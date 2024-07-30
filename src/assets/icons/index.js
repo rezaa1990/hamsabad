@@ -22,6 +22,8 @@ import exit from "./exit.png";
 import hamsabad from "./hamsabad.png";
 import mobile from "./mobile.png";
 import lock from "./lock.png";
+import user from "./user.png";
+import arrowright from "./arrowright.png";
 
 export {
   merchantPrograms,
@@ -48,4 +50,7 @@ export {
   hamsabad,
   mobile,
   lock,
+  user,
+  arrowright,
+  
 };

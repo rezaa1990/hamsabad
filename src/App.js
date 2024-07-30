@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useTheme } from "./contexts/ThemeContext";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider} from "./contexts/AuthContext";
+import { useAuth } from "./hooks/useAuth";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Sidebar from "./components/common/Sidebar";
@@ -18,21 +19,23 @@ import WithdrawCash from "./components/transactions/WithdrawCash";
 import RequestShare from "./components/transactions/RequestShare";
 import ProfileView from "./components/profile/ProfileView";
 import ProfileEdit from "./components/profile/ProfileEdit";
-import { useAuth } from "./hooks/useAuth";
 
 function App() {
-  const { isAuthenticated } = useAuth();
-
   return (
-    <ThemeProvider>
-      <Router>
-        <AppContent isAuthenticated={isAuthenticated} />
-      </Router>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
-function AppContent({ isAuthenticated }) {
+function AppContent() {
+  // استفاده از useAuth برای گرفتن وضعیت احراز هویت
+  const { isAuthenticated } = useAuth();
+  // استفاده از useTheme برای گرفتن وضعیت تم
   const { isDarkMode } = useTheme();
 
   return (
@@ -49,7 +52,7 @@ function AppContent({ isAuthenticated }) {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contracts" element={<ContractList />} />
             <Route path="/contracts/new" element={<ContractForm />} />
             <Route path="/contracts/:id" element={<ContractDetails />} />
@@ -61,9 +64,7 @@ function AppContent({ isAuthenticated }) {
           </Routes>
         </main>
       </div>
-      {
-      // isAuthenticated && 
-      <BottomMenu />}
+      {isAuthenticated && <BottomMenu />}
       <Footer />
     </div>
   );

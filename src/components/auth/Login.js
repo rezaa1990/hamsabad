@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
+import { useAuth } from "../../hooks/useAuth";
 import Icon from "../common/Icon";
 
 const Login = () => {
   const { isDarkMode } = useTheme();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -16,6 +23,22 @@ const Login = () => {
     { name: "emk", label: "امکانات من" },
     { name: "help", label: "راهنما" },
   ];
+
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
+  const handleLogin = () => {
+    setError("");
+    if (phoneNumber.trim() === "" || password.trim() === "") {
+      setError("لطفا شماره تلفن و رمز عبور را وارد کنید.");
+      return;
+    }
+
+    // اگر هر دو فیلد پر شده باشند، کاربر را به عنوان احراز هویت شده در نظر می‌گیریم
+    login(phoneNumber, password);
+    navigate("/dashboard");
+  };
 
   return (
     <div
@@ -46,6 +69,8 @@ const Login = () => {
 
       <div className="w-full max-w-md px-4 mt-6">
         <h2 className="mb-6 text-xl font-semibold text-center">ورود</h2>
+
+        {error && <div className="mb-4 text-center text-red-500">{error}</div>}
 
         <div
           className={`mb-4 relative border ${
@@ -103,7 +128,13 @@ const Login = () => {
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <input type="checkbox" id="remember" className="mr-2" />
+            <input
+              type="checkbox"
+              id="remember"
+              className="mr-2"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <label htmlFor="remember" className="text-sm">
               مرا به خاطر بسپار
             </label>
@@ -124,6 +155,7 @@ const Login = () => {
 
         <div className="flex justify-between mb-6">
           <button
+            onClick={handleRegister}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
                 ? "bg-yellow-600 text-white"
@@ -133,6 +165,7 @@ const Login = () => {
             ثبت نام
           </button>
           <button
+            onClick={handleLogin}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
                 ? "bg-green-600 text-white"

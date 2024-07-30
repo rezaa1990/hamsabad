@@ -1,48 +1,24 @@
-import React, { createContext, useState, useEffect } from "react";
-import { authService } from "../services/authService";
+import React, { createContext, useState } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const userData = await authService.getCurrentUser();
-        setUser(userData);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error("Authentication check failed:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  const login = async (credentials) => {
-    const userData = await authService.login(credentials);
-    setUser(userData);
-    setIsAuthenticated(true);
+  const login = (phoneNumber, password) => {
+    // در اینجا می‌توانید بررسی‌های واقعی احراز هویت را اضافه کنید
+    if (phoneNumber && password) {
+      setIsAuthenticated(true);
+    }
   };
 
-  const logout = async () => {
-    await authService.logout();
-    setUser(null);
+  const logout = () => {
     setIsAuthenticated(false);
   };
 
-  const value = {
-    user,
-    isAuthenticated,
-    loading,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

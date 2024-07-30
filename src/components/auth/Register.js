@@ -1,77 +1,142 @@
 import React, { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { useTheme } from "../../contexts/ThemeContext";
+import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const { register } = useAuth();
+  const { isDarkMode } = useTheme();
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [nationalId, setNationalId] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (credentials.password !== credentials.confirmPassword) {
-      alert("رمز عبور و تایید رمز عبور مطابقت ندارند");
-      return;
-    }
-    try {
-      await register(credentials);
-      navigate("/");
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const goToLogin = () => {
+    navigate("/login");
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+    <div
+      className={`flex flex-col items-center min-h-screen ${
+        isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+      } w-full`}
+    >
+      <div
+        className={`mb-8 relative w-full ${
+          isDarkMode ? "bg-blue-600" : "bg-blue-500"
+        } h-20 py-2 my-4 flex items-center justify-between px-4`}
       >
-        <h2 className="text-2xl mb-4">ثبت نام</h2>
-        <div className="mb-4">
-          <label className="block mb-1">نام کاربری</label>
+        <div className="absolute flex items-center right-4">
+          <button
+            onClick={goBack}
+            className={`p-2 rounded-full ${
+              isDarkMode ? "bg-gray-700" : "bg-gray-200"
+            }`}
+          >
+            <Icon
+              name="arrowright"
+              size={20}
+              className={isDarkMode ? "text-white" : "text-gray-800"}
+            />
+          </button>
+          <h1
+            className={`mr-2 text-2xl font-bold ${
+              isDarkMode ? "text-white" : "text-gray-800"
+            }`}
+          >
+            عضویت
+          </h1>
+        </div>
+        <div className="flex items-center justify-center flex-1">
+          <Icon
+            name="hamsabad"
+            size={150}
+            className="text-white transform translate-y-6"
+          />
+        </div>
+      </div>
+
+      <div className="w-full max-w-md px-4 mt-6">
+        <div
+          className={`mb-4 relative border ${
+            isDarkMode
+              ? "border-gray-600 bg-gray-700"
+              : "border-gray-400 bg-gray-100"
+          } rounded-lg`}
+        >
+          <label className="absolute text-sm right-3 top-2.5">
+            شماره همراه
+          </label>
+          <input
+            type="tel"
+            placeholder="۰۹"
+            className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
+              isDarkMode
+                ? "bg-gray-700 text-white"
+                : "bg-gray-100 text-gray-800"
+            }`}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+          <Icon
+            name="mobile"
+            size={20}
+            className="absolute text-gray-400 left-3 top-3"
+          />
+        </div>
+
+        <div
+          className={`mb-4 relative border ${
+            isDarkMode
+              ? "border-gray-600 bg-gray-700"
+              : "border-gray-400 bg-gray-100"
+          } rounded-lg`}
+        >
+          <label className="absolute text-sm right-3 top-2.5">شماره ملی</label>
           <input
             type="text"
-            value={credentials.username}
-            onChange={(e) =>
-              setCredentials({ ...credentials, username: e.target.value })
-            }
-            className="w-full p-2 border rounded"
+            placeholder="۴۰"
+            className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
+              isDarkMode
+                ? "bg-gray-700 text-white"
+                : "bg-gray-100 text-gray-800"
+            }`}
+            value={nationalId}
+            onChange={(e) => setNationalId(e.target.value)}
+          />
+          <Icon
+            name="user"
+            size={20}
+            className="absolute text-gray-400 left-3 top-3"
           />
         </div>
-        <div className="mb-4">
-          <label className="block mb-1">رمز عبور</label>
-          <input
-            type="password"
-            value={credentials.password}
-            onChange={(e) =>
-              setCredentials({ ...credentials, password: e.target.value })
-            }
-            className="w-full p-2 border rounded"
-          />
+
+        <div className="flex justify-center">
+          <button
+            className={`py-2 px-4 rounded-lg ${
+              isDarkMode
+                ? "bg-green-600 text-white"
+                : "bg-green-500 text-gray-800"
+            } mt-4 w-1/2`}
+          >
+            ادامه
+          </button>
         </div>
-        <div className="mb-4">
-          <label className="block mb-1">تایید رمز عبور</label>
-          <input
-            type="password"
-            value={credentials.confirmPassword}
-            onChange={(e) =>
-              setCredentials({
-                ...credentials,
-                confirmPassword: e.target.value,
-              })
-            }
-            className="w-full p-2 border rounded"
-          />
+
+        <div className="mt-6 text-center">
+          <p className="text-sm">
+            قبلا عضو شده‌اید؟{" "}
+            <button
+              onClick={goToLogin}
+              className="text-blue-500 hover:underline"
+            >
+              ورود به هم‌سبد
+            </button>
+          </p>
         </div>
-        <button type="submit" className="bg-green-600 text-white p-2 rounded">
-          ثبت نام
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
