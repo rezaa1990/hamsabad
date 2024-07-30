@@ -17,21 +17,16 @@ const Login = () => {
     { name: "help", label: "راهنما" },
   ];
 
-  const getIcon = (name) => {
-    const icon = bottomIcons.find((icon) => icon.name === name);
-    return icon ? icon.name : "default"; // Return "default" if icon not found
-  };
-
   return (
     <div
       className={`flex flex-col items-center min-h-screen ${
         isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-      }`}
+      } w-full`}
     >
       <div
-        className={`relative w-full ${
+        className={`mb-8 relative w-full ${
           isDarkMode ? "bg-blue-600" : "bg-blue-500"
-        } py-4 flex flex-col items-center`}
+        } h-40 py-2 my-4 flex flex-col items-center`}
       >
         <h1
           className={`text-2xl font-bold text-center ${
@@ -43,13 +38,13 @@ const Login = () => {
         <div className="relative mt-2">
           <Icon
             name="hamsabad"
-            size={60}
-            className="text-white transform translate-y-10"
+            size={150}
+            className="text-white transform translate-y-6"
           />
         </div>
       </div>
 
-      <div className="w-full max-w-md mt-6">
+      <div className="w-full max-w-md px-4 mt-6">
         <h2 className="mb-6 text-xl font-semibold text-center">ورود</h2>
 
         <div
