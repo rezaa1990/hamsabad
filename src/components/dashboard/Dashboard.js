@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import * as icons from "../../assets/icons"; // مسیر مناسب به فایل index.js
+import * as icons from "../../assets/icons";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const Dashboard = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
+  const { isDarkMode } = useTheme();
+  
   const menuItems = [
     { icon: icons.notes, label: "یادداشت" },
     { icon: icons.graf1, label: "بررسی شاخص" },
@@ -41,8 +38,7 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center space-x-4">
           <button className="text-2xl">🛒</button>
-          <button className="text-2xl" onClick={toggleDarkMode}>
-            {isDarkMode ? "☀️" : "🌙"}
+          <button className="text-2xl">
           </button>
         </div>
       </header>

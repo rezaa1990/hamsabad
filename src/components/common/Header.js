@@ -1,8 +1,10 @@
 import React from "react";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const Header = () => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   return (
-    <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
+    <header className="flex items-center justify-between p-4 text-white bg-gray-800">
       <div className="text-3xl font-bold">همسبد</div>
       <nav className="flex space-x-4">
         <a href="/" className="hover:text-gray-400">
@@ -18,6 +20,9 @@ const Header = () => {
           خروج
         </a>
       </nav>
+      <button onClick={toggleDarkMode}>
+        {isDarkMode ? "حالت روشن" : "حالت تاریک"}
+      </button>
     </header>
   );
 };

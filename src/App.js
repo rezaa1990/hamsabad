@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useTheme } from "./contexts/ThemeContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Sidebar from "./components/common/Sidebar";
@@ -20,79 +22,50 @@ import { useAuth } from "./hooks/useAuth";
 
 function App() {
   const { isAuthenticated } = useAuth();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   return (
-    <Router>
-      <div
-        className={`flex flex-col min-h-screen ${
-          isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
-        }`}
-      >
-        <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        <div className="flex flex-1">
-          {isAuthenticated && <Sidebar isDarkMode={isDarkMode} />}
-          <main className="flex-1 p-4 pb-20">
-            <Routes>
-              <Route
-                path="/login"
-                element={<Login isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/register"
-                element={<Register isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/forgot-password"
-                element={<ForgotPassword isDarkMode={isDarkMode} />}
-              />
-              <Route path="/" element={<Dashboard isDarkMode={isDarkMode} />} />
-              <Route
-                path="/contracts"
-                element={<ContractList isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/contracts/new"
-                element={<ContractForm isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/contracts/:id"
-                element={<ContractDetails isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/increase-capital"
-                element={<IncreaseCapital isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/withdraw-cash"
-                element={<WithdrawCash isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/request-share"
-                element={<RequestShare isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/profile"
-                element={<ProfileView isDarkMode={isDarkMode} />}
-              />
-              <Route
-                path="/profile/edit"
-                element={<ProfileEdit isDarkMode={isDarkMode} />}
-              />
-            </Routes>
-          </main>
-        </div>
-        {
-          // isAuthenticated &&
-          <BottomMenu isDarkMode={isDarkMode} />
-        }
-        <Footer isDarkMode={isDarkMode} />
+    <ThemeProvider>
+      <Router>
+        <AppContent isAuthenticated={isAuthenticated} />
+      </Router>
+    </ThemeProvider>
+  );
+}
+
+function AppContent({ isAuthenticated }) {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div
+      className={`flex flex-col min-h-screen ${
+        isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+      }`}
+    >
+      <Header />
+      <div className="flex flex-1">
+        {isAuthenticated && <Sidebar />}
+        <main className="flex-1 p-4 pb-20">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/contracts" element={<ContractList />} />
+            <Route path="/contracts/new" element={<ContractForm />} />
+            <Route path="/contracts/:id" element={<ContractDetails />} />
+            <Route path="/increase-capital" element={<IncreaseCapital />} />
+            <Route path="/withdraw-cash" element={<WithdrawCash />} />
+            <Route path="/request-share" element={<RequestShare />} />
+            <Route path="/profile" element={<ProfileView />} />
+            <Route path="/profile/edit" element={<ProfileEdit />} />
+          </Routes>
+        </main>
       </div>
-    </Router>
+      {
+      // isAuthenticated && 
+      <BottomMenu />}
+      <Footer />
+    </div>
   );
 }
 

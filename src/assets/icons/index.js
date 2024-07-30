@@ -15,13 +15,13 @@ import mymessages from "./mymessages.png";
 import mybaskets from "./mybaskets.png";
 import share2 from "./share2.png";
 import favorites1 from "./favorites1.png";
-// import  from "./.png";
-// import  from "./.png";
-// import  from "./.png";
-// import  from "./.png";
-// import  from "./.png";
-// import  from "./.png";
-// import  from "./.png";
+import help from "./help.png";
+import emk from "./emk.png";
+import contact from "./contact.png";
+import exit from "./exit.png";
+import hamsabad from "./hamsabad.png";
+import mobile from "./mobile.png";
+import lock from "./lock.png";
 
 export {
   merchantPrograms,
@@ -40,6 +40,12 @@ export {
   mymessages,
   mybaskets,
   share2,
-  favorites1
-
+  favorites1,
+  help,
+  emk,
+  contact,
+  exit,
+  hamsabad,
+  mobile,
+  lock,
 };

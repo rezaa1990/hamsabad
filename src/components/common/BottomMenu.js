@@ -1,39 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import Icon from "./Icon";
+import { useTheme } from "../../contexts/ThemeContext";
 
-const BottomMenu = ({ isDarkMode }) => {
-  const [selectedItem, setSelectedItem] = useState("services"); // Default selected item
+const BottomMenu = () => {
+  const { isDarkMode } = useTheme();
 
   const menuItems = [
-    { icon: "services", label: "خدمات" },
-    { icon: "mymessages", label: "پیام‌های من" },
-    { icon: "mybaskets", label: "سبدهای من" },
-    { icon: "share2", label: "معرفی به دوستان" },
-    { icon: "favorites1", label: "علاقه مندی ها" },
+    { icon: "services", label: "خدمات", path: "/services" },
+    { icon: "mymessages", label: "پیام‌های من", path: "/messages" },
+    { icon: "mybaskets", label: "سبدهای من", path: "/baskets" },
+    { icon: "share2", label: "معرفی به دوستان", path: "/refer" },
+    { icon: "favorites1", label: "علاقه مندی ها", path: "/favorites" },
   ];
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 flex justify-between items-center p-4 ${
-        isDarkMode ? "bg-gray-700" : "bg-white"
-      } shadow-lg`}
+      className={`fixed bottom-0 left-0 right-0 flex justify-between items-center p-4 border-t ${
+        isDarkMode
+          ? "bg-gray-800 border-gray-700 text-white"
+          : "bg-white border-gray-200 text-gray-800"
+      }`}
     >
       {menuItems.map((item, index) => (
-        <div
+        <Link
           key={index}
+          to={item.path}
           className="relative flex flex-col items-center cursor-pointer"
-          onClick={() => setSelectedItem(item.icon)}
         >
-          <Icon name={item.icon} size={24} className="mb-1" />
+          <Icon
+            name={item.icon}
+            size={24}
+            className={`mb-1 ${isDarkMode ? "text-white" : "text-gray-800"}`}
+          />
           <span className="text-xs">{item.label}</span>
-          <div
-            className={`absolute -bottom-2 left-0 right-0 h-0.5 bg-blue-500 transition-all duration-300 ease-in-out ${
-              selectedItem === item.icon
-                ? "opacity-100 scale-x-100"
-                : "opacity-0 scale-x-0"
-            }`}
-          ></div>
-        </div>
+        </Link>
       ))}
     </div>
   );
