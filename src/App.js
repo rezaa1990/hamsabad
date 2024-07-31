@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider} from "./contexts/AuthContext";
+import ContextProvider from "./contexts/ContextProvider"; // اضافه شده
 import { useAuth } from "./hooks/useAuth";
-import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
+import { useTheme } from "./contexts/ThemeContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Sidebar from "./components/common/Sidebar";
@@ -19,23 +19,23 @@ import WithdrawCash from "./components/transactions/WithdrawCash";
 import RequestShare from "./components/transactions/RequestShare";
 import ProfileView from "./components/profile/ProfileView";
 import ProfileEdit from "./components/profile/ProfileEdit";
+import GetSms from "./components/auth/Getsms";
+import SetPassword from "./components/auth/Setpassword";
 
 function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Router>
-          <AppContent />
-        </Router>
-      </ThemeProvider>
-    </AuthProvider>
+    <ContextProvider>
+      {" "}
+      {/* استفاده از ContextProvider */}
+      <Router>
+        <AppContent />
+      </Router>
+    </ContextProvider>
   );
 }
 
 function AppContent() {
-  // استفاده از useAuth برای گرفتن وضعیت احراز هویت
   const { isAuthenticated } = useAuth();
-  // استفاده از useTheme برای گرفتن وضعیت تم
   const { isDarkMode } = useTheme();
 
   return (
@@ -49,8 +49,10 @@ function AppContent() {
         {isAuthenticated && <Sidebar />}
         <main className="flex-1 p-4 pb-20">
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/getsms" element={<GetSms />} />
+            <Route path="/set-password" element={<SetPassword />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contracts" element={<ContractList />} />

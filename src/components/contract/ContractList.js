@@ -14,10 +14,10 @@ const ContractList = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">لیست قراردادها</h2>
+      <h2 className="mb-4 text-2xl font-bold">لیست قراردادها</h2>
       <ul>
         {contracts.map((contract) => (
-          <li key={contract.id} className="bg-white p-4 rounded shadow mb-4">
+          <li key={contract.id} className="p-4 mb-4 bg-white rounded shadow">
             <h3 className="text-xl font-bold">{contract.name}</h3>
             <p>{contract.description}</p>
           </li>

@@ -131,7 +131,7 @@ const Login = () => {
             <input
               type="checkbox"
               id="remember"
-              className="mr-2"
+              className="ml-2"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
@@ -143,7 +143,7 @@ const Login = () => {
             <input
               type="checkbox"
               id="showPassword"
-              className="mr-2"
+              className="ml-2"
               checked={showPassword}
               onChange={togglePasswordVisibility}
             />

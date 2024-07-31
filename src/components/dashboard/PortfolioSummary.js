@@ -2,8 +2,8 @@ import React from "react";
 
 const PortfolioSummary = () => {
   return (
-    <div className="bg-white p-6 rounded shadow-md">
-      <h3 className="text-xl font-bold mb-4">خلاصه سبد سرمایه‌گذاری</h3>
+    <div className="p-6 bg-white rounded shadow-md">
+      <h3 className="mb-4 text-xl font-bold">خلاصه سبد سرمایه‌گذاری</h3>
       <p>اطلاعات مربوط به سبد سرمایه‌گذاری شما در اینجا نمایش داده خواهد شد.</p>
     </div>
   );

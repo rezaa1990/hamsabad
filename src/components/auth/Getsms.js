@@ -1,37 +1,21 @@
-import React, { useState, useContext } from "react"; // اضافه شدن useContext
+import React, { useState, useContext } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
-import Captcha from "../modals/Captcha";
 import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
 
-const Register = () => {
+const GetSms = () => {
   const { isDarkMode } = useTheme();
-  const { setPhoneNumber: setContextPhoneNumber } =
-    useContext(RegistrationContext); // استفاده از کانتکست
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const { phoneNumber } = useContext(RegistrationContext); // گرفتن phoneNumber از کانتکست
   const [nationalId, setNationalId] = useState("");
-  const [showCaptcha, setShowCaptcha] = useState(false);
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  const goToLogin = () => {
-    navigate("/");
-  };
-
-  const handleContinue = () => {
-    setContextPhoneNumber(phoneNumber); // ذخیره شماره تلفن در کانتکست
-    setShowCaptcha(true);
-  };
-
-  const handleCaptchaSubmit = (captchaInput) => {
-    // Logic to verify CAPTCHA and send activation code
-    console.log("CAPTCHA submitted:", captchaInput);
-    setShowCaptcha(false);
-    navigate("/getsms");
+  const goNext = () => {
+    navigate("/set-password");
   };
 
   return (
@@ -63,7 +47,7 @@ const Register = () => {
               isDarkMode ? "text-white" : "text-gray-800"
             }`}
           >
-            عضویت
+            فعالسازی
           </h1>
         </div>
         <div className="flex items-center justify-center flex-1">
@@ -88,14 +72,13 @@ const Register = () => {
           </label>
           <input
             type="tel"
-            placeholder="۰۹"
             className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
             }`}
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber} // استفاده از phoneNumber از کانتکست
+            readOnly // جلوگیری از ویرایش شماره همراه
           />
           <Icon
             name="mobile"
@@ -111,10 +94,12 @@ const Register = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          <label className="absolute text-sm right-3 top-2.5">شماره ملی</label>
+          <label className="absolute text-sm right-3 top-2.5">
+            کد فعالسازی را وارد نمایید
+          </label>
           <input
             type="text"
-            placeholder="۴۰"
+            placeholder="۱۲۳۴"
             className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
@@ -124,7 +109,7 @@ const Register = () => {
             onChange={(e) => setNationalId(e.target.value)}
           />
           <Icon
-            name="user"
+            name="eye"
             size={20}
             className="absolute text-gray-400 left-3 top-3"
           />
@@ -132,7 +117,7 @@ const Register = () => {
 
         <div className="flex justify-center">
           <button
-            onClick={handleContinue}
+            onClick={goNext}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
                 ? "bg-green-600 text-white"
@@ -142,28 +127,9 @@ const Register = () => {
             ادامه
           </button>
         </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm">
-            قبلا عضو شده‌اید؟{" "}
-            <button
-              onClick={goToLogin}
-              className="text-blue-500 hover:underline"
-            >
-              ورود به هم‌سبد
-            </button>
-          </p>
-        </div>
       </div>
-
-      {showCaptcha && (
-        <Captcha
-          onClose={() => setShowCaptcha(false)}
-          onSubmit={handleCaptchaSubmit}
-        />
-      )}
     </div>
   );
 };
 
-export default Register;
+export default GetSms;

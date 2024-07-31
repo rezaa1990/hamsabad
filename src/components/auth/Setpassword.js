@@ -1,37 +1,40 @@
-import React, { useState, useContext } from "react"; // اضافه شدن useContext
+import React, { useState } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
-import Captcha from "../modals/Captcha";
-import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
 
-const Register = () => {
+const SetPassword = () => {
   const { isDarkMode } = useTheme();
-  const { setPhoneNumber: setContextPhoneNumber } =
-    useContext(RegistrationContext); // استفاده از کانتکست
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [nationalId, setNationalId] = useState("");
-  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  const goToLogin = () => {
-    navigate("/");
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleContinue = () => {
-    setContextPhoneNumber(phoneNumber); // ذخیره شماره تلفن در کانتکست
-    setShowCaptcha(true);
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
   };
 
-  const handleCaptchaSubmit = (captchaInput) => {
-    // Logic to verify CAPTCHA and send activation code
-    console.log("CAPTCHA submitted:", captchaInput);
-    setShowCaptcha(false);
-    navigate("/getsms");
+  const handleRememberChange = (e) => {
+    setRemember(e.target.checked);
+  };
+
+  const handleShowPasswordChange = (e) => {
+    setShowPassword(e.target.checked);
+  };
+
+  const handleSubmit = () => {
+    // Add submit logic here
+    console.log("Password submitted:", password);
+    navigate("/next-step"); // Adjust navigation as needed
   };
 
   return (
@@ -63,7 +66,7 @@ const Register = () => {
               isDarkMode ? "text-white" : "text-gray-800"
             }`}
           >
-            عضویت
+            تعیین رمز عبور
           </h1>
         </div>
         <div className="flex items-center justify-center flex-1">
@@ -84,26 +87,25 @@ const Register = () => {
           } rounded-lg`}
         >
           <label className="absolute text-sm right-3 top-2.5">
-            شماره همراه
+            لطفا رمز عبور مد نظر خود را وارد نمایید
           </label>
           <input
-            type="tel"
-            placeholder="۰۹"
+            type={showPassword ? "text" : "password"}
+            placeholder="رمز عبور"
             className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
             }`}
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={password}
+            onChange={handlePasswordChange}
           />
           <Icon
-            name="mobile"
+            name="lock"
             size={20}
             className="absolute text-gray-400 left-3 top-3"
           />
         </div>
-
         <div
           className={`mb-4 relative border ${
             isDarkMode
@@ -111,28 +113,56 @@ const Register = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          <label className="absolute text-sm right-3 top-2.5">شماره ملی</label>
+          <label className="absolute text-sm right-3 top-2.5">
+            لطفا رمز عبور مد نظر خود را مجددا وارد نمایید
+          </label>
           <input
-            type="text"
-            placeholder="۴۰"
+            type={showPassword ? "text" : "password"}
+            placeholder="رمز عبور"
             className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
             }`}
-            value={nationalId}
-            onChange={(e) => setNationalId(e.target.value)}
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
           />
           <Icon
-            name="user"
+            name="lock"
             size={20}
             className="absolute text-gray-400 left-3 top-3"
           />
         </div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="remember"
+              className="ml-2"
+              checked={remember}
+              onChange={handleRememberChange}
+            />
+            <label htmlFor="remember" className="text-sm">
+              مرا به خاطر بسپار
+            </label>
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="showPassword"
+              className="ml-2"
+              checked={showPassword}
+              onChange={handleShowPasswordChange}
+            />
+            <label htmlFor="showPassword" className="text-sm">
+              نمایش رمز عبور
+            </label>
+          </div>
+        </div>
 
         <div className="flex justify-center">
           <button
-            onClick={handleContinue}
+            onClick={handleSubmit}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
                 ? "bg-green-600 text-white"
@@ -142,28 +172,9 @@ const Register = () => {
             ادامه
           </button>
         </div>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm">
-            قبلا عضو شده‌اید؟{" "}
-            <button
-              onClick={goToLogin}
-              className="text-blue-500 hover:underline"
-            >
-              ورود به هم‌سبد
-            </button>
-          </p>
-        </div>
       </div>
-
-      {showCaptcha && (
-        <Captcha
-          onClose={() => setShowCaptcha(false)}
-          onSubmit={handleCaptchaSubmit}
-        />
-      )}
     </div>
   );
 };
 
-export default Register;
+export default SetPassword;

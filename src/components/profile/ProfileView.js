@@ -10,8 +10,8 @@ const ProfileView = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">پروفایل</h2>
-      <div className="bg-white p-6 rounded shadow-md">
+      <h2 className="mb-4 text-2xl font-bold">پروفایل</h2>
+      <div className="p-6 bg-white rounded shadow-md">
         <p>
           <strong>نام کاربری:</strong> {user.username}
         </p>

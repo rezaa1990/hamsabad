@@ -24,6 +24,7 @@ import mobile from "./mobile.png";
 import lock from "./lock.png";
 import user from "./user.png";
 import arrowright from "./arrowright.png";
+import eye from "./eye.png";
 
 export {
   merchantPrograms,
@@ -52,5 +53,5 @@ export {
   lock,
   user,
   arrowright,
-  
+  eye,
 };

@@ -20,8 +20,8 @@ const ContractDetails = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">جزئیات قرارداد</h2>
-      <div className="bg-white p-6 rounded shadow-md">
+      <h2 className="mb-4 text-2xl font-bold">جزئیات قرارداد</h2>
+      <div className="p-6 bg-white rounded shadow-md">
         <h3 className="text-xl font-bold">{contract.name}</h3>
         <p>{contract.description}</p>
       </div>
