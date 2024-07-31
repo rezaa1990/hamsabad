@@ -34,7 +34,7 @@ const SetPassword = () => {
   const handleSubmit = () => {
     // Add submit logic here
     console.log("Password submitted:", password);
-    navigate("/next-step"); // Adjust navigation as needed
+    navigate("/informationentry"); // Adjust navigation as needed
   };
 
   return (

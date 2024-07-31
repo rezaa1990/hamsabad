@@ -21,6 +21,7 @@ import ProfileView from "./components/profile/ProfileView";
 import ProfileEdit from "./components/profile/ProfileEdit";
 import GetSms from "./components/auth/Getsms";
 import SetPassword from "./components/auth/Setpassword";
+import InformationEntry from "./components/profile/InformationEntry";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function AppContent() {
             <Route path="/register" element={<Register />} />
             <Route path="/getsms" element={<GetSms />} />
             <Route path="/set-password" element={<SetPassword />} />
+            <Route path="/informationentry" element={<InformationEntry />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/contracts" element={<ContractList />} />
