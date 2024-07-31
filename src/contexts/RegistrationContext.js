@@ -1,4 +1,3 @@
-// مسیر: src/contexts/RegistrationContext.js
 import React, { createContext, useState } from "react";
 
 export const RegistrationContext = createContext();

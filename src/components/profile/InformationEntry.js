@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
+import { RegistrationContext } from "../../contexts/RegistrationContext";
 
 const InformationEntry = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
+  const { phoneNumber, nationalId, setPhoneNumber, setNationalId } =
+    useContext(RegistrationContext);
   const [formData, setFormData] = useState({
     name: "",
     familyName: "",
-    nationalId: "",
-    phoneNumber: "",
+    nationalId: nationalId,
+    phoneNumber: phoneNumber,
     role: "سهامدار",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [isNationalIdEditable, setIsNationalIdEditable] = useState(false);
+  const [isPhoneNumberEditable, setIsPhoneNumberEditable] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,16 +29,34 @@ const InformationEntry = () => {
   };
 
   const handleSubmit = () => {
-    // بررسی خالی نبودن فیلدهای اجباری (نام، نام خانوادگی و نقش)
     if (!formData.name || !formData.familyName || !formData.role) {
       setErrorMessage("لطفاً نام، نام خانوادگی و نقش را وارد کنید.");
       return;
     }
 
-    // اگر همه فیلدهای اجباری پر شده باشند، پیام خطا را پاک کرده و به داشبورد هدایت می‌کنیم
     setErrorMessage("");
     console.log("Form submitted:", formData);
     navigate("/");
+  };
+
+  const toggleNationalIdEdit = () => {
+    setIsNationalIdEditable(!isNationalIdEditable);
+  };
+
+  const togglePhoneNumberEdit = () => {
+    setIsPhoneNumberEditable(!isPhoneNumberEditable);
+  };
+
+  const handleNationalIdChange = (e) => {
+    const newNationalId = e.target.value;
+    setFormData((prevData) => ({ ...prevData, nationalId: newNationalId }));
+    setNationalId(newNationalId);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    const newPhoneNumber = e.target.value;
+    setFormData((prevData) => ({ ...prevData, phoneNumber: newPhoneNumber }));
+    setPhoneNumber(newPhoneNumber);
   };
 
   return (
@@ -107,23 +130,24 @@ const InformationEntry = () => {
               type="text"
               name="nationalId"
               value={formData.nationalId}
-              onChange={handleInputChange}
-              placeholder="شماره ملی به صورت غیر فعال"
+              onChange={handleNationalIdChange}
+              placeholder="شماره ملی"
               className={`flex-grow py-2 px-3 rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 text-white"
                   : "bg-gray-100 text-gray-800"
               } border ${isDarkMode ? "border-gray-600" : "border-gray-300"}`}
-              disabled
+              disabled={!isNationalIdEditable}
             />
             <button
-              className={`m-2 px-4  rounded-lg ${
+              onClick={toggleNationalIdEdit}
+              className={`m-2 px-4 rounded-lg ${
                 isDarkMode
                   ? "bg-blue-600 text-white"
                   : "bg-blue-500 text-gray-800"
               }`}
             >
-              تغییر کد ملی
+              {isNationalIdEditable ? "ثبت" : "تغییر کد ملی"}
             </button>
           </div>
         </div>
@@ -135,23 +159,24 @@ const InformationEntry = () => {
               type="text"
               name="phoneNumber"
               value={formData.phoneNumber}
-              onChange={handleInputChange}
-              placeholder="شماره همراه به صورت غیرفعال"
+              onChange={handlePhoneNumberChange}
+              placeholder="شماره همراه"
               className={`flex-grow py-2 px-3 rounded-lg ${
                 isDarkMode
                   ? "bg-gray-700 text-white"
                   : "bg-gray-100 text-gray-800"
               } border ${isDarkMode ? "border-gray-600" : "border-gray-300"}`}
-              disabled
+              disabled={!isPhoneNumberEditable}
             />
             <button
+              onClick={togglePhoneNumberEdit}
               className={`m-2 px-4 rounded-lg ${
                 isDarkMode
                   ? "bg-blue-600 text-white"
                   : "bg-blue-500 text-gray-800"
               }`}
             >
-              تغییر شماره
+              {isPhoneNumberEditable ? "ثبت" : "تغییر شماره"}
             </button>
           </div>
         </div>
@@ -174,7 +199,6 @@ const InformationEntry = () => {
           </select>
         </div>
 
-        {/* نمایش پیام خطا */}
         {errorMessage && (
           <div className="mb-4 text-center text-red-500">{errorMessage}</div>
         )}

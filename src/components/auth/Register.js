@@ -1,14 +1,16 @@
-import React, { useState, useContext } from "react"; // اضافه شدن useContext
+import React, { useState, useContext } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import Captcha from "../modals/Captcha";
-import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
+import { RegistrationContext } from "../../contexts/RegistrationContext";
 
 const Register = () => {
   const { isDarkMode } = useTheme();
-  const { setPhoneNumber: setContextPhoneNumber } =
-    useContext(RegistrationContext); // استفاده از کانتکست
+  const {
+    setPhoneNumber: setContextPhoneNumber,
+    setNationalId: setContextNationalId,
+  } = useContext(RegistrationContext);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [nationalId, setNationalId] = useState("");
   const [showCaptcha, setShowCaptcha] = useState(false);
@@ -23,12 +25,12 @@ const Register = () => {
   };
 
   const handleContinue = () => {
-    setContextPhoneNumber(phoneNumber); // ذخیره شماره تلفن در کانتکست
+    setContextPhoneNumber(phoneNumber);
+    setContextNationalId(nationalId);
     setShowCaptcha(true);
   };
 
   const handleCaptchaSubmit = (captchaInput) => {
-    // Logic to verify CAPTCHA and send activation code
     console.log("CAPTCHA submitted:", captchaInput);
     setShowCaptcha(false);
     navigate("/getsms");
