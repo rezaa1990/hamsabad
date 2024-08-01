@@ -57,6 +57,7 @@ function AppContent() {
             <Route path="/informationentry" element={<InformationEntry />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/contractform" element={<ContractForm />} />
             <Route path="/contracts" element={<ContractList />} />
             <Route path="/contracts/new" element={<ContractForm />} />
             <Route path="/contracts/:id" element={<ContractDetails />} />

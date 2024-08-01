@@ -3,7 +3,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 import * as icons from "../../assets/icons";
 
 const UserProfile = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode} = useTheme();
 
   return (
     <div
@@ -11,31 +11,6 @@ const UserProfile = () => {
         isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
       }`}
     >
-      {/* Header */}
-      <header
-        className={`flex justify-between items-center p-4 ${
-          isDarkMode ? "bg-gray-700" : "bg-white"
-        } shadow-md`}
-      >
-        <div className="flex items-center space-x-4">
-          <img
-            src={icons.hamsabad}
-            alt={"hamsabad"}
-            className="object-contain w-12 h-12 mb-2"
-          />
-        </div>
-        <h1 className="text-xl font-extrabold">هم سبد</h1>
-        <div className="flex items-center space-x-4">
-          <button className="ml-4 text-2xl">
-            <img
-              src={icons.search}
-              alt={"search"}
-              className="object-contain w-12 h-12 mb-2"
-            />
-          </button>
-        </div>
-      </header>
-
       {/* Profile Form */}
       <main className="p-4 space-y-6">
         <div className="flex items-center justify-center mb-4">

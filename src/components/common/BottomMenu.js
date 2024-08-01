@@ -30,7 +30,7 @@ const BottomMenu = () => {
         >
           <Icon
             name={item.icon}
-            size={24}
+            size={28}
             className={`mb-1 ${isDarkMode ? "text-white" : "text-gray-800"}`}
           />
           <span className="text-xs">{item.label}</span>

@@ -33,6 +33,7 @@ import services1 from "./services1.png";
 import camera from "./camera.png";
 import share1 from "./share1.png";
 import exit1 from "./exit1.png";
+import contract from "./contract_gray.png";
 
 export {
   merchantPrograms,
@@ -69,5 +70,6 @@ export {
   share1,
   exit1,
   camera,
+  contract,
   
 };
