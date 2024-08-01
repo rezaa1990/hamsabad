@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import * as icons from "../../assets/icons";
 import { useTheme } from "../../contexts/ThemeContext";
+import Sidebar from "../common/Sidebar";
 
 const Dashboard = () => {
   const { isDarkMode } = useTheme();
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   const menuItems = [
     { icon: icons.notes, label: "یادداشت" },
     { icon: icons.graf1, label: "بررسی شاخص" },
@@ -24,7 +28,7 @@ const Dashboard = () => {
     <div
       className={`font-sans ${
         isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
-      } min-h-screen pb-20`}
+      } min-h-screen pb-20 relative`}
     >
       {/* Header */}
       <header
@@ -33,14 +37,33 @@ const Dashboard = () => {
         } shadow-md`}
       >
         <div className="flex items-center space-x-4">
-          <button className="text-2xl">🔍</button>
-          <h1 className="text-xl font-bold">هم سبد</h1>
+          <button className="ml-4 text-2xl" onClick={toggleSidebar}>
+            <img
+              src={icons.menubutton}
+              alt={"menubutton"}
+              className="object-contain w-12 h-12 mb-2"
+            />
+          </button>
+          <img
+            src={icons.hamsabad}
+            alt={"hamsabad"}
+            className="object-contain w-12 h-12 mb-2"
+          />
         </div>
+        <h1 className="text-xl font-extrabold">هم سبد</h1>
         <div className="flex items-center space-x-4">
-          <button className="text-2xl">🛒</button>
-          <button className="text-2xl"></button>
+          <button className="ml-4 text-2xl">
+            <img
+              src={icons.search}
+              alt={"search"}
+              className="object-contain w-12 h-12 mb-2"
+            />
+          </button>
         </div>
       </header>
+
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
 
       {/* Main Grid */}
       <div className="grid grid-cols-3 gap-4 p-4">
