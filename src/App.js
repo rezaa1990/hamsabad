@@ -17,11 +17,11 @@ import ContractDetails from "./components/contract/ContractDetails";
 import IncreaseCapital from "./components/transactions/IncreaseCapital";
 import WithdrawCash from "./components/transactions/WithdrawCash";
 import RequestShare from "./components/transactions/RequestShare";
-import ProfileView from "./components/profile/ProfileView";
 import ProfileEdit from "./components/profile/ProfileEdit";
 import GetSms from "./components/auth/Getsms";
 import SetPassword from "./components/auth/Setpassword";
 import InformationEntry from "./components/profile/InformationEntry";
+import UserProfile from "./components/profile/UserProfile";
 
 function App() {
   return (
@@ -63,7 +63,7 @@ function AppContent() {
             <Route path="/increase-capital" element={<IncreaseCapital />} />
             <Route path="/withdraw-cash" element={<WithdrawCash />} />
             <Route path="/request-share" element={<RequestShare />} />
-            <Route path="/profile" element={<ProfileView />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />
           </Routes>
         </main>

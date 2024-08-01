@@ -30,7 +30,7 @@ import menubutton from "./menubutton.png";
 import profile from "./profile.png"
 import services1 from "./services1.png";
 // import shoppingBasket from "./shopping_basket_full - Copy.png";
-// import messages from "./messages.png";
+import camera from "./camera.png";
 import share1 from "./share1.png";
 import exit1 from "./exit1.png";
 
@@ -68,5 +68,6 @@ export {
   services1,
   share1,
   exit1,
+  camera,
   
 };

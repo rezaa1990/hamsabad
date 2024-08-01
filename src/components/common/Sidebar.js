@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           `}
         </style>
         <Link
-          to="/saman-keshvari"
+          to="/profile"
           className="flex items-center space-x-2 space-x-reverse"
         >
           <img src={icons.profile} alt="سامان کشوری" className="w-6 h-6" />
