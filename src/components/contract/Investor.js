@@ -237,7 +237,7 @@ const Investor = () => {
       {/* Edit Request Modal */}
       {showEditRequestModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
-          <div className="relative w-full max-w-md p-6 bg-white rounded-lg shadow-xl">
+          <div className="relative w-full max-w-md p-6 bg-white shadow-xl">
             <button
               onClick={toggleEditRequestModal}
               className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
@@ -349,12 +349,12 @@ const Investor = () => {
               <div className="flex justify-between mt-4">
                 <button
                   onClick={toggleConfirmationModal}
-                  className="px-1 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
                 >
                   بازگشت
                 </button>
                 <button
-                  className="px-1 text-white bg-green-500 rounded hover:bg-green-600"
+                  className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
                   disabled={!isTermsAccepted}
                 >
                   تایید
