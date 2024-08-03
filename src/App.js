@@ -12,7 +12,7 @@ import Register from "./components/auth/Register";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import Dashboard from "./components/dashboard/Dashboard";
 import ContractList from "./components/contract/ContractList";
-import ContractForm from "./components/contract/ContractForm";
+// import ContractForm from "./components/contract/ContractForm";
 import ContractDetails from "./components/contract/ContractDetails";
 import IncreaseCapital from "./components/transactions/IncreaseCapital";
 import WithdrawCash from "./components/transactions/WithdrawCash";
@@ -22,6 +22,7 @@ import GetSms from "./components/auth/Getsms";
 import SetPassword from "./components/auth/Setpassword";
 import InformationEntry from "./components/profile/InformationEntry";
 import UserProfile from "./components/profile/UserProfile";
+import UserRoleComponent from "./components/contract/UserRoleComponent";
 
 function App() {
   return (
@@ -57,9 +58,9 @@ function AppContent() {
             <Route path="/informationentry" element={<InformationEntry />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/contractform" element={<ContractForm />} />
+            <Route path="/user" element={<UserRoleComponent />} />
             <Route path="/contracts" element={<ContractList />} />
-            <Route path="/contracts/new" element={<ContractForm />} />
+            {/* <Route path="/contracts/new" element={<ContractForm />} /> */}
             <Route path="/contracts/:id" element={<ContractDetails />} />
             <Route path="/increase-capital" element={<IncreaseCapital />} />
             <Route path="/withdraw-cash" element={<WithdrawCash />} />

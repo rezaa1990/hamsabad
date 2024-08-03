@@ -9,7 +9,7 @@ const Dashboard = () => {
     { icon: icons.notes, label: "یادداشت" , path:""},
     { icon: icons.graf1, label: "بررسی شاخص" , path:""},
     { icon: icons.shoppingBasket, label: "سبدهای من" , path:""},
-    { icon: icons.merchantPrograms, label: "بستن قرارداد" , path:"/contractform"},
+    { icon: icons.merchantPrograms, label: "بستن قرارداد" , path:"/user"},
     { icon: icons.bell, label: "اعلان‌ها" , path:""},
     { icon: icons.messages, label: "پیام‌های من" , path:""},
     { icon: icons.pay1, label: "افزایش سرمایه" , path:""},
