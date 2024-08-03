@@ -1,10 +1,9 @@
-import React, { useState } from "react";
 import Investor from "./Investor";
 import  PortfolioManager  from "./PortfolioManager";
 
 const UserRoleComponent = () => {
-  const userRole = "portfolioManager";
-  // const userRole = "investor";
+  // const userRole = "portfolioManager";
+  const userRole = "investor";
   const renderComponentBasedOnRole = () => {
     switch (userRole) {
       case "investor":

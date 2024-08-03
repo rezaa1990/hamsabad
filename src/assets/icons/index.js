@@ -35,6 +35,9 @@ import camera from "./camera.png";
 import share1 from "./share1.png";
 import exit1 from "./exit1.png";
 import contract from "./contract_gray.png";
+import messages2 from "./messages2.png";
+import call from "./call.png";
+import one from "./1.png";
 
 export {
   merchantPrograms,
@@ -74,4 +77,8 @@ export {
   contract,
   Delete,
   pencil,
+  messages2,
+  call,
+  one,
+
 };
