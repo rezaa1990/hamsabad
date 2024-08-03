@@ -149,87 +149,92 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
     URL.revokeObjectURL(url);
   };
 
-  const PreviewModal = () => {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div
-          className={`p-8 rounded-lg w-3/4 max-h-[90vh] overflow-y-auto ${
-            isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          <h2 className="mb-6 text-2xl font-bold text-center">
-            پیش‌نمایش قرارداد
-          </h2>
+  // const PreviewModal = () => {
+  //   return (
+  //     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+  //       <div className="relative w-auto max-w-3xl mx-auto my-6">
+  //         <div
+  //           className={`relative flex flex-col w-full border-0 rounded-lg shadow-lg outline-none focus:outline-none ${
+  //             isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+  //           }`}
+  //         >
+  //           <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
+  //             <h3 className="text-2xl font-semibold">پیش‌نمایش قرارداد</h3>
+  //             <button
+  //               className="float-right text-3xl font-semibold leading-none"
+  //               onClick={handleClosePreview}
+  //             >
+  //               ×
+  //             </button>
+  //           </div>
+  //           <div
+  //             className="relative flex-auto p-6"
+  //             style={{ maxHeight: "70vh", overflowY: "auto" }}
+  //           >
+  //             <div className="mb-6">
+  //               <h4 className="mb-2 text-xl font-semibold">
+  //                 اطلاعات سرمایه گذار
+  //               </h4>
+  //               <p>نام: {investorInfo.name}</p>
+  //               <p>نام خانوادگی: {investorInfo.lastName}</p>
+  //               <p>کد ملی: {investorInfo.nationalCode}</p>
+  //               <p>شماره همراه: {investorInfo.phoneNumber}</p>
+  //             </div>
 
-          <div className="mb-6">
-            <h3 className="mb-2 text-xl font-semibold">اطلاعات سرمایه گذار</h3>
-            <p>نام: {investorInfo.name}</p>
-            <p>نام خانوادگی: {investorInfo.lastName}</p>
-            <p>کد ملی: {investorInfo.nationalCode}</p>
-            <p>شماره همراه: {investorInfo.phoneNumber}</p>
-          </div>
+  //             <div className="mb-6">
+  //               <h4 className="mb-2 text-xl font-semibold">اطلاعات قرارداد</h4>
+  //               <p>سرمایه اولیه: {initialCapital} ریال</p>
+  //               <p>میزان کارمزد: {commissionRate}٪</p>
+  //               <p>مدت قرارداد: {contractDuration} ماه</p>
+  //               <p>
+  //                 از تاریخ:{" "}
+  //                 {startDate instanceof Date
+  //                   ? startDate.toLocaleDateString("fa-IR")
+  //                   : "تاریخ نامعتبر"}
+  //               </p>
+  //               <p>
+  //                 تا تاریخ:{" "}
+  //                 {endDate instanceof Date
+  //                   ? endDate.toLocaleDateString("fa-IR")
+  //                   : "تاریخ نامعتبر"}
+  //               </p>
+  //               <p>بازه گزارش‌دهی: {reportingPeriod}</p>
+  //             </div>
 
-          <div className="mb-6">
-            <h3 className="mb-2 text-xl font-semibold">اطلاعات قرارداد</h3>
-            <p>سرمایه اولیه: {initialCapital} ریال</p>
-            <p>میزان کارمزد: {commissionRate}٪</p>
-            <p>مدت قرارداد: {contractDuration} ماه</p>
-            <p>
-              از تاریخ:{" "}
-              {startDate instanceof Date
-                ? startDate.toLocaleDateString("fa-IR")
-                : "تاریخ نامعتبر"}
-            </p>
-            <p>
-              تا تاریخ:{" "}
-              {endDate instanceof Date
-                ? endDate.toLocaleDateString("fa-IR")
-                : "تاریخ نامعتبر"}
-            </p>
-            <p>بازه گزارش‌دهی: {reportingPeriod}</p>
-          </div>
-
-          {clauses.length > 0 && (
-            <div className="mb-6">
-              <h3 className="mb-2 text-xl font-semibold">
-                تبصره‌های اختیاری قرارداد
-              </h3>
-              {clauses.map((clause, index) => (
-                <p key={index}>
-                  تبصره {index + 1}: {clause}
-                </p>
-              ))}
-            </div>
-          )}
-
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={handleClosePreview}
-              className={`px-4 py-2 font-bold text-white rounded ${
-                isDarkMode
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "bg-blue-500 hover:bg-blue-600"
-              }`}
-            >
-              بستن پیش‌نمایش
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
+  //             {clauses.length > 0 && (
+  //               <div className="mb-6">
+  //                 <h4 className="mb-2 text-xl font-semibold">
+  //                   تبصره‌های اختیاری قرارداد
+  //                 </h4>
+  //                 {clauses.map((clause, index) => (
+  //                   <p key={index}>
+  //                     تبصره {index + 1}: {clause}
+  //                   </p>
+  //                 ))}
+  //               </div>
+  //             )}
+  //           </div>
+  //           <div className="flex items-center justify-end p-6 border-t border-solid rounded-b">
+  //             <button
+  //               className={`px-6 py-2 mb-1 mr-1 text-sm font-bold uppercase rounded shadow outline-none ${
+  //                 isDarkMode
+  //                   ? "bg-gray-700 text-white active:bg-gray-600"
+  //                   : "bg-gray-200 text-gray-800 active:bg-gray-300"
+  //               } hover:shadow-lg focus:outline-none ease-linear transition-all duration-150`}
+  //               type="button"
+  //               onClick={handleClosePreview}
+  //             >
+  //               بستن
+  //             </button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
   return (
-    <div
-      className={`${
-        isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-      } min-h-screen pb-20 pt-8 relative`}
-    >
-      <div
-        className={`flex w-full m-4 text-lg font-bold ${
-          isDarkMode ? "text-white" : "text-gray-800"
-        }`}
-      >
+    <div className={`${isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"} min-h-screen pb-20 pt-8 relative`}>
+      <div className={`flex w-full m-4 text-lg font-bold ${isDarkMode ? "text-white" : "text-gray-800"}`}>
         <img
           onClick={handleBack}
           src={icons.arrowright}
@@ -249,69 +254,45 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           onClick={toggleForm}
         >
           <div className="mb-4">
-            <img
-              src={icons.contract}
-              alt="Contract Icon"
-              className="w-12 h-12"
-            />
+            <img src={icons.contract} alt="Contract Icon" className="w-12 h-12" />
           </div>
           <span className="text-md">بستن قرارداد جدید</span>
         </div>
       ) : (
-        <div
-          className={`p-8 mx-auto border ${
-            isDarkMode
-              ? "border-gray-600 bg-gray-700 text-white"
-              : "border-gray-300 bg-white text-gray-800"
-          } rounded-lg max-w-xl`}
-        >
-          <div
-            className={`flex items-center justify-between mb-8 text-sm border-b pb-4 ${
-              isDarkMode
-                ? "text-white border-gray-600"
-                : "text-gray-800 border-gray-300"
-            }`}
-          >
+        <div className={`p-4 sm:p-8 mx-auto border ${
+          isDarkMode
+            ? "border-gray-600 bg-gray-700 text-white"
+            : "border-gray-300 bg-white text-gray-800"
+          } rounded-lg max-w-xl w-full`}>
+          <div className={`flex items-center justify-between mb-8 text-sm border-b pb-4 ${
+            isDarkMode ? "text-white border-gray-600" : "text-gray-800 border-gray-300"
+          }`}>
             <span>شماره قرارداد:</span>
             <span>عدد تولید شده نرم‌افزار:</span>
           </div>
 
           {/* اطلاعات سرمایه گذار */}
           <div className="relative p-4 mb-8 border border-gray-300 rounded-lg">
-            <div
-              className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
-                isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
-              }`}
-            >
+            <div className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
+              isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
+            }`}>
               اطلاعات سرمایه گذار
             </div>
-            <div className="mt-8">
+            <div className="mt-8 space-y-4">
               {Object.entries(investorInfo).map(([key, value]) => (
-                <div className="flex items-center mb-4" key={key}>
-                  <label className="w-32">
-                    {key === "name"
-                      ? "نام"
-                      : key === "lastName"
-                      ? "نام خانوادگی"
-                      : key === "nationalCode"
-                      ? "کد ملی"
-                      : "شماره همراه"}
-                    :
+                <div className="flex flex-col mb-4 sm:flex-row sm:items-center" key={key}>
+                  <label className="w-full mb-2 sm:w-32 sm:mb-0">
+                    {key === "name" ? "نام" :
+                     key === "lastName" ? "نام خانوادگی" :
+                     key === "nationalCode" ? "کد ملی" : "شماره همراه"}:
                   </label>
                   <input
                     type="text"
-                    className={`flex-1 p-2 ml-4 border rounded ${
-                      isDarkMode
-                        ? "bg-gray-600 border-gray-500"
-                        : "bg-white border-gray-300"
+                    className={`w-full sm:flex-1 p-2 sm:ml-4 border rounded ${
+                      isDarkMode ? "bg-gray-600 border-gray-500" : "bg-white border-gray-300"
                     }`}
                     value={value}
-                    onChange={(e) =>
-                      setInvestorInfo({
-                        ...investorInfo,
-                        [key]: e.target.value,
-                      })
-                    }
+                    onChange={(e) => setInvestorInfo({...investorInfo, [key]: e.target.value})}
                   />
                 </div>
               ))}
@@ -320,23 +301,20 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
 
           {/* اطلاعات قرارداد */}
           <div className="relative p-4 mb-8 border border-gray-300 rounded-lg">
-            <div
-              className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
-                isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
-              }`}
-            >
+            <div className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
+              isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
+            }`}>
               اطلاعات قرارداد
             </div>
             <div className="mt-4 space-y-4">
-              <div className="flex items-center">
-                <label className="w-32 text-right">سرمایه اولیه:</label>
-                <div className="flex items-center flex-1">
+              {/* سرمایه اولیه */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">سرمایه اولیه:</label>
+                <div className="flex items-center w-full sm:flex-1">
                   <input
                     type="text"
-                    className={`flex-1 p-2 text-left border rounded ${
-                      isDarkMode
-                        ? "bg-gray-600 border-gray-500"
-                        : "bg-white border-gray-300"
+                    className={`w-full sm:flex-1 p-2 text-left border rounded ${
+                      isDarkMode ? "bg-gray-600 border-gray-500" : "bg-white border-gray-300"
                     }`}
                     value={initialCapital}
                     onChange={(e) => setInitialCapital(e.target.value)}
@@ -344,96 +322,48 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                   <span className="mr-2">ریال</span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <label className="w-32 text-right">میزان کارمزد:</label>
-                <div className="flex items-center flex-1">
+              
+              {/* میزان کارمزد */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">میزان کارمزد:</label>
+                <div className="flex items-center w-full sm:flex-1">
                   <div className="flex flex-col h-full">
-                    <button
-                      onClick={() =>
-                        handleIncrement(setCommissionRate, commissionRate)
-                      }
-                      className={`px-1 border ${
-                        isDarkMode
-                          ? "bg-gray-600 text-white"
-                          : "bg-gray-100 text-gray-800"
-                      } rounded-t flex-1`}
-                      style={{ height: "100%" }}
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleDecrement(setCommissionRate, commissionRate)
-                      }
-                      className={`border ${
-                        isDarkMode
-                          ? "bg-gray-600 text-white"
-                          : "bg-gray-100 text-gray-800"
-                      } rounded-b flex-1`}
-                      style={{ height: "100%" }}
-                    >
-                      -
-                    </button>
+                    <button onClick={() => handleIncrement(setCommissionRate, commissionRate)}
+                      className={`px-1 border ${isDarkMode ? "bg-gray-600 text-white" : "bg-gray-100 text-gray-800"} rounded-t flex-1`}
+                      style={{ height: "100%" }}>+</button>
+                    <button onClick={() => handleDecrement(setCommissionRate, commissionRate)}
+                      className={`border ${isDarkMode ? "bg-gray-600 text-white" : "bg-gray-100 text-gray-800"} rounded-b flex-1`}
+                      style={{ height: "100%" }}>-</button>
                   </div>
-                  <input
-                    type="text"
-                    className={`flex-1 p-3 text-center border rounded ${
-                      isDarkMode
-                        ? "bg-gray-600 border-gray-500"
-                        : "bg-white border-gray-300"
-                    }`}
-                    value={commissionRate}
-                    readOnly
-                  />
+                  <input type="text" className={`w-full sm:flex-1 p-3 text-center border rounded ${
+                    isDarkMode ? "bg-gray-600 border-gray-500" : "bg-white border-gray-300"
+                  }`} value={commissionRate} readOnly />
                   <span className="mr-2">درصد</span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <label className="w-32 text-right">مدت قرارداد:</label>
-                <div className="flex items-center flex-1">
+
+              {/* مدت قرارداد */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">مدت قرارداد:</label>
+                <div className="flex items-center w-full sm:flex-1">
                   <div className="flex flex-col h-full">
-                    <button
-                      onClick={() =>
-                        handleIncrement(setContractDuration, contractDuration)
-                      }
-                      className={`px-1 border ${
-                        isDarkMode
-                          ? "bg-gray-600 text-white"
-                          : "bg-gray-100 text-gray-800"
-                      } rounded-t flex-1`}
-                      style={{ height: "100%" }}
-                    >
-                      +
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleDecrement(setContractDuration, contractDuration)
-                      }
-                      className={`border ${
-                        isDarkMode
-                          ? "bg-gray-600 text-white"
-                          : "bg-gray-100 text-gray-800"
-                      } rounded-b flex-1`}
-                      style={{ height: "100%" }}
-                    >
-                      -
-                    </button>
+                    <button onClick={() => handleIncrement(setContractDuration, contractDuration)}
+                      className={`px-1 border ${isDarkMode ? "bg-gray-600 text-white" : "bg-gray-100 text-gray-800"} rounded-t flex-1`}
+                      style={{ height: "100%" }}>+</button>
+                    <button onClick={() => handleDecrement(setContractDuration, contractDuration)}
+                      className={`border ${isDarkMode ? "bg-gray-600 text-white" : "bg-gray-100 text-gray-800"} rounded-b flex-1`}
+                      style={{ height: "100%" }}>-</button>
                   </div>
-                  <input
-                    type="text"
-                    className={`flex-1 p-3 text-center border rounded ${
-                      isDarkMode
-                        ? "bg-gray-600 border-gray-500"
-                        : "bg-white border-gray-300"
-                    }`}
-                    value={contractDuration}
-                    readOnly
-                  />
+                  <input type="text" className={`w-full sm:flex-1 p-3 text-center border rounded ${
+                    isDarkMode ? "bg-gray-600 border-gray-500" : "bg-white border-gray-300"
+                  }`} value={contractDuration} readOnly />
                   <span className="mr-2">ماه</span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <label className="w-32 text-right">از تاریخ:</label>
+
+              {/* از تاریخ */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">از تاریخ:</label>
                 <DatePicker
                   calendar={persian}
                   locale={persian_fa}
@@ -441,19 +371,19 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                   value={startDate}
                   onChange={setStartDate}
                   format="YYYY/MM/DD"
-                  inputClass={`flex-1 p-2 border rounded text-left cursor-pointer ${
-                    isDarkMode
-                      ? "bg-gray-600 border-gray-500 text-white"
-                      : "bg-white border-gray-300 text-gray-800"
+                  inputClass={`w-full sm:flex-1 p-2 border rounded text-left cursor-pointer ${
+                    isDarkMode ? "bg-gray-600 border-gray-500 text-white" : "bg-white border-gray-300 text-gray-800"
                   }`}
-                  containerClassName="flex-1"
+                  containerClassName="w-full sm:flex-1"
                 />
               </div>
-              <div className="mr-32 text-sm text-right text-gray-500">
+              <div className="mr-0 text-sm text-right text-gray-500 sm:mr-32">
                 {dateToWords(startDate)}
               </div>
-              <div className="flex items-center">
-                <label className="w-32 text-right">تا تاریخ:</label>
+
+              {/* تا تاریخ */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">تا تاریخ:</label>
                 <DatePicker
                   calendar={persian}
                   locale={persian_fa}
@@ -461,24 +391,22 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                   value={endDate}
                   onChange={setEndDate}
                   format="YYYY/MM/DD"
-                  inputClass={`flex-1 p-2 border rounded text-left cursor-pointer ${
-                    isDarkMode
-                      ? "bg-gray-600 border-gray-500 text-white"
-                      : "bg-white border-gray-300 text-gray-800"
+                  inputClass={`w-full sm:flex-1 p-2 border rounded text-left cursor-pointer ${
+                    isDarkMode ? "bg-gray-600 border-gray-500 text-white" : "bg-white border-gray-300 text-gray-800"
                   }`}
-                  containerClassName="flex-1"
+                  containerClassName="w-full sm:flex-1"
                 />
               </div>
-              <div className="mr-32 text-sm text-right text-gray-500">
+              <div className="mr-0 text-sm text-right text-gray-500 sm:mr-32">
                 {dateToWords(endDate)}
               </div>
-              <div className="flex items-center">
-                <label className="w-32 text-right">بازه گزارش‌دهی:</label>
+
+              {/* بازه گزارش‌دهی */}
+              <div className="flex flex-col sm:flex-row sm:items-center">
+                <label className="w-full mb-2 text-right sm:w-32 sm:mb-0">بازه گزارش‌دهی:</label>
                 <select
-                  className={`flex-1 p-2 text-right border rounded ${
-                    isDarkMode
-                      ? "bg-gray-600 border-gray-500 text-white"
-                      : "bg-white border-gray-300 text-gray-800"
+                  className={`w-full sm:flex-1 p-2 text-right border rounded ${
+                    isDarkMode ? "bg-gray-600 border-gray-500 text-white" : "bg-white border-gray-300 text-gray-800"
                   }`}
                   value={reportingPeriod}
                   onChange={(e) => setReportingPeriod(e.target.value)}
@@ -493,72 +421,71 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
 
           {/* تبصره‌های اختیاری قرارداد */}
           <div className="relative p-4 border border-gray-300 rounded-lg">
-            <div
-              className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
-                isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
-              }`}
-            >
+            <div className={`border absolute -top-3 left-1/2 transform -translate-x-1/2 px-2 ${
+              isDarkMode ? "text-white bg-gray-700" : "text-gray-800 bg-white"
+            }`}>
               تبصره‌های اختیاری قرارداد
             </div>
             <div className="mt-2 mb-4">
               <img
                 src={icons.contract}
                 alt="Contract Icon"
-                className="w-12 h-12 m-auto cursor-pointer"
+                className="w-12 h-12 m-auto mt-8 cursor-pointer"
                 onClick={handleAddClause}
               />
             </div>
             {clauses.map((clause, index) => (
-              <div key={index} className="flex items-center mb-2">
-                <span className="ml-2">تبصره اختیاری {index + 1}:</span>
+              <div key={index} className="flex flex-col mb-2 sm:flex-row sm:items-center">
+                <span className="w-full mb-2 sm:w-32 sm:mb-0">تبصره اختیاری {index + 1}:</span>
                 <input
                   type="text"
                   value={clause}
                   readOnly
-                  className={`flex-1 p-2 border rounded ${
-                    isDarkMode
-                      ? "bg-gray-600 border-gray-500 text-white"
-                      : "bg-white border-gray-300 text-gray-800"
+                  className={`w-full sm:flex-1 p-2 border rounded ${
+                    isDarkMode ? "bg-gray-600 border-gray-500 text-white" : "bg-white border-gray-300 text-gray-800"
                   }`}
                 />
-                <img
-                  src={icons.pencil}
-                  alt="edit"
-                  className="w-6 h-6 m-2 cursor-pointer"
-                  onClick={() => handleEditClause(index)}
-                />
-                <img
-                  src={icons.Delete}
-                  alt="Delete"
-                  className="w-6 h-6 ml-2 cursor-pointer"
-                  onClick={() => handleDeleteConfirmation(index)}
-                />
+                <div className="flex justify-end mt-2 sm:mt-0">
+                  <img
+                    src={icons.pencil}
+                    alt="edit"
+                    className="w-6 h-6 m-2 cursor-pointer"
+                    onClick={() => handleEditClause(index)}
+                  />
+                  <img
+                    src={icons.Delete}
+                    alt="Delete"
+                    className="w-6 h-6 ml-2 cursor-pointer"
+                    onClick={() => handleDeleteConfirmation(index)}
+                  />
+                </div>
               </div>
             ))}
           </div>
 
           <div className="justify-between mt-8">
-            <div className="flex justify-center m-1">
+            <div className="flex flex-col justify-center m-1 sm:flex-row">
               <button
-                className="w-40 px-1 py-1 mx-1 font-bold text-white bg-[#891BBF] rounded hover:bg-opacity-90"
+                className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#891BBF] rounded hover:bg-opacity-90"
                 onClick={handleSaveDraft}
               >
                 ذخیره پیش‌نویس
               </button>
               <button
-                className="w-40 px-1 py-1 mx-1 font-bold text-white bg-[#F7AF3E] rounded hover:bg-opacity-90"
+                
+                className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#F7AF3E] rounded hover:bg-opacity-90"
                 onClick={handlePreview}
               >
                 پیش‌نمایش
               </button>
             </div>
-            <div className="flex justify-center">
-              <button className="w-40 px-1 py-1 mx-1 font-bold text-white bg-[#1BBF89] rounded hover:bg-opacity-90">
+            <div className="flex flex-col justify-center mt-2 sm:flex-row sm:mt-0">
+              <button className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#1BBF89] rounded hover:bg-opacity-90">
                 تایید و ارسال
               </button>
               <button
                 onClick={handleBack}
-                className="w-40 px-1 py-1 mx-1 font-bold text-white bg-[#DB524B] rounded hover:bg-opacity-90"
+                className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#DB524B] rounded hover:bg-opacity-90"
               >
                 لغو و بازگشت
               </button>
@@ -571,7 +498,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div
-            className={`p-6 rounded-lg ${
+            className={`p-6 rounded-lg w-full max-w-md ${
               isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
             }`}
           >
@@ -592,7 +519,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
             <div className="flex justify-end">
               <button
                 onClick={handleClauseSubmit}
-                className={`px-2 m-1 text-white rounded ${
+                className={`px-4 py-2 m-1 text-white rounded ${
                   isDarkMode
                     ? "bg-blue-600 hover:bg-blue-700"
                     : "bg-blue-500 hover:bg-blue-600"
@@ -602,7 +529,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className={`px-2 m-1 rounded ${
+                className={`px-4 py-2 m-1 rounded ${
                   isDarkMode
                     ? "bg-gray-600 hover:bg-gray-500 text-white"
                     : "bg-gray-300 hover:bg-gray-400 text-gray-800"
@@ -619,7 +546,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
       {showDeleteConfirmation && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div
-            className={`p-6 rounded-lg ${
+            className={`p-6 rounded-lg w-full max-w-md ${
               isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
             }`}
           >
@@ -628,7 +555,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
             <div className="flex justify-end mt-6">
               <button
                 onClick={handleDeleteClause}
-                className={`px-2 m-1 text-white rounded ${
+                className={`px-4 py-2 m-1 text-white rounded ${
                   isDarkMode
                     ? "bg-red-600 hover:bg-red-700"
                     : "bg-red-500 hover:bg-red-600"
@@ -638,7 +565,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
               </button>
               <button
                 onClick={() => setShowDeleteConfirmation(false)}
-                className={`px-2 m-1 rounded ${
+                className={`px-4 py-2 m-1 rounded ${
                   isDarkMode
                     ? "bg-gray-600 hover:bg-gray-500 text-white"
                     : "bg-gray-300 hover:bg-gray-400 text-gray-800"
@@ -651,9 +578,73 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
         </div>
       )}
 
-      {showPreview && <PreviewModal />}
+      {/* Preview Modal */}
+      {showPreview && (
+        <>
+          <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+            <div className="relative w-auto max-w-3xl mx-auto my-6">
+              <div className={`relative flex flex-col w-full border-0 rounded-lg shadow-lg outline-none focus:outline-none ${
+                isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+              }`}>
+                <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
+                  <h3 className="text-2xl font-semibold">پیش‌نمایش قرارداد</h3>
+                  <button
+                    className="float-right p-1 mr-8 text-3xl font-semibold leading-none border-2 cursor-pointer"
+                    onClick={handleClosePreview}
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="relative flex-auto p-6" style={{maxHeight: "70vh", overflowY: "auto"}}>
+                  <div className="mb-6">
+                    <h4 className="mb-2 text-xl font-semibold">اطلاعات سرمایه گذار</h4>
+                    <p>نام: {investorInfo.name}</p>
+                    <p>نام خانوادگی: {investorInfo.lastName}</p>
+                    <p>کد ملی: {investorInfo.nationalCode}</p>
+                    <p>شماره همراه: {investorInfo.phoneNumber}</p>
+                  </div>
+
+                  <div className="mb-6">
+                    <h4 className="mb-2 text-xl font-semibold">اطلاعات قرارداد</h4>
+                    <p>سرمایه اولیه: {initialCapital} ریال</p>
+                    <p>میزان کارمزد: {commissionRate}٪</p>
+                    <p>مدت قرارداد: {contractDuration} ماه</p>
+                    <p>
+                      از تاریخ:{" "}
+                      {startDate instanceof Date
+                        ? startDate.toLocaleDateString("fa-IR")
+                        : "تاریخ نامعتبر"}
+                    </p>
+                    <p>
+                      تا تاریخ:{" "}
+                      {endDate instanceof Date
+                        ? endDate.toLocaleDateString("fa-IR")
+                        : "تاریخ نامعتبر"}
+                    </p>
+                    <p>بازه گزارش‌دهی: {reportingPeriod}</p>
+                  </div>
+
+                  {clauses.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="mb-4 text-xl font-semibold">
+                        تبصره‌های اختیاری قرارداد
+                      </h4>
+                      {clauses.map((clause, index) => (
+                        <p key={index}>
+                          تبصره {index + 1}: {clause}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
-}; 
+};
 
 export default ContractForm;

@@ -8,11 +8,11 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <aside
-      className={`fixed top-0 right-0 w-[40%] h-full ${
-        isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-      } shadow-lg transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      } z-50 rtl flex flex-col`}
+      className={`fixed top-0 right-0 h-full w-64 md:w-80 lg:w-96 
+        ${isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}
+        shadow-lg transition-transform duration-300 ease-in-out 
+        ${isOpen ? "translate-x-0" : "translate-x-full"}
+        z-50 overflow-y-auto`}
     >
       <div
         className={`flex items-center justify-between p-4 ${
@@ -142,7 +142,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             alt="خروج از حساب کاربری"
             className="w-6 h-6"
           />
-          <span>خروج از حساب کاربری</span>
+          <span>خروج</span>
         </button>
       </nav>
     </aside>

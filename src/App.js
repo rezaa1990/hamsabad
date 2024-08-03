@@ -46,9 +46,9 @@ function AppContent() {
       }`}
     >
       <Header />
-      <div className="flex flex-1">
+      <div className="relative flex flex-1">
         {isAuthenticated && <Sidebar />}
-        <main className="flex-1 p-4 pb-20">
+        <main className="flex-1 p-4 pb-20 overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

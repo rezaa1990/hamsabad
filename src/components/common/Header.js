@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div>
       <header
-        className={`flex justify-between items-center p-4 ${
+        className={`w-full flex justify-between items-center p-4 md:p-6 shadow-md ${
           isDarkMode ? "bg-gray-700" : "bg-white"
         } shadow-md`}
       >
