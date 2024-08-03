@@ -5,6 +5,18 @@ import { useNavigate } from "react-router-dom";
 const Investor = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [showEditRequestModal, setShowEditRequestModal] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [editReasons, setEditReasons] = useState({
+    initialAmount: false,
+    percentage: false,
+    dates: false,
+    personalInfo: false,
+    otherReasons: false,
+  });
+  const [editNotes, setEditNotes] = useState("");
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -14,10 +26,37 @@ const Investor = () => {
     setShowModal(!showModal);
   };
 
+  const toggleRejectModal = () => {
+    setShowRejectModal(!showRejectModal);
+  };
+
+  const toggleEditRequestModal = () => {
+    setShowEditRequestModal(!showEditRequestModal);
+  };
+
+  const toggleConfirmationModal = () => {
+    setShowConfirmationModal(!showConfirmationModal);
+  };
+
+  const handleReasonChange = (reason) => {
+    setEditReasons((prev) => ({ ...prev, [reason]: !prev[reason] }));
+  };
+
+  const handleEditRequest = (e) => {
+    e.preventDefault();
+    console.log("Edit Reasons:", editReasons);
+    console.log("Edit Notes:", editNotes);
+    toggleEditRequestModal();
+  };
+
+  const handleTermsAccept = () => {
+    setIsTermsAccepted(!isTermsAccepted);
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
-        <div className="flex items-center justify-between p-4 mb-2">
+    <div className="flex items-center justify-center p-4">
+      <div className="w-full bg-white rounded-lg shadow-lg">
+        <div className="flex items-center justify-start p-4 mb-2">
           <button
             onClick={handleNavigate}
             className="flex items-center text-gray-600 hover:text-gray-800"
@@ -27,23 +66,23 @@ const Investor = () => {
           <h2 className="text-lg font-semibold text-center">بستن قرارداد</h2>
         </div>
         <div className="w-full p-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex flex-col items-center mb-3 space-y-2">
+          <div className="flex flex-col items-center mb-3 space-y-10">
             <div className="text-center">
               <div className="font-medium">شماره قرارداد</div>
             </div>
-            <div className="flex flex-col justify-around w-full sm:flex-row">
+            <div className="flex flex-col justify-between w-full sm:flex-row">
               <div className="text-right">
                 <div className="font-medium ">تاریخ ثبت</div>
               </div>
-              <div className="text-right">
+              <div className="ml-16 text-right">
                 <div className="font-medium ">سرمایه گذار</div>
               </div>
             </div>
-            <div className="flex flex-col justify-around w-full sm:flex-row">
+            <div className="flex flex-col justify-between w-full sm:flex-row">
               <div className="text-right">
                 <div className="font-medium ">تاریخ ویرایش</div>
               </div>
-              <div className="text-right">
+              <div className="ml-16 text-right">
                 <div className="font-medium ">سبدگردان</div>
               </div>
             </div>
@@ -66,20 +105,29 @@ const Investor = () => {
             </button>
           </div>
           <div className="flex flex-wrap justify-center">
-            <button className="px-4 py-2 m-1 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600">
+            <button
+              className="px-4 py-2 m-1 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600"
+              onClick={toggleEditRequestModal}
+            >
               درخواست اصلاح
             </button>
-            <button className="px-4 py-2 m-1 text-sm text-white bg-red-500 rounded hover:bg-red-600">
+            <button
+              className="px-4 py-2 m-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+              onClick={toggleRejectModal}
+            >
               رد
             </button>
-            <button className="px-4 py-2 m-1 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+            <button
+              className="px-4 py-2 m-1 text-sm text-white bg-green-500 rounded hover:bg-green-600"
+              onClick={toggleConfirmationModal}
+            >
               تایید
             </button>
           </div>
         </div>
       </div>
 
-      {/* Modal Implementation */}
+      {/* Modal for viewing details */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
           <div className="relative w-full max-w-sm p-6 bg-white shadow-xl">
@@ -121,6 +169,197 @@ const Investor = () => {
               <button className="p-2">
                 <Icon name="call" size={24} className="text-gray-700" />
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for rejection */}
+      {showRejectModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
+          <div className="relative w-full max-w-sm p-6 bg-white shadow-xl">
+            <button
+              onClick={toggleRejectModal}
+              className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
+            >
+              <Icon name="close" size={24} />
+            </button>
+            <div className="text-right">
+              <h2 className="mb-4 text-xl font-semibold">علت رد:</h2>
+              <form>
+                <div className="space-y-2">
+                  <label className="flex items-center">
+                    <input type="radio" name="rejectReason" className="ml-2" />
+                    <span>از سرمایه‌گذاری منصرف شدم.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input type="radio" name="rejectReason" className="ml-2" />
+                    <span>سبدگردان دیگری انتخاب کردم.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input type="radio" name="rejectReason" className="ml-2" />
+                    <span>میخواهم بعدا سرمایه‌گذاری کنم.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input type="radio" name="rejectReason" className="ml-2" />
+                    <span>روی درصد توافق نکردیم.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input type="radio" name="rejectReason" className="ml-2" />
+                    <span>سایر دلایل</span>
+                  </label>
+                </div>
+                <textarea
+                  className="w-full p-2 mt-4 border border-gray-300 rounded"
+                  placeholder="نوشتن توضیحات..."
+                />
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={toggleRejectModal}
+                    className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  >
+                    بازگشت
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                  >
+                    ثبت رد
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Request Modal */}
+      {showEditRequestModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
+          <div className="relative w-full max-w-md p-6 bg-white rounded-lg shadow-xl">
+            <button
+              onClick={toggleEditRequestModal}
+              className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
+            >
+              <Icon name="close" size={24} />
+            </button>
+            <div className="text-right">
+              <h2 className="mb-4 text-xl font-semibold">علت درخواست اصلاح:</h2>
+              <form onSubmit={handleEditRequest}>
+                <div className="space-y-2">
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="ml-2"
+                      checked={editReasons.initialAmount}
+                      onChange={() => handleReasonChange("initialAmount")}
+                    />
+                    <span>مبلغ سرمایه اولیه را اصلاح کنید.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="ml-2"
+                      checked={editReasons.percentage}
+                      onChange={() => handleReasonChange("percentage")}
+                    />
+                    <span>میزان درصد را اصلاح کنید.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="ml-2"
+                      checked={editReasons.dates}
+                      onChange={() => handleReasonChange("dates")}
+                    />
+                    <span>تاریخ‌ها را اصلاح کنید.</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="ml-2"
+                      checked={editReasons.personalInfo}
+                      onChange={() => handleReasonChange("personalInfo")}
+                    />
+                    <span>اطلاعات من درست نیست</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="ml-2"
+                      checked={editReasons.otherReasons}
+                      onChange={() => handleReasonChange("otherReasons")}
+                    />
+                    <span>سایر دلایل</span>
+                  </label>
+                </div>
+                <textarea
+                  className="w-full p-2 mt-4 border border-gray-300 rounded"
+                  placeholder="نوشتن توضیحات..."
+                  value={editNotes}
+                  onChange={(e) => setEditNotes(e.target.value)}
+                />
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={toggleEditRequestModal}
+                    className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  >
+                    بازگشت
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600"
+                  >
+                    درخواست اصلاح
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation Modal */}
+      {showConfirmationModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
+          <div className="relative w-full max-w-md p-6 bg-white shadow-xl">
+            <button
+              onClick={toggleConfirmationModal}
+              className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
+            >
+              <Icon name="close" size={24} />
+            </button>
+            <div className="text-right">
+              <p className="mb-4">
+                اینجانب نام و نام خانوادگی
+                <br />
+                ضمن مطالعه موارد اشاره شده در قرارداد شماره فلان
+              </p>
+              <div className="flex items-center mb-4">
+                <input
+                  type="checkbox"
+                  className="ml-2"
+                  checked={isTermsAccepted}
+                  onChange={handleTermsAccept}
+                />
+                <span>بندهای موجود در این قرارداد مورد تایید می‌باشد.</span>
+              </div>
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={toggleConfirmationModal}
+                  className="px-1 text-white bg-blue-500 rounded hover:bg-blue-600"
+                >
+                  بازگشت
+                </button>
+                <button
+                  className="px-1 text-white bg-green-500 rounded hover:bg-green-600"
+                  disabled={!isTermsAccepted}
+                >
+                  تایید
+                </button>
+              </div>
             </div>
           </div>
         </div>
