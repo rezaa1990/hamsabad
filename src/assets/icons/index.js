@@ -38,6 +38,7 @@ import contract from "./contract_gray.png";
 import messages2 from "./messages2.png";
 import call from "./call.png";
 import one from "./1.png";
+import eraser from "./eraser-icon.png";
 
 export {
   merchantPrograms,
@@ -80,5 +81,6 @@ export {
   messages2,
   call,
   one,
+  eraser,
 
 };

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
@@ -19,7 +19,7 @@ const Investor = () => {
   });
   const [editNotes, setEditNotes] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-  const [signature, setSignature] = useState("");
+  // const [signature, setSignature] = useState("");
   const [hasPreviousSignature, setHasPreviousSignature] = useState(false); // این باید بر اساس داده‌های بک‌اند تنظیم شود
 
   const handleNavigate = () => {
@@ -71,26 +71,15 @@ const Investor = () => {
     }
   };
 
-  // const clearSignature = () => {
-  //   setSignature("");
-  // };
-
-  // const handleSignatureSubmit = () => {
-  //   if (signature) {
-  //     // در اینجا معمولاً امضا را به بک‌اند ارسال می‌کنید
-  //     console.log("امضا ثبت شد:", signature);
-  //     setHasPreviousSignature(true);
-  //     toggleSignatureModal();
-  //     // ادامه با تایید نهایی
-  //     console.log("قرارداد با امضای جدید تایید شد");
-  //     toggleConfirmationModal();
-  //   } else {
-  //     alert("لطفا امضای خود را وارد کنید");
-  //   }
-  // };
-
-  
   const sigCanvas = useRef({});
+  const sigContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (sigContainerRef.current) {
+      const width = sigContainerRef.current.offsetWidth;
+      sigCanvas.current.width = width;
+    }
+  }, []);
 
   const clearSignature = () => {
     sigCanvas.current.clear();
@@ -108,10 +97,6 @@ const Investor = () => {
       toggleConfirmationModal();
     }
   };
-
-
-
-  
 
   return (
     <div className="flex items-center justify-center p-4">
@@ -443,23 +428,27 @@ const Investor = () => {
               <p className="mb-2 text-red-500">
                 (توجه کنید که امضا قابل تغییر نیست)
               </p>
-              <div className="relative mb-4 border border-gray-300">
+              <div
+                ref={sigContainerRef}
+                className="relative mb-4 border border-gray-300"
+              >
                 <SignatureCanvas
                   ref={sigCanvas}
                   canvasProps={{
-                    width: 500,
-                    height: 200,
                     className: "signature-canvas",
                   }}
                 />
-              </div>
-              <div className="flex justify-between">
+                <span className="absolute text-gray-400 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none top-1/2 left-1/2">
+                  محل امضا
+                </span>
                 <button
                   onClick={clearSignature}
-                  className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                  className="absolute p-1 bg-white border border-gray-300 rounded top-2 left-2 hover:bg-gray-100"
                 >
-                  پاک کردن
+                  <Icon name="eraser" size={20} />
                 </button>
+              </div>
+              <div className="flex justify-between">
                 <button
                   onClick={toggleSignatureModal}
                   className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
