@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
+import SignatureCanvas from "react-signature-canvas";
 
 const Investor = () => {
   const navigate = useNavigate();
@@ -8,6 +9,7 @@ const Investor = () => {
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [showEditRequestModal, setShowEditRequestModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSignatureModal, setShowSignatureModal] = useState(false);
   const [editReasons, setEditReasons] = useState({
     initialAmount: false,
     percentage: false,
@@ -17,6 +19,8 @@ const Investor = () => {
   });
   const [editNotes, setEditNotes] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const [signature, setSignature] = useState("");
+  const [hasPreviousSignature, setHasPreviousSignature] = useState(false); // این باید بر اساس داده‌های بک‌اند تنظیم شود
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -38,6 +42,10 @@ const Investor = () => {
     setShowConfirmationModal(!showConfirmationModal);
   };
 
+  const toggleSignatureModal = () => {
+    setShowSignatureModal(!showSignatureModal);
+  };
+
   const handleReasonChange = (reason) => {
     setEditReasons((prev) => ({ ...prev, [reason]: !prev[reason] }));
   };
@@ -52,6 +60,58 @@ const Investor = () => {
   const handleTermsAccept = () => {
     setIsTermsAccepted(!isTermsAccepted);
   };
+
+  const handleConfirmation = () => {
+    if (hasPreviousSignature) {
+      // ادامه با تایید نهایی
+      console.log("قرارداد با امضای موجود تایید شد");
+      toggleConfirmationModal();
+    } else {
+      toggleSignatureModal();
+    }
+  };
+
+  // const clearSignature = () => {
+  //   setSignature("");
+  // };
+
+  // const handleSignatureSubmit = () => {
+  //   if (signature) {
+  //     // در اینجا معمولاً امضا را به بک‌اند ارسال می‌کنید
+  //     console.log("امضا ثبت شد:", signature);
+  //     setHasPreviousSignature(true);
+  //     toggleSignatureModal();
+  //     // ادامه با تایید نهایی
+  //     console.log("قرارداد با امضای جدید تایید شد");
+  //     toggleConfirmationModal();
+  //   } else {
+  //     alert("لطفا امضای خود را وارد کنید");
+  //   }
+  // };
+
+  
+  const sigCanvas = useRef({});
+
+  const clearSignature = () => {
+    sigCanvas.current.clear();
+  };
+
+  const handleSignatureSubmit = () => {
+    if (sigCanvas.current.isEmpty()) {
+      alert("لطفا امضای خود را وارد کنید");
+    } else {
+      const signatureData = sigCanvas.current.toDataURL();
+      console.log("امضا ثبت شد:", signatureData);
+      setHasPreviousSignature(true);
+      toggleSignatureModal();
+      console.log("قرارداد با امضای جدید تایید شد");
+      toggleConfirmationModal();
+    }
+  };
+
+
+
+  
 
   return (
     <div className="flex items-center justify-center p-4">
@@ -356,6 +416,59 @@ const Investor = () => {
                 <button
                   className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
                   disabled={!isTermsAccepted}
+                  onClick={handleConfirmation}
+                >
+                  تایید
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Signature Modal */}
+      {showSignatureModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
+          <div className="relative w-full max-w-md p-6 bg-white shadow-xl">
+            <button
+              onClick={toggleSignatureModal}
+              className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
+            >
+              <Icon name="close" size={24} />
+            </button>
+            <div className="text-right">
+              <h2 className="mb-4 text-xl font-semibold">
+                امضای خود را وارد کنید:
+              </h2>
+              <p className="mb-2 text-red-500">
+                (توجه کنید که امضا قابل تغییر نیست)
+              </p>
+              <div className="relative mb-4 border border-gray-300">
+                <SignatureCanvas
+                  ref={sigCanvas}
+                  canvasProps={{
+                    width: 500,
+                    height: 200,
+                    className: "signature-canvas",
+                  }}
+                />
+              </div>
+              <div className="flex justify-between">
+                <button
+                  onClick={clearSignature}
+                  className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                >
+                  پاک کردن
+                </button>
+                <button
+                  onClick={toggleSignatureModal}
+                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                >
+                  بازگشت
+                </button>
+                <button
+                  onClick={handleSignatureSubmit}
+                  className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
                 >
                   تایید
                 </button>
