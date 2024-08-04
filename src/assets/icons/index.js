@@ -39,6 +39,8 @@ import messages2 from "./messages2.png";
 import call from "./call.png";
 import one from "./1.png";
 import eraser from "./eraser-icon.png";
+import capital from "./capital.png";
+import dollar from "./dollar.png";
 
 export {
   merchantPrograms,
@@ -82,5 +84,8 @@ export {
   call,
   one,
   eraser,
+  capital,
+  dollar,
+  
 
 };

@@ -17,7 +17,6 @@ const UserRoleComponent = () => {
 
   return (
     <div className="">
-      {/* <h2>پنل کاربری</h2> */}
       {renderComponentBasedOnRole()}
     </div>
   );

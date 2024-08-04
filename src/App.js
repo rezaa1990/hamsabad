@@ -14,7 +14,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ContractList from "./components/contract/ContractList";
 // import ContractForm from "./components/contract/ContractForm";
 import ContractDetails from "./components/contract/ContractDetails";
-import IncreaseCapital from "./components/transactions/IncreaseCapital";
+// import IncreaseCapital from "./components/transactions/IncreaseCapital";
 import WithdrawCash from "./components/transactions/WithdrawCash";
 import RequestShare from "./components/transactions/RequestShare";
 import ProfileEdit from "./components/profile/ProfileEdit";
@@ -23,6 +23,7 @@ import SetPassword from "./components/auth/Setpassword";
 import InformationEntry from "./components/profile/InformationEntry";
 import UserProfile from "./components/profile/UserProfile";
 import UserRoleComponent from "./components/contract/UserRoleComponent";
+import InvestRoleComponent from "./components/transactions/InvestRoleComponent";
 
 function App() {
   return (
@@ -62,7 +63,7 @@ function AppContent() {
             <Route path="/contracts" element={<ContractList />} />
             {/* <Route path="/contracts/new" element={<ContractForm />} /> */}
             <Route path="/contracts/:id" element={<ContractDetails />} />
-            <Route path="/increase-capital" element={<IncreaseCapital />} />
+            <Route path="/increasecapital" element={<InvestRoleComponent />} />
             <Route path="/withdraw-cash" element={<WithdrawCash />} />
             <Route path="/request-share" element={<RequestShare />} />
             <Route path="/profile" element={<UserProfile />} />

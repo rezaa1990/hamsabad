@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 const Dashboard = () => {
   const { isDarkMode } = useTheme();
   const menuItems = [
-    { icon: icons.notes, label: "یادداشت" , path:""},
-    { icon: icons.graf1, label: "بررسی شاخص" , path:""},
-    { icon: icons.shoppingBasket, label: "سبدهای من" , path:""},
-    { icon: icons.merchantPrograms, label: "بستن قرارداد" , path:"/user"},
-    { icon: icons.bell, label: "اعلان‌ها" , path:""},
-    { icon: icons.messages, label: "پیام‌های من" , path:""},
-    { icon: icons.pay1, label: "افزایش سرمایه" , path:""},
-    { icon: icons.cash, label: "درخواست وجه" , path:""},
-    { icon: icons.favorites, label: "علاقه‌مندی" , path:""},
-    { icon: icons.kodal, label: "اخبار" , path:""},
-    { icon: icons.txhistory, label: "تاریخچه معاملات" , path:""},
-    { icon: icons.graf2, label: "بررسی سهم" , path:""},
+    { icon: icons.notes, label: "یادداشت", path: "" },
+    { icon: icons.graf1, label: "بررسی شاخص", path: "" },
+    { icon: icons.shoppingBasket, label: "سبدهای من", path: "" },
+    { icon: icons.merchantPrograms, label: "بستن قرارداد", path: "/user" },
+    { icon: icons.bell, label: "اعلان‌ها", path: "" },
+    { icon: icons.messages, label: "پیام‌های من", path: "" },
+    { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
+    { icon: icons.cash, label: "درخواست وجه", path: "" },
+    { icon: icons.favorites, label: "علاقه‌مندی", path: "" },
+    { icon: icons.kodal, label: "اخبار", path: "" },
+    { icon: icons.txhistory, label: "تاریخچه معاملات", path: "" },
+    { icon: icons.graf2, label: "بررسی سهم", path: "" },
   ];
 
   return (
