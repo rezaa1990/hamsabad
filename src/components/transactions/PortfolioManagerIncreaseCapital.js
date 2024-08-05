@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
 
-const PortfolioManagerIncreaseCapital = () => {
+const PortfolioManagerIncreaseCapital = ({ investments }) => {
   const navigate = useNavigate();
   const [showConfirmForm, setShowConfirmForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);

@@ -6,7 +6,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 
-const InvestorIncreaseCapital = () => {
+const InvestorIncreaseCapital = ({ investments }) => {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
