@@ -4,8 +4,8 @@ import PortfolioManagerIncreaseCapital from "./PortfolioManagerIncreaseCapital";
 import { useState } from "react";
 
 const InvestRoleComponent = () => {
-  const userRole = "portfolioManager";
-  // const userRole = "investor";
+  // const userRole = "portfolioManager";
+  const userRole = "investor";
   const [investments, setInvestments] = useState([
     {
       id: 1,

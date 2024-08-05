@@ -58,11 +58,13 @@ const PortfolioManagerIncreaseCapital = ({
       console.log("Message to investor:", messageToInvestor);
 
       setShowConfirmForm(false);
-      setIncreaseCapitalRequest(null); // Reset the current request
+      setIncreaseCapitalRequest(null);
     }
   };
 
   const handleCancel = () => {
+  handleConfirmRequest();
+    
     setShowConfirmForm(false);
     setShowRejectForm(false);
   };
