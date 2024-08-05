@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Icon from "../common/Icon";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
+import AppContext from "../../contexts/AppContext";
 
 const Captcha = ({ onClose, onSubmit }) => {
+    const {
+      isAuthenticated,
+      setIsAuthenticated,
+      role,
+      setRole,
+      login,
+      logout,
+      baskets,
+      setBaskets,
+      handleUpdateBasket,
+      phoneNumber,
+      setPhoneNumber,
+      nationalId,
+      setNationalId,
+      isDarkMode,
+      setIsDarkMode,
+      toggleDarkMode,
+    } = useContext(AppContext);
+  
   const [captchaInput, setCaptchaInput] = useState("");
   const [error, setError] = useState("");
-  const { isDarkMode } = useTheme();
+  // const { isDarkMode } = useTheme();
 
   const handleSubmit = () => {
     if (!captchaInput) {

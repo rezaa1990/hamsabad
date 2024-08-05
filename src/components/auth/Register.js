@@ -1,18 +1,38 @@
 import React, { useState, useContext } from "react";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import Captcha from "../modals/Captcha";
-import { RegistrationContext } from "../../contexts/RegistrationContext";
+// import { RegistrationContext } from "../../contexts/RegistrationContext";
+import AppContext from "../../contexts/AppContext";
 
 const Register = () => {
-  const { isDarkMode } = useTheme();
   const {
-    setPhoneNumber: setContextPhoneNumber,
-    setNationalId: setContextNationalId,
-  } = useContext(RegistrationContext);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [nationalId, setNationalId] = useState("");
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
+  // const {
+  //   setPhoneNumber: setContextPhoneNumber,
+  //   setNationalId: setContextNationalId,
+  // } = useContext(RegistrationContext);
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [nationalId, setNationalId] = useState("");
   const [showCaptcha, setShowCaptcha] = useState(false);
   const navigate = useNavigate();
 
@@ -25,8 +45,8 @@ const Register = () => {
   };
 
   const handleContinue = () => {
-    setContextPhoneNumber(phoneNumber);
-    setContextNationalId(nationalId);
+    setPhoneNumber(phoneNumber);
+    setNationalId(nationalId);
     setShowCaptcha(true);
   };
 

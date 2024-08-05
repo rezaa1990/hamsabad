@@ -1,9 +1,33 @@
+import { useContext } from "react";
 import Investor from "./Investor";
-import  PortfolioManager  from "./PortfolioManager";
+import PortfolioManager from "./PortfolioManager";
+// import { useAuth } from "../../contexts/AuthContext";
+import AppContext from "../../contexts/AppContext";
 
 const UserRoleComponent = () => {
-  // const userRole = "portfolioManager";
-  const userRole = "investor";
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  
+  // const { role } = useAuth();
+  const userRole = role;
+  console.log("userRole", userRole);
+
   const renderComponentBasedOnRole = () => {
     switch (userRole) {
       case "investor":
@@ -15,11 +39,7 @@ const UserRoleComponent = () => {
     }
   };
 
-  return (
-    <div className="">
-      {renderComponentBasedOnRole()}
-    </div>
-  );
+  return <div className="">{renderComponentBasedOnRole()}</div>;
 };
 
 export default UserRoleComponent;

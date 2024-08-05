@@ -1,9 +1,29 @@
-import React from "react";
-import { useTheme } from "../../contexts/ThemeContext";
+import React ,{useContext} from "react";
+// import { useTheme } from "../../contexts/ThemeContext";
 import * as icons from "../../assets/icons";
+import AppContext from "../../contexts/AppContext";
 
 const UserProfile = () => {
-  const { isDarkMode} = useTheme();
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { isDarkMode} = useTheme();
 
   return (
     <div

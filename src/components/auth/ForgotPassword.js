@@ -1,7 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import AppContext from "../../contexts/AppContext";
 
 const ForgotPassword = () => {
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
   const [email, setEmail] = useState("");
   const { resetPassword } = useAuth();
 

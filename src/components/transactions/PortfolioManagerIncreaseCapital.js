@@ -1,11 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
+// import { useBaskets } from "../../contexts/BasketsContext";
+import AppContext from "../../contexts/AppContext";
+const PortfolioManagerIncreaseCapital = () => {
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
 
-const PortfolioManagerIncreaseCapital = ({
-  investments,
-  onUpdateInvestment,
-}) => {
+  // const { baskets, onUpdateBaskets } = useBaskets();
+  console.log("PortfolioManagerIncreaseCapital_Baskets", baskets);
   const navigate = useNavigate();
   const [showConfirmForm, setShowConfirmForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);
@@ -14,11 +33,9 @@ const PortfolioManagerIncreaseCapital = ({
   const [increaseCapitalRequest, setIncreaseCapitalRequest] = useState(null);
 
   useEffect(() => {
-    const request = investments.find(
-      (inv) => inv.increaseCapital && inv.status === "در انتظار تایید"
-    );
+    const request = baskets.find((inv) => inv.status === "در انتظار تایید");
     setIncreaseCapitalRequest(request || null);
-  }, [investments]);
+  }, [baskets]);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -42,20 +59,20 @@ const PortfolioManagerIncreaseCapital = ({
 
   const handleConfirmRequest = () => {
     if (increaseCapitalRequest) {
-      const updatedInvestment = {
+      const updatedBaskets = {
         ...increaseCapitalRequest,
-        documentRequest: false,
+        // documentRequest: false,
         status:
           selectedOption === "upload"
             ? "در انتظار ارسال سند واریز"
             : "تایید شده",
       };
 
-      onUpdateInvestment(updatedInvestment);
+      setBaskets(updatedBaskets);
 
-      console.log("Confirmed investment:", updatedInvestment);
-      console.log("Selected option:", selectedOption);
-      console.log("Message to investor:", messageToInvestor);
+      // console.log("Confirmed investment:", updatedBaskets);
+      // console.log("Selected option:", selectedOption);
+      // console.log("Message to investor:", messageToInvestor);
 
       setShowConfirmForm(false);
       setIncreaseCapitalRequest(null);
@@ -63,8 +80,8 @@ const PortfolioManagerIncreaseCapital = ({
   };
 
   const handleCancel = () => {
-  handleConfirmRequest();
-    
+    handleConfirmRequest();
+
     setShowConfirmForm(false);
     setShowRejectForm(false);
   };
@@ -142,31 +159,29 @@ const PortfolioManagerIncreaseCapital = ({
             </div>
           </div>
         ) : (
-          investments.map((investment) => (
+          baskets.map((basket) => (
             <div
-              key={investment.id}
-              className={`mb-4 p-4 rounded-lg ${getStatusColor(
-                investment.status
-              )}`}
+              key={basket.id}
+              className={`mb-4 p-4 rounded-lg ${getStatusColor(basket.status)}`}
             >
               <div className="flex justify-between mb-2">
-                <span className="font-bold">{investment.status}</span>
-                <span>{investment.amount} ریال</span>
+                <span className="font-bold">{basket.status}</span>
+                <span>{basket.amount} ریال</span>
               </div>
-              <div className="mb-2">{investment.depositDate}</div>
+              <div className="mb-2">{basket.depositDate}</div>
               <div className="flex items-center">
                 <Icon name="eye" size={16} className="mr-2" />
                 <span>
-                  {investment.paymentMethod === "مستقیم"
+                  {basket.paymentMethod === "مستقیم"
                     ? "واریز مستقیم"
                     : "واریز به حساب کارگزاری"}
                 </span>
-                {investment.hasDocument && (
+                {basket.hasDocument && (
                   <Icon name="document" size={16} className="ml-2" />
                 )}
               </div>
-              {investment.status === "رد" && (
-                <div className="mt-2">علت رد: {investment.rejectionReason}</div>
+              {basket.status === "رد" && (
+                <div className="mt-2">علت رد: {basket.rejectionReason}</div>
               )}
             </div>
           ))

@@ -1,10 +1,30 @@
-import React, { useState } from "react";
-import { useTheme } from "../../contexts/ThemeContext";
+import React, { useState,useContext } from "react";
+// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
 
 const SetPassword = () => {
-  const { isDarkMode } = useTheme();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [remember, setRemember] = useState(false);

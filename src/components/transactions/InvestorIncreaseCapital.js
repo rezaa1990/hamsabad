@@ -1,12 +1,35 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
+// import { useBaskets } from "../../contexts/BasketsContext";
+import AppContext from "../../contexts/AppContext"; 
 
-const InvestorIncreaseCapital = ({ investments }) => {
+const InvestorIncreaseCapital = () => {
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { Baskets, onUpdateBaskets } = useBaskets();
+  console.log("InvestorIncreaseCapital_Baskets", baskets);
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);

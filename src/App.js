@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ContextProvider from "./contexts/ContextProvider"; // اضافه شده
-import { useAuth } from "./hooks/useAuth";
-import { useTheme } from "./contexts/ThemeContext";
+
+import AppProvider from "./contexts/AppProvider";
+import AppContext from "./contexts/AppContext";
+// import { useAuth } from "./hooks/useAuth";
+// import { useTheme } from "./contexts/ThemeContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Sidebar from "./components/common/Sidebar";
@@ -24,22 +26,22 @@ import InformationEntry from "./components/profile/InformationEntry";
 import UserProfile from "./components/profile/UserProfile";
 import UserRoleComponent from "./components/contract/UserRoleComponent";
 import InvestRoleComponent from "./components/transactions/InvestRoleComponent";
+// import DepositReceipt from "./components/notification/DepositReceipt";
+import InvestmentApproval from "./components/notification/DepositReceipt";
 
 function App() {
   return (
-    <ContextProvider>
-      {" "}
-      {/* استفاده از ContextProvider */}
+    <AppProvider>
       <Router>
         <AppContent />
       </Router>
-    </ContextProvider>
+    </AppProvider>
   );
 }
 
 function AppContent() {
-  const { isAuthenticated } = useAuth();
-  const { isDarkMode } = useTheme();
+  const { isAuthenticated, isDarkMode } = useContext(AppContext);
+  // const { isDarkMode } = AppProvider();
 
   return (
     <div
@@ -61,7 +63,7 @@ function AppContent() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/user" element={<UserRoleComponent />} />
             <Route path="/contracts" element={<ContractList />} />
-            {/* <Route path="/contracts/new" element={<ContractForm />} /> */}
+            <Route path="/notification" element={<InvestmentApproval />} />
             <Route path="/contracts/:id" element={<ContractDetails />} />
             <Route path="/increasecapital" element={<InvestRoleComponent />} />
             <Route path="/withdraw-cash" element={<WithdrawCash />} />

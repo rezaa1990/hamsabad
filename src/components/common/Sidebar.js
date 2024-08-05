@@ -1,10 +1,30 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import * as icons from "../../assets/icons";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
+import AppContext from "../../contexts/AppContext";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const { isDarkMode } = useTheme();
+    const {
+      isAuthenticated,
+      setIsAuthenticated,
+      role,
+      setRole,
+      login,
+      logout,
+      baskets,
+      setBaskets,
+      handleUpdateBasket,
+      phoneNumber,
+      setPhoneNumber,
+      nationalId,
+      setNationalId,
+      isDarkMode,
+      setIsDarkMode,
+      toggleDarkMode,
+    } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
 
   return (
     <aside

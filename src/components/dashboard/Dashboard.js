@@ -1,16 +1,36 @@
-import React from "react";
+import React, {useContext} from "react";
 import * as icons from "../../assets/icons";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
 
 const Dashboard = () => {
-  const { isDarkMode } = useTheme();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
   const menuItems = [
     { icon: icons.notes, label: "یادداشت", path: "" },
     { icon: icons.graf1, label: "بررسی شاخص", path: "" },
     { icon: icons.shoppingBasket, label: "سبدهای من", path: "" },
     { icon: icons.merchantPrograms, label: "بستن قرارداد", path: "/user" },
-    { icon: icons.bell, label: "اعلان‌ها", path: "" },
+    { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
     { icon: icons.messages, label: "پیام‌های من", path: "" },
     { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
     { icon: icons.cash, label: "درخواست وجه", path: "" },

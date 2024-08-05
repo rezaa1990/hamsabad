@@ -1,13 +1,33 @@
 import React, { useState, useContext } from "react";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import { RegistrationContext } from "../../contexts/RegistrationContext";
+import AppContext from "../../contexts/AppContext";
 
 const InformationEntry = () => {
-  const { isDarkMode } = useTheme();
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
   const navigate = useNavigate();
-  const { phoneNumber, nationalId, setPhoneNumber, setNationalId } =
+  // const { phoneNumber, nationalId, setPhoneNumber, setNationalId } =
     useContext(RegistrationContext);
   const [formData, setFormData] = useState({
     name: "",

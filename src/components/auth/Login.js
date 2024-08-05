@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../../contexts/ThemeContext";
-import { useAuth } from "../../hooks/useAuth";
+// import { useTheme } from "../../contexts/ThemeContext";
+// import { useAuth } from "../../hooks/useAuth";
 import Icon from "../common/Icon";
+import AppContext from "../../contexts/AppContext";
 
 const Login = () => {
-  const { isDarkMode } = useTheme();
-  const { login } = useAuth();
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
+  // const { login } = useAuth();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);

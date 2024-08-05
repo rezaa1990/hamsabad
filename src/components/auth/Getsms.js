@@ -1,13 +1,33 @@
 import React, { useState, useContext } from "react";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
-import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
+// import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
+import AppContext from "../../contexts/AppContext";
 
 const GetSms = () => {
-  const { isDarkMode } = useTheme();
-  const { phoneNumber } = useContext(RegistrationContext); // گرفتن phoneNumber از کانتکست
-  const [nationalId, setNationalId] = useState("");
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
+  // const { phoneNumber } = useContext(RegistrationContext); // گرفتن phoneNumber از کانتکست
+  // const [nationalId, setNationalId] = useState("");
   const navigate = useNavigate();
 
   const goBack = () => {

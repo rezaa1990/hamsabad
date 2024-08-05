@@ -1,16 +1,36 @@
-import React, { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import React, { useState, useContext } from "react";
+// import { useAuth } from "../../hooks/useAuth";
+import AppContext from "../../contexts/AppContext";
 
 const ProfileEdit = () => {
-  const { user, updateUser } = useAuth();
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { user, updateUser } = useAuth();
   const [profile, setProfile] = useState({
-    username: user.username,
-    email: user.email,
+    // username: user.username,
+    // email: user.email,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateUser(profile);
+    // await updateUser(profile);
     alert("پروفایل با موفقیت به‌روز شد");
   };
 

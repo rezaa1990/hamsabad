@@ -1,9 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
+import AppContext from "../../contexts/AppContext";
 
 const Investor = () => {
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);

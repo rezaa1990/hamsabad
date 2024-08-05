@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import * as icons from "../../assets/icons";
-import { useTheme } from "../../contexts/ThemeContext";
+// import { useTheme } from "../../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../../contexts/AppContext";
 
 const PortfolioManager = () => {
-  const { isDarkMode } = useTheme();
+   const {
+     isAuthenticated,
+     setIsAuthenticated,
+     role,
+     setRole,
+     login,
+     logout,
+     baskets,
+     setBaskets,
+     handleUpdateBasket,
+     phoneNumber,
+     setPhoneNumber,
+     nationalId,
+     setNationalId,
+     isDarkMode,
+     setIsDarkMode,
+     toggleDarkMode,
+   } = useContext(AppContext);
+  
+  // const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [initialCapital, setInitialCapital] = useState("");
