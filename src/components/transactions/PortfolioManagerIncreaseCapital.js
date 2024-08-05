@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
 
-const PortfolioManagerIncreaseCapital = ({ investments }) => {
+const PortfolioManagerIncreaseCapital = ({
+  investments,
+  onUpdateInvestment,
+}) => {
   const navigate = useNavigate();
   const [showConfirmForm, setShowConfirmForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [messageToInvestor, setMessageToInvestor] = useState("");
+  const [increaseCapitalRequest, setIncreaseCapitalRequest] = useState(null);
+
+  useEffect(() => {
+    const request = investments.find(
+      (inv) => inv.increaseCapital && inv.status === "در انتظار تایید"
+    );
+    setIncreaseCapitalRequest(request || null);
+  }, [investments]);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -30,13 +41,45 @@ const PortfolioManagerIncreaseCapital = ({ investments }) => {
   };
 
   const handleConfirmRequest = () => {
-    console.log("Selected option:", selectedOption);
-    console.log("Message to investor:", messageToInvestor);
-    setShowConfirmForm(false);
+    if (increaseCapitalRequest) {
+      const updatedInvestment = {
+        ...increaseCapitalRequest,
+        documentRequest: false,
+        status:
+          selectedOption === "upload"
+            ? "در انتظار ارسال سند واریز"
+            : "تایید شده",
+      };
+
+      onUpdateInvestment(updatedInvestment);
+
+      console.log("Confirmed investment:", updatedInvestment);
+      console.log("Selected option:", selectedOption);
+      console.log("Message to investor:", messageToInvestor);
+
+      setShowConfirmForm(false);
+      setIncreaseCapitalRequest(null); // Reset the current request
+    }
   };
 
   const handleCancel = () => {
     setShowConfirmForm(false);
+    setShowRejectForm(false);
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "در انتظار تایید":
+        return "bg-gray-100";
+      case "رد":
+        return "bg-red-100";
+      case "در انتظار ارسال سند واریز":
+        return "bg-blue-100";
+      case "تایید شده":
+        return "bg-green-100";
+      default:
+        return "bg-white";
+    }
   };
 
   return (
@@ -49,50 +92,88 @@ const PortfolioManagerIncreaseCapital = ({ investments }) => {
           >
             <Icon name="arrowright" size={16} className="ml-4" />
           </button>
-          <h2 className="text-xl font-bold">درخواست افزایش سرمایه:</h2>
+          <h2 className="text-xl font-bold">افزایش سرمایه (شماره سبد)</h2>
         </div>
-        <form>
-          <div className="mb-4">
-            <label className="block mb-2 mr-6 font-medium">مبلغ:</label>
-            <div className="p-2 bg-gray-100 rounded">
-              <span className="text-lg">۱۰۰۰۰۰۰۰ ریال</span>
-            </div>
-          </div>
 
-          <div className="mb-6">
-            <label className="block mb-2 mr-6 font-medium">تاریخ:</label>
-            <div className="p-2 bg-gray-100 rounded">
-              <span className="text-lg">۱۴۰۳/۱۱/۲۳</span>
+        {increaseCapitalRequest ? (
+          <div
+            className={`mb-4 p-4 rounded-lg ${getStatusColor(
+              increaseCapitalRequest.status
+            )}`}
+          >
+            <div className="mb-4">
+              <label className="block mb-2 mr-6 font-medium">مبلغ:</label>
+              <div className="p-2 bg-gray-100 rounded">
+                <span className="text-lg">
+                  {increaseCapitalRequest.amount} ریال
+                </span>
+              </div>
+            </div>
+            <div className="mb-6">
+              <label className="block mb-2 mr-6 font-medium">تاریخ:</label>
+              <div className="p-2 bg-gray-100 rounded">
+                <span className="text-lg">
+                  {increaseCapitalRequest.depositDate}
+                </span>
+              </div>
+            </div>
+            <div className="mb-4 font-medium text-center">
+              <span>
+                {increaseCapitalRequest.paymentMethod === "مستقیم"
+                  ? "واریز به صورت مستقیم"
+                  : "واریز به حساب کارگزاری"}
+              </span>
+            </div>
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={handleReject}
+                className="px-6 py-2 text-white transition duration-300 bg-red-500 rounded hover:bg-red-600"
+              >
+                رد
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="px-6 py-2 text-white transition duration-300 bg-green-500 rounded hover:bg-green-600"
+              >
+                تایید
+              </button>
             </div>
           </div>
-          <div className="mb-4 font-medium text-center">
-            <span>واریز به صورت مستقیم</span>
-          </div>
-          <div className="mb-6 font-medium text-center">
-            <span>واریز به حساب کارگزاری</span>
-          </div>
-          <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={handleReject}
-              className="px-6 py-2 text-white transition duration-300 bg-red-500 rounded hover:bg-red-600"
+        ) : (
+          investments.map((investment) => (
+            <div
+              key={investment.id}
+              className={`mb-4 p-4 rounded-lg ${getStatusColor(
+                investment.status
+              )}`}
             >
-              رد
-            </button>
-            <button
-              type="button"
-              onClick={handleConfirm}
-              className="px-6 py-2 text-white transition duration-300 bg-green-500 rounded hover:bg-green-600"
-            >
-              تایید
-            </button>
-          </div>
-        </form>
+              <div className="flex justify-between mb-2">
+                <span className="font-bold">{investment.status}</span>
+                <span>{investment.amount} ریال</span>
+              </div>
+              <div className="mb-2">{investment.depositDate}</div>
+              <div className="flex items-center">
+                <Icon name="eye" size={16} className="mr-2" />
+                <span>
+                  {investment.paymentMethod === "مستقیم"
+                    ? "واریز مستقیم"
+                    : "واریز به حساب کارگزاری"}
+                </span>
+                {investment.hasDocument && (
+                  <Icon name="document" size={16} className="ml-2" />
+                )}
+              </div>
+              {investment.status === "رد" && (
+                <div className="mt-2">علت رد: {investment.rejectionReason}</div>
+              )}
+            </div>
+          ))
+        )}
       </div>
 
       {showConfirmForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-full max-w-md p-6 bg-white">
+          <div className="w-full max-w-md p-6 bg-white rounded-lg">
             <div className="flex items-center mb-6">
               <button
                 onClick={handleCancel}
@@ -146,7 +227,7 @@ const PortfolioManagerIncreaseCapital = ({ investments }) => {
             </div>
             <div className="mb-6">
               <textarea
-                className="w-full p-2 border resize-none"
+                className="w-full p-2 border rounded resize-none"
                 placeholder="متن خطاب به سرمایه‌گذار"
                 rows="3"
                 value={messageToInvestor}
@@ -156,7 +237,7 @@ const PortfolioManagerIncreaseCapital = ({ investments }) => {
             <div className="flex justify-end">
               <button
                 onClick={handleConfirmRequest}
-                className="px-4 py-1 text-white transition duration-300 bg-green-500 rounded hover:bg-green-600"
+                className="px-4 py-2 text-white transition duration-300 bg-green-500 rounded hover:bg-green-600"
               >
                 تایید درخواست
               </button>
@@ -166,13 +247,21 @@ const PortfolioManagerIncreaseCapital = ({ investments }) => {
       )}
 
       {showRejectForm && (
-        <RejectForm onClose={() => setShowRejectForm(false)} />
+        <RejectForm
+          onClose={handleCancel}
+          onReject={(reason, comment) => {
+            console.log("Rejected investment:", increaseCapitalRequest);
+            console.log("Rejection reason:", reason);
+            console.log("Rejection comment:", comment);
+            handleCancel();
+          }}
+        />
       )}
     </div>
   );
 };
 
-const RejectForm = ({ onClose }) => {
+const RejectForm = ({ onClose, onReject }) => {
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");
 
@@ -185,9 +274,7 @@ const RejectForm = ({ onClose }) => {
   };
 
   const handleSubmit = () => {
-    console.log("Rejection reason:", reason);
-    console.log("Rejection comment:", comment);
-    onClose();
+    onReject(reason, comment);
   };
 
   return (
@@ -252,7 +339,13 @@ const RejectForm = ({ onClose }) => {
           value={comment}
           onChange={handleCommentChange}
         ></textarea>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-gray-600 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            انصراف
+          </button>
           <button
             onClick={handleSubmit}
             className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
