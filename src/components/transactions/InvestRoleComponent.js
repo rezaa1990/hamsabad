@@ -2,10 +2,14 @@ import React from "react";
 import InvestorIncreaseCapital from "./InvestorIncreaseCapital";
 import PortfolioManagerIncreaseCapital from "./PortfolioManagerIncreaseCapital";
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const InvestRoleComponent = () => {
+  const {role} = useAuth();
+  const userRole = role;
+  console.log("userRole",userRole)
   // const userRole = "portfolioManager";
-  const userRole = "investor";
+  // const userRole = "investor";
   const [investments, setInvestments] = useState([
     {
       id: 1,
