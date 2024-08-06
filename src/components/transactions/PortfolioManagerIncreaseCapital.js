@@ -27,6 +27,7 @@ const PortfolioManagerIncreaseCapital = () => {
   const [selectedBasket, setSelectedBasket] = useState(null);
   const [showConfirmForm, setShowConfirmForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);
+  const [showDepositDocumentReviewModal, setShowDepositDocumentReviewModal] = useState(false);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -35,6 +36,9 @@ const PortfolioManagerIncreaseCapital = () => {
   const handleBasketClick = (basket) => {
     if (basket.status === "در انتظار بررسی") {
       setSelectedBasket(basket);
+    } else if (basket.status === "بررسی سند واریز") {
+      setSelectedBasket(basket);
+      setShowDepositDocumentReviewModal(true);
     }
   };
 
@@ -151,7 +155,7 @@ const PortfolioManagerIncreaseCapital = () => {
         ))}
       </div>
 
-      {selectedBasket && (
+      {selectedBasket && selectedBasket.status === "در انتظار بررسی" && (
         <div
           className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}
         >
@@ -160,8 +164,13 @@ const PortfolioManagerIncreaseCapital = () => {
               isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
             }`}
           >
-            
-            <h2 className="mb-4 text-xl font-bold">درخواست افزایش سرمایه</h2>
+            <div className="flex mb-8">
+              {" "}
+              <button onClick={() => setSelectedBasket(null)} className="">
+                <Icon className="ml-2" name="arrowright" size={20} />
+              </button>
+              <h2 className="text-xl font-bold ">درخواست افزایش سرمایه</h2>
+            </div>
             <div className="mb-4">
               <label className="block mb-2 font-medium">مبلغ:</label>
               <div className="text-center">
@@ -213,6 +222,7 @@ const PortfolioManagerIncreaseCapital = () => {
         <ConfirmForm
           onClose={() => setShowConfirmForm(false)}
           onConfirm={handleConfirmRequest}
+          handleUpdateBasket={handleUpdateBasket}
         />
       )}
 
@@ -222,11 +232,45 @@ const PortfolioManagerIncreaseCapital = () => {
           onReject={handleRejectRequest}
         />
       )}
+
+      {showDepositDocumentReviewModal && (
+        <DepositDocumentReviewModal
+          onClose={() => setShowDepositDocumentReviewModal(false)}
+          onConfirm={(message) => {
+            const updatedBaskets = baskets.map((basket) =>
+              basket.id === selectedBasket.id
+                ? {
+                    ...basket,
+                    status: "تایید",
+                    message: message,
+                  }
+                : basket
+            );
+            setBaskets(updatedBaskets);
+            setSelectedBasket(null);
+            setShowDepositDocumentReviewModal(false);
+          }}
+          onReject={(message) => {
+            const updatedBaskets = baskets.map((basket) =>
+              basket.id === selectedBasket.id
+                ? {
+                    ...basket,
+                    status: "رد",
+                    message: message,
+                  }
+                : basket
+            );
+            setBaskets(updatedBaskets);
+            setSelectedBasket(null);
+            setShowDepositDocumentReviewModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };
 
-const ConfirmForm = ({ onClose, onConfirm }) => {
+const ConfirmForm = ({ onClose, onConfirm, handleUpdateBasket }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [messageToInvestor, setMessageToInvestor] = useState("");
 
@@ -239,7 +283,26 @@ const ConfirmForm = ({ onClose, onConfirm }) => {
   };
 
   const handleSubmit = () => {
+    let updateData = {};
+
+    if (selectedOption === "upload") {
+      updateData = {
+        status: "درخواست سند واریز",
+        approveDocSituation: "سند واریز را ارسال کنید",
+      };
+    } else if (selectedOption === "noUpload") {
+      updateData = {
+        status: "تایید",
+      };
+    } else if (selectedOption === "coordinate") {
+      updateData = {
+        status: "تایید",
+        approveDocSituation: " این سری تایید میشود ولی بهتر است برای سری های بعد قبل از تصمیم هماهنگ کنید"
+      };
+    }
+
     onConfirm(selectedOption, messageToInvestor);
+    handleUpdateBasket(updateData);
   };
 
   return (
@@ -280,8 +343,8 @@ const ConfirmForm = ({ onClose, onConfirm }) => {
             <input
               type="radio"
               name="option"
-              value="upload"
-              checked={selectedOption === "upload"}
+              value="coordinate"
+              checked={selectedOption === "coordinate"}
               onChange={handleOptionChange}
               className="form-radio"
             />
@@ -401,6 +464,51 @@ const RejectForm = ({ onClose, onReject }) => {
             className="px-8 py-1 text-white bg-red-500 rounded hover:bg-red-600"
           >
             رد
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DepositDocumentReviewModal = ({ onClose, onConfirm, onReject }) => {
+  const [comment, setComment] = useState("");
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-md p-6 bg-white rounded-lg">
+        <div className="flex mb-4">
+          <button onClick={onClose} className="ml-2">
+            <Icon name="arrowright" size={16} />
+          </button>
+          <h2 className="text-xl font-bold">بررسی سند واریز سبد (شماره سبد)</h2>
+        </div>
+        <div className="mb-4 border border-gray-300 rounded-lg" style={{ height: '200px' }}>
+          {/* Placeholder for the deposit document image */}
+        </div>
+        <textarea
+          className="w-full p-2 mb-4 border rounded"
+          placeholder="نوشتن توضیحات..."
+          rows="3"
+          value={comment}
+          onChange={handleCommentChange}
+        ></textarea>
+        <div className="flex justify-between">
+          <button
+            onClick={() => onReject(comment)}
+            className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+          >
+            رد
+          </button>
+          <button
+            onClick={() => onConfirm(comment)}
+            className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+          >
+            تایید
           </button>
         </div>
       </div>

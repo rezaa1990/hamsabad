@@ -19,6 +19,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
+      approveDocSituation:"",
     },
     {
       id: 2,
