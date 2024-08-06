@@ -32,6 +32,7 @@ const InvestorIncreaseCapital = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showDepositModal, setShowDepositModal] = useState(null);
   const [fileName, setFileName] = useState(""); // اضافه کردن state برای نام فایل
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(""); // اضافه کردن state برای URL تصویر
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -88,11 +89,13 @@ const InvestorIncreaseCapital = () => {
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
-      setFileName(event.target.files[0].name);
+      const file = event.target.files[0];
+      setImagePreviewUrl(URL.createObjectURL(file));
     } else {
-      setFileName("");
+      setImagePreviewUrl("");
     }
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
@@ -276,14 +279,21 @@ const InvestorIncreaseCapital = () => {
                   <form
                     onSubmit={(e) => handleSubmitDepositDocument(basket.id, e)}
                   >
-                    <div className="mb-4">
-                      
-                      <input value={""} className="p-16"/>
-                      
+                    {/* نمایش تصویر در اینجا */}
+                    {imagePreviewUrl && (
+                      <div className="flex justify-center mt-6">
+                        <img
+                          src={imagePreviewUrl}
+                          alt="تصویر انتخاب شده"
+                          className="justify-center w-44 h-44"
+                        />
+                      </div>
+                    )}
+                    <div className="mb-2">
                       <div className="flex justify-center">
                         <label
                           htmlFor="file-upload"
-                          className="px-2 py-1 mt-1 text-white bg-blue-500 rounded cursor-pointer"
+                          className="px-2 py-1 mt-1 text-white bg-blue-500 cursor-pointer"
                         >
                           انتخاب سند
                         </label>
@@ -291,23 +301,20 @@ const InvestorIncreaseCapital = () => {
                           id="file-upload"
                           type="file"
                           className="hidden"
-                          accept=".pdf,.jpg,.jpeg,.png"
+                          accept=".jpg,.jpeg,.png"
                           onChange={handleFileChange}
                         />
-                        {/* <span className="ml-2 text-gray-600">
-                          {fileName ? fileName : "فایلی انتخاب نشده"}
-                        </span> */}
                       </div>
                     </div>
-                    <div className="mb-4">
-                      <label className="block mb-2">توضیحات:</label>
+                    <div className="mb-">
+                      <label className="block">توضیحات:</label>
                       <textarea
                         placeholder="نوشتن توضیحات"
                         className="w-full p-2 border"
                         rows="1"
                       ></textarea>
                     </div>
-                    <div className="flex justify-between mt-4">
+                    <div className="flex justify-between">
                       <button
                         type="submit"
                         className="px-8 py-1 text-white bg-red-500"
