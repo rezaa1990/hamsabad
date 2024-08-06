@@ -30,6 +30,8 @@ const InvestorIncreaseCapital = () => {
   const [showForm, setShowForm] = useState(null);
   const [showModal, setShowModal] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [showDepositModal, setShowDepositModal] = useState(null);
+  const [fileName, setFileName] = useState(""); // اضافه کردن state برای نام فایل
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -42,6 +44,11 @@ const InvestorIncreaseCapital = () => {
   const toggleModal = (id) => {
     setShowModal(showModal === id ? null : id);
   };
+
+  const toggleDepositModal = (id) => {
+    setShowDepositModal(showDepositModal === id ? null : id);
+  };
+
   // تابع کمکی برای تعیین رنگ بر اساس وضعیت
   const getStatusColor = (status) => {
     switch (status) {
@@ -70,6 +77,23 @@ const InvestorIncreaseCapital = () => {
     alert("درخواست افزایش سرمایه با موفقیت ثبت شد.");
   };
 
+  const handleSubmitDepositDocument = (basketId, event) => {
+    event.preventDefault();
+    handleUpdateBasket(basketId, {
+      status: "بررسی سند واریز",
+    });
+    toggleDepositModal(null);
+    alert("سند واریز با موفقیت ثبت شد.");
+  };
+
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      setFileName(event.target.files[0].name);
+    } else {
+      setFileName("");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="w-full mb-4 bg-white rounded-lg shadow-lg">
@@ -89,7 +113,8 @@ const InvestorIncreaseCapital = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="w-full mb-4 bg-white rounded-lg shadow-lg"
+          className="w-full mb-4 bg-white rounded-lg shadow-lg cursor-pointer"
+          onClick={() => toggleDepositModal(basket.id)}
         >
           <div className="p-4">
             <div className={`p-4 rounded-lg ${getStatusColor(basket.status)}`}>
@@ -125,10 +150,22 @@ const InvestorIncreaseCapital = () => {
               <div className="flex items-center justify-between">
                 <span></span>
                 <div className="flex">
-                  <button onClick={() => toggleForm(basket.id)} className="">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleForm(basket.id);
+                    }}
+                    className=""
+                  >
                     <Icon className="mx-1" name="dollar" size={30} />
                   </button>
-                  <button onClick={() => toggleModal(basket.id)} className="">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleModal(basket.id);
+                    }}
+                    className=""
+                  >
                     <Icon className="mx-1" name="capital" size={30} />
                   </button>
                 </div>
@@ -136,9 +173,11 @@ const InvestorIncreaseCapital = () => {
             </div>
           </div>
 
-          {/* نمایش فرم درخواست افزایش سرمایه به صورت مودال */}
           {showForm === basket.id && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div
+              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-lg">
                 <div className="flex mb-4">
                   <button
@@ -198,9 +237,11 @@ const InvestorIncreaseCapital = () => {
             </div>
           )}
 
-          {/* نمایش مودال قیمت */}
           {showModal === basket.id && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div
+              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-lg">
                 <h2 className="mb-4 text-2xl font-bold">قیمت افزایش سرمایه</h2>
                 <p>مبلغ سرمایه‌گذاری: {basket.InvestAmount} ریال</p>
@@ -215,6 +256,75 @@ const InvestorIncreaseCapital = () => {
               </div>
             </div>
           )}
+
+          {showDepositModal === basket.id &&
+            basket.status === "درخواست سند واریز" && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="max-w-md p-8 mx-auto bg-gray-200 shadow-lg">
+                  <div className="flex mb-4">
+                    <button
+                      onClick={() => toggleDepositModal(null)}
+                      className="flex items-center text-gray-600 hover:text-gray-800"
+                    >
+                      <Icon name="arrowright" size={16} className="ml-4" />
+                    </button>
+                    <h2 className="text-xl font-bold ">ثبت سند واریز:</h2>
+                  </div>
+                  <form
+                    onSubmit={(e) => handleSubmitDepositDocument(basket.id, e)}
+                  >
+                    <div className="mb-4">
+                      
+                      <input value={""} className="p-16"/>
+                      
+                      <div className="flex justify-center">
+                        <label
+                          htmlFor="file-upload"
+                          className="px-2 py-1 mt-1 text-white bg-blue-500 rounded cursor-pointer"
+                        >
+                          انتخاب سند
+                        </label>
+                        <input
+                          id="file-upload"
+                          type="file"
+                          className="hidden"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={handleFileChange}
+                        />
+                        {/* <span className="ml-2 text-gray-600">
+                          {fileName ? fileName : "فایلی انتخاب نشده"}
+                        </span> */}
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <label className="block mb-2">توضیحات:</label>
+                      <textarea
+                        placeholder="نوشتن توضیحات"
+                        className="w-full p-2 border"
+                        rows="1"
+                      ></textarea>
+                    </div>
+                    <div className="flex justify-between mt-4">
+                      <button
+                        type="submit"
+                        className="px-8 py-1 text-white bg-red-500"
+                      >
+                        رد
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-8 py-1 text-white bg-green-500"
+                      >
+                        ثبت
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
         </div>
       ))}
     </div>
