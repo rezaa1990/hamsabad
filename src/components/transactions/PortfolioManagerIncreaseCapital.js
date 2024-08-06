@@ -27,7 +27,8 @@ const PortfolioManagerIncreaseCapital = () => {
   const [selectedBasket, setSelectedBasket] = useState(null);
   const [showConfirmForm, setShowConfirmForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);
-  const [showDepositDocumentReviewModal, setShowDepositDocumentReviewModal] = useState(false);
+  const [showDepositDocumentReviewModal, setShowDepositDocumentReviewModal] =
+    useState(false);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -109,7 +110,7 @@ const PortfolioManagerIncreaseCapital = () => {
       }`}
     >
       <div
-        className={`w-full max-w-md p-8 rounded-lg shadow-lg ${
+        className={`w-full p-8 shadow-lg ${
           isDarkMode ? "bg-gray-700 text-white" : "bg-white"
         }`}
       >
@@ -124,29 +125,31 @@ const PortfolioManagerIncreaseCapital = () => {
           >
             <Icon name="arrowright" size={16} className="ml-4" />
           </button>
-          <h2 className="text-xl font-bold">افزایش سرمایه (شماره سبد)</h2>
+          <h2 className="text-xl font-bold">افزایش سرمایه</h2>
         </div>
 
         {baskets.map((basket) => (
           <div
             key={basket.id}
-            className={`mb-3 p-4 ${getStatusColor(
+            className={`mb-3 mx-auto p-4 ${getStatusColor(
               basket.status
             )} cursor-pointer`}
             onClick={() => handleBasketClick(basket)}
           >
-            <div className="flex justify-between mb-2">
-              <span className="font-bold">{basket.status}</span>
-              <span>{basket.InvestAmount} ریال</span>
+            <div className="flex mb-2">
+              <label>مبلغ:</label>
+              <span className="mr-4">{basket.InvestAmount} ریال</span>
+              <span className="mr-auto font-bold">{basket.status}</span>
             </div>
-            <div className="mb-2">{basket.depositDate}</div>
+            <label className="">تاریخ:</label>
+            <span className="mb-2 mr-4">{basket.depositDate}</span>
             <div className="flex items-center">
-              <Icon name="eye" size={16} className="mr-2" />
               <span>
                 {basket.paymentMethod === "مستقیم"
                   ? "واریز مستقیم"
                   : "واریز به حساب کارگزاری"}
               </span>
+              <Icon name="eye" size={35} className="mr-auto" />
             </div>
             {basket.status === "رد" && (
               <div className="mt-2">علت رد: {basket.rejectionReason}</div>
@@ -297,7 +300,8 @@ const ConfirmForm = ({ onClose, onConfirm, handleUpdateBasket }) => {
     } else if (selectedOption === "coordinate") {
       updateData = {
         status: "تایید",
-        approveDocSituation: " این سری تایید میشود ولی بهتر است برای سری های بعد قبل از تصمیم هماهنگ کنید"
+        approveDocSituation:
+          " این سری تایید میشود ولی بهتر است برای سری های بعد قبل از تصمیم هماهنگ کنید",
       };
     }
 
@@ -480,33 +484,36 @@ const DepositDocumentReviewModal = ({ onClose, onConfirm, onReject }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg">
+      <div className="w-full max-w-md p-6 bg-gray-200">
         <div className="flex mb-4">
           <button onClick={onClose} className="ml-2">
             <Icon name="arrowright" size={16} />
           </button>
           <h2 className="text-xl font-bold">بررسی سند واریز سبد (شماره سبد)</h2>
         </div>
-        <div className="mb-4 border border-gray-300 rounded-lg" style={{ height: '200px' }}>
+        <div
+          className="mb-4 bg-white border border-gray-300"
+          style={{ height: "200px" }}
+        >
           {/* Placeholder for the deposit document image */}
         </div>
         <textarea
           className="w-full p-2 mb-4 border rounded"
           placeholder="نوشتن توضیحات..."
-          rows="3"
+          rows="2"
           value={comment}
           onChange={handleCommentChange}
         ></textarea>
         <div className="flex justify-between">
           <button
             onClick={() => onReject(comment)}
-            className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
+            className="px-8 py-1 text-white bg-red-500 rounded hover:bg-red-600"
           >
             رد
           </button>
           <button
             onClick={() => onConfirm(comment)}
-            className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+            className="px-8 py-1 text-white bg-green-500 rounded hover:bg-green-600"
           >
             تایید
           </button>

@@ -31,8 +31,9 @@ const InvestorIncreaseCapital = () => {
   const [showModal, setShowModal] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [showDepositModal, setShowDepositModal] = useState(null);
-  const [fileName, setFileName] = useState(""); // اضافه کردن state برای نام فایل
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(""); // اضافه کردن state برای URL تصویر
+  const [fileName, setFileName] = useState("");
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [showBasketDetails, setShowBasketDetails] = useState(null);
 
   const handleNavigate = () => {
     navigate("/dashboard");
@@ -50,7 +51,10 @@ const InvestorIncreaseCapital = () => {
     setShowDepositModal(showDepositModal === id ? null : id);
   };
 
-  // تابع کمکی برای تعیین رنگ بر اساس وضعیت
+  const toggleBasketDetails = (id) => {
+    setShowBasketDetails(showBasketDetails === id ? null : id);
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case "در انتظار بررسی":
@@ -96,11 +100,10 @@ const InvestorIncreaseCapital = () => {
     }
   };
 
-
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <div className="w-full mb-4 bg-white rounded-lg shadow-lg">
-        <div className="flex items-center justify-between p-4 mb-2">
+      <div className="w-full bg-white shadow-lg">
+        <div className="flex items-center justify-between p-4">
           <div className="flex">
             <button
               onClick={handleNavigate}
@@ -116,11 +119,11 @@ const InvestorIncreaseCapital = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="w-full mb-4 bg-white rounded-lg shadow-lg cursor-pointer"
+          className="w-full bg-white shadow-lg cursor-pointer"
           onClick={() => toggleDepositModal(basket.id)}
         >
           <div className="p-4">
-            <div className={`p-4 rounded-lg ${getStatusColor(basket.status)}`}>
+            <div className={`p-4 ${getStatusColor(basket.status)}`}>
               <div className="mb-4 text-center">
                 <span className="text-xl font-bold">شماره سبد</span>
                 <div className="mt-2">{basket.contractNumber}</div>
@@ -144,8 +147,14 @@ const InvestorIncreaseCapital = () => {
                   <button className="p-2 bg-gray-200">
                     <Icon name="call" size={20} className="text-gray-600" />
                   </button>
-                  <button className="p-2 bg-gray-200">
-                    <Icon name="eye" size={20} className="text-gray-600" />
+                  <button
+                    className="p-2 bg-gray-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleBasketDetails(basket.id);
+                    }}
+                  >
+                    <Icon name="eye" size={25} className="text-gray-600" />
                   </button>
                 </div>
               </div>
@@ -279,7 +288,6 @@ const InvestorIncreaseCapital = () => {
                   <form
                     onSubmit={(e) => handleSubmitDepositDocument(basket.id, e)}
                   >
-                    {/* نمایش تصویر در اینجا */}
                     {imagePreviewUrl && (
                       <div className="flex justify-center mt-6">
                         <img
@@ -332,6 +340,81 @@ const InvestorIncreaseCapital = () => {
                 </div>
               </div>
             )}
+
+          {showBasketDetails === basket.id && (
+            <div
+              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-gray-200 shadow-lg p-8 mx-6 w-full max-w-4xl h-auto max-h-[90vh] overflow-y-auto">
+                <div className="flex items-center mb-4">
+                  <button
+                    onClick={() => toggleBasketDetails(null)}
+                    className="mr-2 text-gray-600 hover:text-gray-800"
+                  >
+                    <Icon name="arrowright" size={20} />
+                  </button>
+                  <h2 className="flex-grow text-xl font-bold">
+                    {basket.status === "تایید"
+                      ? `شماره سبد (${basket.status})`
+                      : `شماره سبد (${basket.status})`}
+                  </h2>
+                </div>
+                <div className="p-4 my-4">
+                  <div className="flex mb-2">
+                    <span className="ml-2 font-semibold">مبلغ:</span>
+                    <span className="mx-2">{basket.InvestAmount}</span>
+                    <span>ریال</span>
+                  </div>
+                  <div className="flex mb-2">
+                    <span className="ml-2 font-semibold">تاریخ:</span>
+                    <span className="mr-2">{basket.date || "1398/03/12"}</span>
+                  </div>
+                  <div className="mb-2">
+                    <span className="font-semibold">واریز به صورت مستقیم</span>
+                  </div>
+                  <div className="flex mb-2">
+                    <span className="ml-2 font-semibold">
+                      پیام سرمایه‌گذار:
+                    </span>
+                    <span className="mr-2">
+                      {basket.investorMessage || "-"}
+                    </span>
+                  </div>
+                  <div className="flex mb-2">
+                    <span className="ml-2 font-semibold">پیام سبدگردان:</span>
+                    <span className="mr-2">{basket.managerMessage || "-"}</span>
+                  </div>
+                  {basket.status === "رد" && (
+                    <div className="flex mb-2">
+                      <span className="ml-2 font-semibold">علت رد:</span>
+                      <span className="mr-2">{basket.rejectReason || "-"}</span>
+                    </div>
+                  )}
+                  <div className="mb-2">
+                    <span className="font-semibold">سند واریز:</span>
+                    {basket.depositDocument && (
+                      <div className="inline-block p-2 mt-2 bg-white">
+                        <img
+                          src={basket.depositDocument}
+                          alt="سند واریز"
+                          className="object-contain h-auto max-w-full max-h-60"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex justify-end mt-4">
+                  <button
+                    onClick={() => toggleBasketDetails(null)}
+                    className="px-4 py-2 text-gray-800 transition-colors bg-gray-300 rounded hover:bg-gray-400"
+                  >
+                    بازگشت
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
