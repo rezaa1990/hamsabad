@@ -42,7 +42,7 @@ function AppProvider({ children }) {
       portfolioManager: "سبدگردان 1",
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
-      paymentMethod: "مستقیم",
+      paymentMethod: "غیر مستقیم",
     },
     {
       id: 4,
@@ -82,13 +82,17 @@ function AppProvider({ children }) {
     setRole(null);
   };
 
-  const handleUpdateBasket = (updatedBasket) => {
-    setBaskets((prevBaskets) =>
-      prevBaskets.map((inv) =>
-        inv.id === updatedBasket.id ? updatedBasket : inv
-      )
-    );
-  };
+  const handleUpdateBasket = (id, updatedFields) => {
+  setBaskets((prevBaskets) =>
+    prevBaskets.map((basket) =>
+      basket.id === id
+        ? { ...basket, ...updatedFields }
+        : basket
+    )
+  );
+};
+
+
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
