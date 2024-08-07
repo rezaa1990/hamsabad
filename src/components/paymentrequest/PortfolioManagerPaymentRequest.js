@@ -24,44 +24,56 @@ const Modal = ({ isVisible, onClose, title, children }) => {
 // Specific Modal Content for "تاریخچه"
 const HistoryModalContent = () => (
   <>
-    <div className="p-4 bg-gray-100 rounded-md">
+    <div className="p-4 bg-gray-300">
       <div className="flex justify-between">
+        <span>مبلغ</span>
         <span>در انتظار تایید</span>
-        <span>مبلغ</span>
       </div>
       <div className="flex justify-between">
         <span>تاریخ</span>
+      </div>
+      <div className="flex justify-between">
         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
+        <Icon className="" name="eye" size={32} />
       </div>
     </div>
-    <div className="p-4 bg-red-100 rounded-md">
+    <div className="p-4 bg-red-500">
       <div className="flex justify-between">
+        <span>مبلغ</span>
         <span>رد</span>
-        <span>مبلغ</span>
       </div>
       <div className="flex justify-between">
         <span>تاریخ</span>
-        <span>علت رد</span>
+      </div>
+      <span>علت رد</span>
+      <div className="flex justify-end ">
+        <Icon className="" name="eye" size={32} />
       </div>
     </div>
-    <div className="p-4 bg-blue-100 rounded-md">
+    <div className="p-4 bg-blue-500">
       <div className="flex justify-between">
+        <span>مبلغ</span>
         <span>در انتظار ارسال سند واریز</span>
-        <span>مبلغ</span>
       </div>
       <div className="flex justify-between">
         <span>تاریخ</span>
+      </div>
+      <div className="flex justify-between">
         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
+        <Icon className="" name="eye" size={32} />
       </div>
     </div>
-    <div className="p-4 bg-green-100 rounded-md">
+    <div className="p-4 bg-green-500">
       <div className="flex justify-between">
-        <span>انجام شده</span>
         <span>مبلغ</span>
+        <span>انجام شده</span>
       </div>
       <div className="flex justify-between">
         <span>تاریخ</span>
+      </div>
+      <div className="flex justify-between">
         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
+        <Icon className="" name="eye" size={32} />
       </div>
     </div>
   </>
@@ -231,13 +243,13 @@ const PortfolioManagerPaymentRequest = () => {
     }
   };
 
-  const handleTransactionIconClick = (basket,event) => {
+  const handleTransactionIconClick = (basket, event) => {
     event.stopPropagation(); // Prevent the basket click event from firing
     setSelectedBasket(basket);
     setHistoryModalVisible(true);
   };
 
-  const handleDollarBagIconClick = (basket,event) => {
+  const handleDollarBagIconClick = (basket, event) => {
     event.stopPropagation(); // Prevent the basket click event from firing
     setSelectedBasket(basket);
     setShareRequestModalVisible(true);
@@ -284,10 +296,14 @@ const PortfolioManagerPaymentRequest = () => {
               <Icon className="mx-2" name="messages2" size={32} />
               <Icon className="mx-2" name="call" size={32} />
               <Icon className="mx-2" name="eye" size={32} />
-              <button onClick={(event) => handleTransactionIconClick(basket,event)}>
+              <button
+                onClick={(event) => handleTransactionIconClick(basket, event)}
+              >
                 <Icon className="mx-2" name="transactionicon" size={32} />
               </button>
-              <button onClick={(event) => handleDollarBagIconClick(basket,event)}>
+              <button
+                onClick={(event) => handleDollarBagIconClick(basket, event)}
+              >
                 <Icon className="mx-2" name="dollarbag" size={32} />
               </button>
             </div>
@@ -299,7 +315,7 @@ const PortfolioManagerPaymentRequest = () => {
       <Modal
         isVisible={isHistoryModalVisible}
         onClose={handleCloseHistoryModal}
-        title={`تاریخچه (${selectedBasket?.contractNumber || "شماره سبد"})`}
+        title={`تاریخچه ی سبد (${selectedBasket?.contractNumber || "شماره سبد"})`}
       >
         <HistoryModalContent />
       </Modal>
