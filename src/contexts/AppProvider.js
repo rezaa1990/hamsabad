@@ -19,7 +19,8 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
-      approveDocSituation:"",
+      approveDocSituation: "",
+      shareRequest: "تایید",
     },
     {
       id: 2,
@@ -32,6 +33,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
+      shareRequest: "رد",
     },
     {
       id: 3,
@@ -44,6 +46,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "غیر مستقیم",
+      shareRequest: "",
     },
     {
       id: 4,
@@ -56,6 +59,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
+      shareRequest: "تایید",
     },
     {
       id: 5,
@@ -68,6 +72,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
+      shareRequest: "",
     },
   ]);
 
