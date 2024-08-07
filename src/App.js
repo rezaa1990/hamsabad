@@ -28,6 +28,7 @@ import UserRoleComponent from "./components/contract/UserRoleComponent";
 import InvestRoleComponent from "./components/transactions/InvestRoleComponent";
 // import DepositReceipt from "./components/notification/DepositReceipt";
 import InvestmentApproval from "./components/notification/DepositReceipt";
+import PaymentRequestRole from "./components/paymentrequest/PaymentRequestRole";
 
 function App() {
   return (
@@ -66,7 +67,7 @@ function AppContent() {
             <Route path="/notification" element={<InvestmentApproval />} />
             <Route path="/contracts/:id" element={<ContractDetails />} />
             <Route path="/increasecapital" element={<InvestRoleComponent />} />
-            <Route path="/withdraw-cash" element={<WithdrawCash />} />
+            <Route path="/withdraw-request" element={<PaymentRequestRole />} />
             <Route path="/request-share" element={<RequestShare />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />

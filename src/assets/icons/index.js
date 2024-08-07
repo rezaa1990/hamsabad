@@ -41,6 +41,8 @@ import one from "./1.png";
 import eraser from "./eraser-icon.png";
 import capital from "./capital.png";
 import dollar from "./dollar.png";
+import dollarbag from "./dollarbag.png";
+import transactionicon from "./transaction-icon.png";
 
 export {
   merchantPrograms,
@@ -86,6 +88,6 @@ export {
   eraser,
   capital,
   dollar,
-  
-
+  dollarbag,
+  transactionicon,
 };
