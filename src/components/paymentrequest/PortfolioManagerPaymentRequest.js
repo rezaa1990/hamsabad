@@ -9,7 +9,7 @@ const Modal = ({ isVisible, onClose, title, children }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-full max-w-lg p-8 bg-gray-200">
-        <div className="flex items-center mb-4">
+        <div className="flex items-center">
           <button onClick={onClose} className="">
             <Icon name="arrowright" size={16} className="ml-4" />
           </button>
@@ -21,9 +21,9 @@ const Modal = ({ isVisible, onClose, title, children }) => {
   );
 };
 
-// Specific Modal Content for "تاریخچه"
+// Specific Modal Content for "history"
 const HistoryModalContent = () => (
-  <>
+  <div>
     <div className="p-4 bg-gray-300">
       <div className="flex justify-between">
         <span>مبلغ</span>
@@ -76,47 +76,50 @@ const HistoryModalContent = () => (
         <Icon className="" name="eye" size={32} />
       </div>
     </div>
-  </>
+  </div>
 );
 
 // Specific Modal Content for "درخواست سهم"
 const ShareRequestModalContent = () => (
-  <div className="space-y-4">
-    <div className="flex">
-      <label>کل موجودی سبد :</label>
+  <div className="space-y-1">
+    <div className="p-6 border border-gray-400">
+      <label>کل موجودی سبد (پرتفوی و نقد) :</label>
       <div className="flex justify-center">
         <input
           type="text"
-          className="text-center bg-gray-100"
-          value="10000000"
+          className="pl-2 bg-gray-100 text-end"
+          value="1000000"
           readOnly
         />
-        <span>ریال</span>
+        <span className="mr-2">ریال</span>
       </div>
     </div>
-    <div className="flex">
-      <label>درصد توافق شده:</label>
-      <input
-        type="text"
-        className="text-center bg-gray-100"
-        value="30"
-        readOnly
-      />
-      <span>درصد</span>
-    </div>
-    <div className="flex">
-      <label>مبلغ سهم سرمایه گذاران:</label>
-      <div className="flex justify-between">
+    <div className="p-6 border border-gray-400">
+      <div className="flex justify-between ">
+        <label>درصد توافق شده:</label>
+        {/* <span className="text-end">۳۰</span> */}
         <input
           type="text"
-          className="text-center bg-gray-100"
+          className="bg-gray-200 text-end"
+          value="30"
+          readOnly
+        />
+        <span>درصد</span>
+      </div>
+
+      <label>مبلغ سهم سبد گردان:</label>
+      <div className="flex justify-end">
+        <input
+          type="text"
+          className="ml-8 bg-gray-200 text-end"
           value="10000000"
           readOnly
         />
         <span>ریال</span>
       </div>
     </div>
-    <div className="flex">
+
+    <div className="p-6 border border-gray-400">
       <label>مبلغ درخواست شده:</label>
       <div className="flex justify-between">
         <input
@@ -128,7 +131,7 @@ const ShareRequestModalContent = () => (
         <span>ریال</span>
       </div>
     </div>
-    <div className="flex">
+    <div className="p-6 border border-gray-400">
       <label>مبلغ باقیمانده:</label>
       <div className="flex justify-between">
         <input
@@ -140,7 +143,7 @@ const ShareRequestModalContent = () => (
         <span>ریال</span>
       </div>
     </div>
-    <div className="flex">
+    <div className="p-6 border border-gray-400">
       <label>تاریخ:</label>
       <input
         type="text"
@@ -201,6 +204,61 @@ const ConfirmedPortfolioShareRequestModalContent = () => (
   </div>
 );
 
+// New Modal Content for "ثبت سند واریز سبد"
+const DepositDocumentModalContent = () => (
+  <div className="space-y-4">
+    <h2 className="text-xl font-bold text-center">
+      ثبت سند واریز سبد (شماره سبد)
+    </h2>
+    <div className="flex items-center justify-center h-48 border-2 border-gray-300">
+      {/* Placeholder for image upload area */}
+      <span className="text-gray-400">محل آپلود تصویر</span>
+    </div>
+    <button className="w-full p-2 text-white bg-blue-500 rounded">
+      انتخاب سند
+    </button>
+    <textarea
+      className="w-full p-2 border border-gray-300 rounded"
+      placeholder="نوشتن توضیحات..."
+      rows="3"
+    ></textarea>
+    <button className="w-full p-2 text-white bg-green-500 rounded">ثبت</button>
+  </div>
+);
+
+// New Modal Content for "رد شده" (Rejected) basket
+const RejectedBasketModalContent = ({ basketNumber }) => (
+  <div className="space-y-4">
+    {/* <h2 className="text-xl font-bold text-center">شماره سبد (رد شده)</h2> */}
+    <div className="space-y-2">
+      <div className="flex justify-between">
+        <span>مبلغ:</span>
+        <span>10.000.000 ریال</span>
+      </div>
+      <div className="flex justify-between">
+        <span>تاریخ:</span>
+        <span>1398/03/12</span>
+      </div>
+      <div>واریز به صورت مستقیم</div>
+      <div>
+        <span>پیام سرمایه گذار :</span>
+        <p></p>
+      </div>
+      <div>
+        <span>علت رد</span>
+        <p></p>
+      </div>
+      <div>
+        <span>پیام سبدگردان :</span>
+        <p></p>
+      </div>
+    </div>
+    <button className="w-full p-2 text-black bg-gray-300 rounded">
+      بازگشت
+    </button>
+  </div>
+);
+
 const PortfolioManagerPaymentRequest = () => {
   const {
     isAuthenticated,
@@ -236,10 +294,20 @@ const PortfolioManagerPaymentRequest = () => {
   ] = useState(false);
   // ---------------------------------------------------------------------------------------------------
 
+  const [isDepositDocumentModalVisible, setDepositDocumentModalVisible] =
+    useState(false);
+  //-----------------------------------------------------------------------------------------------------
+   const [isRejectedBasketModalVisible, setRejectedBasketModalVisible] =
+     useState(false);
+//------------------------------------------------------------------------------------------------------
   const handleBasketClick = (basket) => {
     setSelectedBasket(basket);
     if (basket.shareRequest === "تایید") {
       setConfirmedPortfolioShareRequestModalVisible(true);
+    } else if (basket.shareRequest === "درخواست سند نقد کردن") {
+      setDepositDocumentModalVisible(true);
+    } else if (basket.shareRequest === "رد") {
+      setRejectedBasketModalVisible(true);
     }
   };
 
@@ -268,6 +336,16 @@ const PortfolioManagerPaymentRequest = () => {
     setConfirmedPortfolioShareRequestModalVisible(false);
     setSelectedBasket(null);
   };
+
+  const handleCloseDepositDocumentModal = () => {
+    setDepositDocumentModalVisible(false);
+    setSelectedBasket(null);
+  };
+
+    const handleCloseRejectedBasketModal = () => {
+      setRejectedBasketModalVisible(false);
+      setSelectedBasket(null);
+    };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -315,7 +393,9 @@ const PortfolioManagerPaymentRequest = () => {
       <Modal
         isVisible={isHistoryModalVisible}
         onClose={handleCloseHistoryModal}
-        title={`تاریخچه ی سبد (${selectedBasket?.contractNumber || "شماره سبد"})`}
+        title={`تاریخچه ی سبد (${
+          selectedBasket?.contractNumber || "شماره سبد"
+        })`}
       >
         <HistoryModalContent />
       </Modal>
@@ -336,6 +416,24 @@ const PortfolioManagerPaymentRequest = () => {
         })`}
       >
         <ConfirmedPortfolioShareRequestModalContent />
+      </Modal>
+      <Modal
+        isVisible={isDepositDocumentModalVisible}
+        onClose={handleCloseDepositDocumentModal}
+        title={`ثبت سند واریز سبد (${
+          selectedBasket?.contractNumber || "شماره سبد"
+        })`}
+      >
+        <DepositDocumentModalContent />
+      </Modal>
+      <Modal
+        isVisible={isRejectedBasketModalVisible}
+        onClose={handleCloseRejectedBasketModal}
+        title={`شماره سبد (رد شده) (${selectedBasket?.contractNumber || ""})`}
+      >
+        <RejectedBasketModalContent
+          basketNumber={selectedBasket?.contractNumber}
+        />
       </Modal>
     </div>
   );

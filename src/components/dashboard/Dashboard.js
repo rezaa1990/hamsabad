@@ -33,7 +33,7 @@ const Dashboard = () => {
     { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
     { icon: icons.messages, label: "پیام‌های من", path: "" },
     { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
-    { icon: icons.cash, label: "درخواست وجه", path: "/withdraw-request" },
+    { icon: icons.cash, label: "درخواست سهم سبدگردانی", path: "/withdraw-request" },
     { icon: icons.favorites, label: "علاقه‌مندی", path: "" },
     { icon: icons.kodal, label: "اخبار", path: "" },
     { icon: icons.txhistory, label: "تاریخچه معاملات", path: "" },

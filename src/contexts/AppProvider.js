@@ -46,7 +46,7 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "غیر مستقیم",
-      shareRequest: "سند نقد کردن",
+      shareRequest: "درخواست سند نقد کردن",
     },
     {
       id: 4,
@@ -72,7 +72,21 @@ function AppProvider({ children }) {
       portfolioManagerPhone: "09124681012",
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
+      shareRequest: "درخواست سهم",
+    },
+    {
+      id: 6,
+      contractNumber: "CN-2023-006",
+      InvestAmount: 6000000,
+      status: "رد",
+      investor: "سرمایه‌گذار 1",
+      investorPhone: "09121234567",
+      portfolioManager: "سبدگردان 1",
+      portfolioManagerPhone: "09124681012",
+      depositDate: "2024-08-04",
+      paymentMethod: "مستقیم",
       shareRequest: "",
+      sharedocument: true,
     },
   ]);
 
