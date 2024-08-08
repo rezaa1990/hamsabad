@@ -13,7 +13,7 @@ const Modal = ({ isVisible, onClose, title, children }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-lg p-8 bg-gray-200">
+      <div className="w-full max-w-lg p-4 bg-gray-100">
         <div className="flex items-center mb-4">
           <button onClick={onClose} className="">
             <Icon name="arrowright" size={16} className="ml-4" />
@@ -51,86 +51,98 @@ const ShareRequestModalContent = ({
   basket,
 }) => (
   <div className="space-y-1">
-    <div className="p-6 border border-gray-400">
+    <div className="px-6 py-3 border border-gray-400">
       <label>کل موجودی سبد (پرتفوی و نقد) :</label>
-      <div className="flex justify-center">
-        <input
-          type="text"
-          className="pl-2 bg-gray-100 text-end"
-          value="1000000"
-          readOnly
-        />
-        <span className="mr-2">ریال</span>
-      </div>
-    </div>
-    <div className="p-6 border border-gray-400">
-      <div className="flex justify-between ">
-        <label>درصد توافق شده:</label>
-        <input
-          type="text"
-          className="bg-gray-200 text-end"
-          value="30"
-          readOnly
-        />
-        <span>درصد</span>
-      </div>
-      <label>مبلغ سهم سبد گردان:</label>
       <div className="flex justify-end">
+        <span></span>
         <input
           type="text"
-          className="ml-8 bg-gray-200 text-end"
-          value="10000000"
+          className="p-2 bg-white text-end"
+          value="۱۰۰۰۰۰۰۰"
           readOnly
         />
-        <span>ریال</span>
+        <span className="p-2">ریال</span>
       </div>
     </div>
-    <div className="p-6 border border-gray-400">
+    <div className="px-6 py-3 border border-gray-400 ">
+      <div className="flex justify-between mb-1">
+        <label>درصد توافق شده:</label>
+        <div className="flex justify-end">
+          <input
+            type="text"
+            className="p-2 bg-gray-100 text-end"
+            value="۳۰"
+            readOnly
+          />
+          <span className="p-1">درصد</span>
+        </div>
+      </div>
+      <div className="">
+        <label>مبلغ سهم سبد گردان:</label>
+        <div className="flex justify-end">
+          {/* <div className="flex justify-end"> */}
+          <input
+            type="text"
+            className="p-2 bg-gray-100 text-end"
+            value="۱۰۰۰۰۰۰۰"
+            readOnly
+          />
+          <span className="p-2">ریال</span>
+        </div>
+        {/* </div> */}
+      </div>
+    </div>
+    <div className="px-6 py-3 border border-gray-400 ">
       <label>مبلغ درخواست شده:</label>
-      <div className="flex justify-between">
+      <div className="flex justify-end">
+        <span></span>
         <input
           type="text"
-          className="text-center bg-gray-100"
-          value="10000000"
+          className="p-2 bg-gray-100 text-end"
+          value="۱۰۰۰۰۰۰"
           readOnly
         />
-        <span>ریال</span>
+        <span className="p-2">ریال</span>
       </div>
     </div>
-    <div className="p-6 border border-gray-400">
+    <div className="px-6 py-3 border border-gray-400 ">
       <label>مبلغ باقیمانده:</label>
-      <div className="flex justify-between">
+      <div className="flex justify-end">
+        <span></span>
         <input
           type="text"
-          className="text-center bg-gray-100"
-          value="10000000"
+          className="p-2 bg-gray-100 text-end"
+          value="۱۰۰۰۰۰"
           readOnly
         />
-        <span>ریال</span>
+        <span className="p-2">ریال</span>
       </div>
     </div>
-    <div className="p-6 border border-gray-400">
-      <label>تاریخ:</label>
-      <input
-        type="text"
-        className="text-center bg-gray-100"
-        value="1398/03/12"
-        readOnly
-      />
+    <div className="px-6 py-3 ">
+      <div className="flex justify-between">
+        <label>تاریخ:</label>
+        {/* <span></span> */}
+        <input
+          type="text"
+          className="bg-gray-100 text-end"
+          value="۱۴۰۰/۰۸/۱۲"
+          readOnly
+        />
+        {/* <span className=""></span> */}
+      </div>
     </div>
-    <div className="">
+    <div className="flex justify-around">
       <button
         onClick={() => handleButtonConfirmSharerequestClick(basket)}
-        className="px-4 text-white bg-green-500 "
+        className="px-6 py-1 text-white bg-green-500 "
       >
-        {" "}
         تایید
       </button>
-      <button className="px-4 text-white bg-red-500 "> رد</button>
+      <button className="px-6 py-1 text-white bg-red-500 "> رد</button>
     </div>
   </div>
 );
-
+//
 const ConfirmShareRequestModalContent = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [text, setText] = useState("");
@@ -218,6 +230,101 @@ const ShareDocumentModalContent = () => {
   );
 };
 
+// Modal Content for "درخواست سهم از سبد (تایید شده)"
+const ConfirmedPortfolioShareRequestModalContent = () => (
+  <div className="space-y-4 ">
+    <div className="flex justify-around">
+      <label className="">کل موجودی:</label>
+      <span className="">۱۰۰۰۰۰۰۰۰۰</span>
+      <span className="mr-2">ریال</span>
+    </div>
+    <div className="flex justify-around">
+      <label className="">درصد توافقی:</label>
+      {/* <div className="flex items-center"> */}
+      <span className="">۳۰</span>
+      <span className="mr-2">درصد</span>
+      {/* </div> */}
+    </div>
+    <div className="flex justify-around">
+      <label>مبلغ سهم:</label>
+      {/* <div className="flex items-center"> */}
+      <span className="">۱۰۰۰۰۰۰۰۰۰</span>
+      <span className="mr-2">ریال</span>
+      {/* </div> */}
+    </div>
+    <div className="flex justify-around">
+      <label>مبلغ درخواستی:</label>
+      {/* <div className="flex items-center"> */}
+      <span className="">۱۰۰۰۰۰۰</span>
+      <span className="mr-2">ریال</span>
+      {/* </div> */}
+    </div>
+    <div className="flex justify-around">
+      <label>مبلغ باقیمانده:</label>
+      {/* <div className="flex items-center"> */}
+      <span className="">۱۰۰۰۰۰۰۰</span>
+      <span className="mr-2">ریال</span>
+      {/* </div> */}
+    </div>
+    <div className="flex justify-around">
+      <label>تاریخ:</label>
+      <span>۱۳۹۸/۰۳/۰۴</span>
+      <span></span>
+    </div>
+    {/* <button className="flex p-1 font-bold text-black bg-gray-300">
+      بازگشت
+    </button> */}
+  </div>
+);
+
+// New Modal Content for "رد شده" (Rejected) basket
+const RejectedBasketModalContent = ({ basketNumber }) => (
+  <div className="space-y-4">
+    {/* <h2 className="text-xl font-bold text-center">شماره سبد (رد شده)</h2> */}
+    <div className="space-y-2">
+      <div className="flex justify-around">
+        <span>مبلغ:</span>
+        <span>۱۰۰۰۰۰۰</span>
+        <span>ریال</span>
+      </div>
+      <div className="flex justify-around">
+        <span>تاریخ:</span>
+        <span>۱۳۹۹/۰۹/۲۱</span>
+        <span></span>
+      </div>
+      <div className="flex justify-around">
+        <span>واریز به صورت مستقیم</span>
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <div className="flex justify-around">
+          <span>پیام سرمایه گذار :</span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div>
+        <div className="flex justify-around">
+          <span>علت رد</span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div>
+        <div className="flex justify-around">
+          <span>پیام سبد گردان</span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    {/* <button className="w-full p-2 text-black bg-gray-300 rounded">
+      بازگشت
+    </button> */}
+  </div>
+);
+
 const InvestorPaymentRequest = () => {
   const {
     isAuthenticated,
@@ -248,13 +355,23 @@ const InvestorPaymentRequest = () => {
   ] = useState(false);
   const [isShareDocumentModalVisible, setShareDocumentModalVisible] =
     useState(false);
+  const [
+    isConfirmedPortfolioShareRequestModalVisible,
+    setConfirmedPortfolioShareRequestModalVisible,
+  ] = useState(false);
+  const [isRejectedBasketModalVisible, setRejectedBasketModalVisible] =
+    useState(false);
 
   const handleBasketClick = (basket) => {
     setSelectedBasket(basket);
-    if (basket.shareRequest == "درخواست سهم") {
+    if (basket.shareRequest === "تایید") {
+      setConfirmedPortfolioShareRequestModalVisible(true);
+    } else if (basket.shareRequest == "درخواست سهم") {
       setShareRequestModalVisible(true);
     } else if (basket.sharedocument) {
       setShareDocumentModalVisible(true);
+    } else if (basket.shareRequest === "رد") {
+      setRejectedBasketModalVisible(true);
     }
   };
 
@@ -284,10 +401,20 @@ const InvestorPaymentRequest = () => {
     setSelectedBasket(null);
   };
 
-   const handleCloseShareDocumentModal = () => {
-     setShareDocumentModalVisible(false);
-     setSelectedBasket(null);
-   };
+  const handleCloseShareDocumentModal = () => {
+    setShareDocumentModalVisible(false);
+    setSelectedBasket(null);
+  };
+
+  const handleCloseRejectedBasketModal = () => {
+    setRejectedBasketModalVisible(false);
+    setSelectedBasket(null);
+  };
+
+  const handleCloseConfirmedPortfolioShareRequestModal = () => {
+    setConfirmedPortfolioShareRequestModalVisible(false);
+    setSelectedBasket(null);
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -344,7 +471,9 @@ const InvestorPaymentRequest = () => {
         }
         isVisible={isShareRequestModalVisible}
         onClose={handleCloseShareRequestModal}
-        title={`درخواست سهم (${selectedBasket?.contractNumber || "شماره سبد"})`}
+        title={`درخواست سهم از سبد(${
+          selectedBasket?.contractNumber || "شماره سبد"
+        })`}
       >
         <ShareRequestModalContent
           handleButtonConfirmSharerequestClick={
@@ -373,6 +502,22 @@ const InvestorPaymentRequest = () => {
         title={`ثبت سند واریز`}
       >
         <ShareDocumentModalContent />
+      </Modal>
+      <Modal
+        isVisible={isConfirmedPortfolioShareRequestModalVisible}
+        onClose={handleCloseConfirmedPortfolioShareRequestModal}
+        title={`درخواست سهم از سبد (تایید شده)`}
+      >
+        <ConfirmedPortfolioShareRequestModalContent />
+      </Modal>
+      <Modal
+        isVisible={isRejectedBasketModalVisible}
+        onClose={handleCloseRejectedBasketModal}
+        title={`${selectedBasket?.contractNumber || ""} (رد شده)`}
+      >
+        <RejectedBasketModalContent
+          basketNumber={selectedBasket?.contractNumber}
+        />
       </Modal>
     </div>
   );

@@ -5,7 +5,6 @@ import AppContext from "../../contexts/AppContext";
 // Generic Modal Component
 const Modal = ({ isVisible, onClose, title, children }) => {
   if (!isVisible) return null;
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-full max-w-lg p-8 bg-gray-200">
