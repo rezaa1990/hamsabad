@@ -727,7 +727,7 @@ const handleDocumentUpload = (file, comments) => {
               >
                 <Icon className="mx-2" name="cashrequesthistory" size={32} />
               </button>
-              <button onClick={""}>
+              <button>
                 <Icon className="mx-2" name="cashrequest" size={32} />
               </button>
             </div>
