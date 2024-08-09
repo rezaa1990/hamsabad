@@ -21,6 +21,28 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       approveDocSituation: "",
       shareRequest: "تایید",
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -52,6 +74,28 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "رد",
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -83,6 +127,28 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "غیر مستقیم",
       shareRequest: "درخواست سند نقد کردن",
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -114,6 +180,28 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "تایید",
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -145,6 +233,28 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "درخواست سهم",
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -177,6 +287,28 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       shareRequest: "",
       sharedocument: true,
+      shareRequestHistory: [
+        {
+          shareRequestStatus: "انجام شده",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "رد",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار تایید",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+        {
+          shareRequestStatus: "در انتظار سند واریز",
+          Date: "۱۳۳۳/۱۲/۱۲",
+          isDirectPayment: true,
+        },
+      ],
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
@@ -211,16 +343,12 @@ function AppProvider({ children }) {
   };
 
   const handleUpdateBasket = (id, updatedFields) => {
-  setBaskets((prevBaskets) =>
-    prevBaskets.map((basket) =>
-      basket.id === id
-        ? { ...basket, ...updatedFields }
-        : basket
-    )
-  );
-};
-
-
+    setBaskets((prevBaskets) =>
+      prevBaskets.map((basket) =>
+        basket.id === id ? { ...basket, ...updatedFields } : basket
+      )
+    );
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
