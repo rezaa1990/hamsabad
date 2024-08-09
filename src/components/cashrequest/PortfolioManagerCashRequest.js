@@ -461,6 +461,63 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
   );
 };
 
+const UploadDocumentModal = ({ onClose, onSubmit }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [comments, setComments] = useState("");
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleSubmit = () => {
+    onSubmit(selectedFile, comments);
+    onClose();
+  };
+
+  return (
+    <div className="p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="mb-4 text-xl font-bold text-right">
+        ثبت سند واریز وجه درخواستی به حساب (شماره)
+      </h2>
+      <div className="mb-4">
+        <div className="flex items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg">
+          {selectedFile ? (
+            <p className="text-gray-600">{selectedFile.name}</p>
+          ) : (
+            <p className="text-gray-400">برای انتخاب فایل کلیک کنید</p>
+          )}
+        </div>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="hidden"
+          id="fileInput"
+        />
+        <button
+          onClick={() => document.getElementById("fileInput").click()}
+          className="w-full mt-2 text-white bg-blue-500"
+        >
+          انتخاب سند
+        </button>
+      </div>
+      <div className="mb-4">
+        <textarea
+          placeholder="نوشتن توضیحات..."
+          value={comments}
+          onChange={(e) => setComments(e.target.value)}
+          className="w-full p-2 border rounded"
+          rows="3"
+        />
+      </div>
+      <div className="flex justify-end">
+        <button onClick={handleSubmit} className="text-white bg-green-500">
+          ثبت
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const InvestorCashRequest = () => {
   const {
     isAuthenticated,
@@ -510,6 +567,8 @@ const InvestorCashRequest = () => {
    setIsRejectingCashRequestModalVisible,
  ] = useState(false);
 
+ const [isUploadDocumentModalVisible, setIsUploadDocumentModalVisible] =
+   useState(false);
   //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
@@ -519,23 +578,35 @@ const InvestorCashRequest = () => {
     // setCashRequestHistoryModalVisible(true);
   };
 
-  const handleEyeIconClick = (event, basket, cashreq) => {
-    event.stopPropagation();
+const handleEyeIconClick = (event, basket, cashreq) => {
+  event.stopPropagation();
 
-    if (cashreq.cashRequestStatus === "رد") {
-      setSelectedBasket(basket);
-      setCashreq(cashreq);
-      setIsCashRequestDetailsModalVisible(true);
-    } else if (cashreq.cashRequestStatus === "انجام شده") {
-      setSelectedBasket(basket);
-      setCashreq(cashreq);
-      setIsConfirmedCashRequestModalVisible(true);
-    } else if (cashreq.cashRequestStatus === "در انتظار تایید") {
-      setSelectedBasket(basket);
-      setCashreq(cashreq);
-      setIsWaitingForConfirmModalVisible(true);
-    }
-  };
+  if (cashreq.cashRequestStatus === "رد") {
+    setSelectedBasket(basket);
+    setCashreq(cashreq);
+    setIsCashRequestDetailsModalVisible(true);
+  } else if (cashreq.cashRequestStatus === "انجام شده") {
+    setSelectedBasket(basket);
+    setCashreq(cashreq);
+    setIsConfirmedCashRequestModalVisible(true);
+  } else if (cashreq.cashRequestStatus === "در انتظار تایید") {
+    setSelectedBasket(basket);
+    setCashreq(cashreq);
+    setIsWaitingForConfirmModalVisible(true);
+  } else if (cashreq.cashRequestStatus === "در انتظار سند واریز") {
+    setSelectedBasket(basket);
+    setCashreq(cashreq);
+    setIsUploadDocumentModalVisible(true);
+  }
+};
+
+const handleDocumentUpload = (file, comments) => {
+  // Implement the logic for uploading the document
+  console.log("Document uploaded:", file);
+  console.log("Comments:", comments);
+  // You might want to update the cashreq status or perform other actions here
+  setIsUploadDocumentModalVisible(false);
+};
 
    const handleConfirmingCashRequest = () => {
      setIsWaitingForConfirmModalVisible(false);
@@ -759,6 +830,16 @@ const InvestorCashRequest = () => {
         title="رد درخواست وجه"
       >
         <RejectingCashRequestModal onClose={handleCloseRejectingModal} />
+      </Modal>
+      <Modal
+        isVisible={isUploadDocumentModalVisible}
+        onClose={() => setIsUploadDocumentModalVisible(false)}
+        title="ثبت سند واریز"
+      >
+        <UploadDocumentModal
+          onClose={() => setIsUploadDocumentModalVisible(false)}
+          onSubmit={handleDocumentUpload}
+        />
       </Modal>
     </div>
   );
