@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import * as icons from "../../assets/icons";
 // import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const Dashboard = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-  
+
   // const { isDarkMode } = useTheme();
   const menuItems = [
     { icon: icons.notes, label: "یادداشت", path: "" },
@@ -33,7 +33,16 @@ const Dashboard = () => {
     { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
     { icon: icons.messages, label: "پیام‌های من", path: "" },
     { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
-    { icon: icons.cash, label: "درخواست سهم سبدگردانی", path: "/withdraw-request" },
+    {
+      icon: icons.dollarbag2,
+      label: "درخواست سهم سبدگردانی",
+      path: "/share-request",
+    },
+    {
+      icon: icons.cash,
+      label: "درخواست وجه",
+      path: "/cashrequest",
+    },
     { icon: icons.favorites, label: "علاقه‌مندی", path: "" },
     { icon: icons.kodal, label: "اخبار", path: "" },
     { icon: icons.txhistory, label: "تاریخچه معاملات", path: "" },

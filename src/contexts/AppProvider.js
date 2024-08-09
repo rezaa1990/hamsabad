@@ -21,6 +21,24 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       approveDocSituation: "",
       shareRequest: "تایید",
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
     {
       id: 2,
@@ -34,6 +52,24 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "رد",
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
     {
       id: 3,
@@ -47,6 +83,24 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "غیر مستقیم",
       shareRequest: "درخواست سند نقد کردن",
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
     {
       id: 4,
@@ -60,6 +114,24 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "تایید",
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
     {
       id: 5,
@@ -73,6 +145,24 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "درخواست سهم",
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
     {
       id: 6,
@@ -87,6 +177,24 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       shareRequest: "",
       sharedocument: true,
+      cashRequestHistory: [
+        {
+          cashRequestStatus: "انجام شده",
+          amount: 1000000,
+          isDirectPayment: true,
+        },
+        { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
+        {
+          cashRequestStatus: "در انتظار تایید",
+          amount: 3000000,
+          isDirectPayment: false,
+        },
+        {
+          cashRequestStatus: "در انتظار سند واریز",
+          amount: 4000000,
+          isDirectPayment: true,
+        },
+      ],
     },
   ]);
 

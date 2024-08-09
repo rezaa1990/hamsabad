@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-multi-date-picker";
@@ -94,7 +94,7 @@ const ShareRequestModalContent = ({
   };
 
   return (
-    <div className="space-y-1">
+    <div className="px-6 space-y-1">
       <div className="px-6 py-3 border border-gray-400">
         <label>کل موجودی سبد (پرتفوی و نقد) :</label>
         <div className="flex justify-end">
@@ -110,21 +110,20 @@ const ShareRequestModalContent = ({
       </div>
       <div className="px-6 py-3 border border-gray-400 ">
         <div className="flex justify-between mb-1">
-          <label>درصد توافق شده:</label>
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <label className="">درصد توافق شده:</label>
             <input
               type="text"
               className="p-2 bg-gray-100 text-end"
               value="۳۰"
               readOnly
             />
-            <span className="p-1">درصد</span>
+            <span className="py-2 mr-2">درصد</span>
           </div>
         </div>
         <div className="">
           <label>مبلغ سهم سبد گردان:</label>
           <div className="flex justify-end">
-            {/* <div className="flex justify-end"> */}
             <input
               type="text"
               className="p-2 bg-gray-100 text-end"
@@ -133,7 +132,6 @@ const ShareRequestModalContent = ({
             />
             <span className="p-2">ریال</span>
           </div>
-          {/* </div> */}
         </div>
       </div>
       <div className="px-6 py-3 border border-gray-400 ">
@@ -148,8 +146,7 @@ const ShareRequestModalContent = ({
           />
           <span className="p-2">ریال</span>
         </div>
-      </div>
-      <div className="px-6 py-3 border border-gray-400 ">
+
         <label>مبلغ باقیمانده:</label>
         <div className="flex justify-end">
           <span></span>
@@ -162,10 +159,11 @@ const ShareRequestModalContent = ({
           <span className="p-2">ریال</span>
         </div>
       </div>
+
       <div className="px-6 py-3 ">
         <div className="flex justify-between">
           <label>تاریخ:</label>
-          {/* <span></span> */}
+
           <input
             type="text"
             className="bg-gray-100 text-end"
@@ -342,97 +340,98 @@ const ShareDocumentModalContent = () => {
 };
 
 // Modal Content for "درخواست سهم از سبد (تایید شده)"
-const ConfirmedPortfolioShareRequestModalContent = () => (
-  <div className="space-y-4 ">
-    <div className="flex justify-around">
+const ConfirmedPortfolioShareRequestModalContent = ({ onClose }) => (
+  <div className="px-8 space-y-8">
+    <div className="flex justify-between">
       <label className="">کل موجودی:</label>
       <span className="">۱۰۰۰۰۰۰۰۰۰</span>
       <span className="mr-2">ریال</span>
     </div>
-    <div className="flex justify-around">
+    <div className="flex justify-between">
       <label className="">درصد توافقی:</label>
-      {/* <div className="flex items-center"> */}
       <span className="">۳۰</span>
       <span className="mr-2">درصد</span>
-      {/* </div> */}
     </div>
-    <div className="flex justify-around">
-      <label>مبلغ سهم:</label>
-      {/* <div className="flex items-center"> */}
+    <div className="flex justify-between">
+      <label className="">مبلغ سهم:</label>
       <span className="">۱۰۰۰۰۰۰۰۰۰</span>
       <span className="mr-2">ریال</span>
-      {/* </div> */}
     </div>
-    <div className="flex justify-around">
-      <label>مبلغ درخواستی:</label>
-      {/* <div className="flex items-center"> */}
+    <div className="flex justify-between">
+      <label className="">مبلغ درخواستی:</label>
       <span className="">۱۰۰۰۰۰۰</span>
       <span className="mr-2">ریال</span>
-      {/* </div> */}
     </div>
-    <div className="flex justify-around">
-      <label>مبلغ باقیمانده:</label>
-      {/* <div className="flex items-center"> */}
+    <div className="flex justify-between">
+      <label className="">مبلغ باقیمانده:</label>
       <span className="">۱۰۰۰۰۰۰۰</span>
       <span className="mr-2">ریال</span>
-      {/* </div> */}
     </div>
-    <div className="flex justify-around">
-      <label>تاریخ:</label>
+    <div className="flex justify-between">
+      <label className="">تاریخ:</label>
       <span>۱۳۹۸/۰۳/۰۴</span>
-      <span></span>
+      <span className="mr-2"></span>
     </div>
-    {/* <button className="flex p-1 font-bold text-black bg-gray-300">
-      بازگشت
-    </button> */}
+    <div className="flex justify-end">
+      <button
+        onClick={onClose}
+        className="flex px-4 font-bold text-black border border-gray-300"
+      >
+        بازگشت
+      </button>
+    </div>
   </div>
 );
 
 // New Modal Content for "رد شده" (Rejected) basket
-const RejectedBasketModalContent = ({ basketNumber }) => (
-  <div className="space-y-4">
-    {/* <h2 className="text-xl font-bold text-center">شماره سبد (رد شده)</h2> */}
-    <div className="space-y-2">
-      <div className="flex justify-around">
+const RejectedBasketModalContent = ({ basketNumber, onClose }) => (
+  <div className="">
+    <div className="px-8 space-y-8">
+      <div className="flex justify-between">
         <span>مبلغ:</span>
         <span>۱۰۰۰۰۰۰</span>
         <span>ریال</span>
       </div>
-      <div className="flex justify-around">
+      <div className="flex justify-between">
         <span>تاریخ:</span>
         <span>۱۳۹۹/۰۹/۲۱</span>
         <span></span>
       </div>
-      <div className="flex justify-around">
+      <div className="flex justify-between">
         <span>واریز به صورت مستقیم</span>
         <span></span>
         <span></span>
       </div>
       <div>
-        <div className="flex justify-around">
+        <div className="flex justify-between">
           <span>پیام سرمایه گذار :</span>
           <span></span>
           <span></span>
         </div>
       </div>
       <div>
-        <div className="flex justify-around">
+        <div className="flex justify-between">
           <span>علت رد</span>
           <span></span>
           <span></span>
         </div>
       </div>
       <div>
-        <div className="flex justify-around">
-          <span>پیام سبد گردان</span>
+        <div className="flex justify-between">
+          <span>پیام سبد گردان :</span>
           <span></span>
           <span></span>
         </div>
       </div>
     </div>
-    {/* <button className="w-full p-2 text-black bg-gray-300 rounded">
-      بازگشت
-    </button> */}
+    <div className="flex justify-end mt-10">
+      <button
+        onClick={onClose}
+        className="px-4 font-bold text-black border border-gray-300"
+      >
+        بازگشت
+      </button>
+    </div>
   </div>
 );
 
@@ -455,6 +454,52 @@ const InvestorPaymentRequest = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
+
+  const navigate = useNavigate();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 640); // Assume screen width less than 640px is considered small
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Check initial screen size
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleCallClick = (phoneNumber) => {
+    if (phoneNumber) {
+      window.location.href = `tel:${phoneNumber}`;
+    } else {
+      if (isSmallScreen) {
+        alert("دستگاه شما قابلیت تماس تلفنی را ندارد.");
+      } else {
+        Modal({
+          title: "خطا",
+          message:
+            "متأسفانه دستگاه شما قابلیت تماس تلفنی را ندارد. لطفاً از طریق سایر راه‌های ارتباطی با ما در تماس باشید.",
+        });
+      }
+    }
+  };
+
+  const handleMessageClick = (phoneNumber, message) => {
+    if (phoneNumber) {
+      window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(
+        message
+      )}`;
+    } else {
+      if (isSmallScreen) {
+        alert("دستگاه شما قابلیت ارسال اس ام اس را ندارد.");
+      } else {
+        Modal({
+          title: "خطا",
+          message:
+            "متأسفانه دستگاه شما قابلیت اشتراک‌گذاری اس ام اس را ندارد. لطفاً از طریق سایر راه‌های ارتباطی با ما در تماس باشید.",
+        });
+      }
+    }
+  };
 
   const [selectedBasket, setSelectedBasket] = useState(null);
   const [isHistoryModalVisible, setHistoryModalVisible] = useState(false);
@@ -573,8 +618,12 @@ const InvestorPaymentRequest = () => {
           </div>
           <div className="flex justify-center mt-10">
             <div className="flex justify-center px-4 py-2 bg-gray-200">
-              <Icon className="mx-2" name="messages2" size={32} />
-              <Icon className="mx-2" name="call" size={32} />
+              <button onClick={() => handleMessageClick("0912")}>
+                <Icon className="mx-2" name="messages2" size={32} />
+              </button>
+              <button onClick={() => handleCallClick("0912")}>
+                <Icon className="mx-2" name="call" size={32} />
+              </button>
               <Icon className="mx-2" name="eye" size={32} />
               <button
                 onClick={(event) => handleTransactionIconClick(basket, event)}
@@ -635,7 +684,9 @@ const InvestorPaymentRequest = () => {
         onClose={handleCloseConfirmedPortfolioShareRequestModal}
         title={`درخواست سهم از سبد (تایید شده)`}
       >
-        <ConfirmedPortfolioShareRequestModalContent />
+        <ConfirmedPortfolioShareRequestModalContent
+          onClose={handleCloseConfirmedPortfolioShareRequestModal}
+        />
       </Modal>
       <Modal
         isVisible={isRejectedBasketModalVisible}
@@ -644,6 +695,7 @@ const InvestorPaymentRequest = () => {
       >
         <RejectedBasketModalContent
           basketNumber={selectedBasket?.contractNumber}
+          onClose={handleCloseRejectedBasketModal}
         />
       </Modal>
       <Modal

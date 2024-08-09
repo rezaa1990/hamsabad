@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import InvestorIncreaseCapital from "./InvestorIncreaseCapital";
-import PortfolioManagerIncreaseCapital from "./PortfolioManagerIncreaseCapital";
-
+import PortfolioManagerCashRequest from "./PortfolioManagerCashRequest";
+import InvestorCashRequest from "./InvestorCashRequest";
 import AppContext from "../../contexts/AppContext";
 
-const InvestRoleComponent = () => {
+const CashRequestRole = () => {
   const {
     isAuthenticated,
     setIsAuthenticated,
@@ -27,9 +26,9 @@ const InvestRoleComponent = () => {
   const renderComponentBasedOnRole = () => {
     switch (role) {
       case "investor":
-        return <InvestorIncreaseCapital />;
+        return <InvestorCashRequest />;
       case "portfolioManager":
-        return <PortfolioManagerIncreaseCapital />;
+        return <PortfolioManagerCashRequest />;
       default:
         return <p>نقش کاربر نامعتبر است</p>;
     }
@@ -38,4 +37,4 @@ const InvestRoleComponent = () => {
   return <div className="">{renderComponentBasedOnRole()}</div>;
 };
 
-export default InvestRoleComponent;
+export default CashRequestRole;

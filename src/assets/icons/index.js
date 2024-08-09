@@ -42,7 +42,10 @@ import eraser from "./eraser-icon.png";
 import capital from "./capital.png";
 import dollar from "./dollar.png";
 import dollarbag from "./dollarbag.png";
+import dollarbag2 from "./dollarbag2.png";
 import transactionicon from "./transaction-icon.png";
+import cashrequesthistory from "./cashrequesthistory.png";
+import cashrequest from "./cashrequest.png";
 
 export {
   merchantPrograms,
@@ -90,4 +93,7 @@ export {
   dollar,
   dollarbag,
   transactionicon,
+  dollarbag2,
+  cashrequesthistory,
+  cashrequest
 };
