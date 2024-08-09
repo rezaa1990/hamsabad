@@ -155,7 +155,9 @@ const CashRequestHistoryModalContent = ({ basket, handleEyeIconClick }) => (
               ? "واریز مستقیم"
               : "واریز به حساب کارگزاری"}
           </span>
-          <button onClick={(event) => handleEyeIconClick(event, basket, cashreq)}>
+          <button
+            onClick={(event) => handleEyeIconClick(event, basket, cashreq)}
+          >
             <Icon className="mx-2" name="eye" size={32} />
           </button>
         </div>
@@ -198,6 +200,61 @@ const CashRequestDetailsModal = ({
   );
 };
 
+const ConfirmedCashRequestModal = ({ cashreq, onClose }) => {
+  return (
+    <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
+      <div className="p-4 text-white bg-blue-500">
+        <h2 className="text-xl font-bold text-center">
+          درخواست وجه شماره سبد (تایید شده)
+        </h2>
+      </div>
+      <div className="p-4">
+        <div className="space-y-4">
+          <div className="flex justify-between">
+            <span className="font-bold">مبلغ:</span>
+            <span>{cashreq.amount} ریال</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-bold">تاریخ:</span>
+            <span>{cashreq.date}</span>
+          </div>
+          <div>
+            <span className="font-bold">پیام سبدگردان:</span>
+            <p className="mt-1">
+              {cashreq.portfolioManagerMessage || "بدون پیام"}
+            </p>
+          </div>
+          <div>
+            <span className="font-bold">پیام سرمایه‌گذار:</span>
+            <p className="mt-1">{cashreq.investorMessage || "بدون پیام"}</p>
+          </div>
+          <div>
+            <span className="font-bold">سند واریز:</span>
+            <div className="flex items-center justify-center h-32 mt-2 bg-gray-100">
+              {cashreq.depositDocument ? (
+                <img
+                  src={cashreq.depositDocument}
+                  alt="سند واریز"
+                  className="max-h-full"
+                />
+              ) : (
+                <span>سند واریز موجود نیست</span>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 text-center">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-white transition-colors bg-gray-500 rounded hover:bg-gray-600"
+          >
+            بازگشت
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const InvestorCashRequest = () => {
   const {
@@ -226,8 +283,16 @@ const InvestorCashRequest = () => {
     useState(false);
   const [isCashRequestHistoryModalVisible, setCashRequestHistoryModalVisible] =
     useState(false);
-  const [isCashRequestDetailsModalVisible,setIsCashRequestDetailsModalVisible] = useState(false);
+  const [
+    isCashRequestDetailsModalVisible,
+    setIsCashRequestDetailsModalVisible,
+  ] = useState(false);
   const [cashreq, setCashreq] = useState();
+
+  const [
+    isConfirmedCashRequestModalVisible,
+    setIsConfirmedCashRequestModalVisible,
+  ] = useState(false);
   //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
@@ -236,20 +301,28 @@ const InvestorCashRequest = () => {
     setSelectedBasket(basket);
     // setCashRequestHistoryModalVisible(true);
   };
-const handleEyeIconClick = (event, basket, cashreq) => {
-  event.stopPropagation();
+  const handleEyeIconClick = (event, basket, cashreq) => {
+    event.stopPropagation();
 
-  if (cashreq.cashRequestStatus === "رد") {
-    setSelectedBasket(basket);
-    setCashreq(cashreq);
-    setIsCashRequestDetailsModalVisible(true);
-  }
-};
+    if (cashreq.cashRequestStatus === "رد") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsCashRequestDetailsModalVisible(true);
+    } else if (cashreq.cashRequestStatus === "انجام شده") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsConfirmedCashRequestModalVisible(true);
+    }
+  };
 
-    const handleCloseCashRequestDetailsModal = () => {
-      setIsCashRequestDetailsModalVisible(false);
-      // setSelectedBasket(null);
-    };
+  const handleCloseConfirmedCashRequestModal = () => {
+    setIsConfirmedCashRequestModalVisible(false);
+  };
+
+  const handleCloseCashRequestDetailsModal = () => {
+    setIsCashRequestDetailsModalVisible(false);
+    // setSelectedBasket(null);
+  };
 
   const handleCloseCashRequestHistoryModal = () => {
     setCashRequestHistoryModalVisible(false);
@@ -371,6 +444,16 @@ const handleEyeIconClick = (event, basket, cashreq) => {
           basket={selectedBasket}
           // handleEyeIconClick={handleEyeIconClick}
           cashreq={cashreq}
+        />
+      </Modal>
+      <Modal
+        isVisible={isConfirmedCashRequestModalVisible}
+        onClose={handleCloseConfirmedCashRequestModal}
+        title={`درخواست وجه تایید شده (شماره سبد: ${selectedBasket?.contractNumber})`}
+      >
+        <ConfirmedCashRequestModal
+          cashreq={cashreq}
+          onClose={handleCloseConfirmedCashRequestModal}
         />
       </Modal>
     </div>
