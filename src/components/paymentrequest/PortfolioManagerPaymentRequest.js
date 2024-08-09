@@ -254,6 +254,8 @@ const RejectedBasketModalContent = ({ basketNumber }) => (
   </div>
 );
 
+
+
 const PortfolioManagerPaymentRequest = () => {
   const {
     isAuthenticated,

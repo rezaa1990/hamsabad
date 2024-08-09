@@ -26,63 +26,59 @@ const Modal = ({ isVisible, onClose, title, children }) => {
   );
 };
 
+const getStatusColor = (status) => {
+  switch (status) {
+    case "رد":
+      return "bg-red-500";
+    case "انجام شده":
+      return "bg-green-500";
+    case "در انتظار تایید":
+      return "bg-gray-500";
+    case "در انتظار سند واریز":
+      return "bg-blue-500";
+    default:
+      return "bg-gray-500";
+  }
+};
+
 // Specific Modal Content for "history"
-const HistoryModalContent = () => (
-  <div>
-    <div className="p-4 bg-gray-300">
-      <div className="flex justify-between">
-        <span>مبلغ</span>
-        <span>در انتظار تایید</span>
-      </div>
-      <div className="flex justify-between">
-        <span>تاریخ</span>
-      </div>
-      <div className="flex justify-between">
-        <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-        <Icon className="" name="eye" size={32} />
-      </div>
+const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
+  const shareRequestHistory = basket?.shareRequestHistory || [];
+
+  return (
+    <div>
+      {shareRequestHistory.length > 0 ? (
+        shareRequestHistory.map((sharereq, index) => (
+          <div
+            key={index}
+            className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
+          >
+            <div className="flex justify-between">
+              <label>مبلغ</label>
+              <span>{sharereq.amount}</span>
+              <span>رد</span>
+            </div>
+            <div className="flex justify-between">
+              <label>تاریخ</label>
+              <span>{sharereq.Date}</span>
+            </div>
+            <label>علت رد</label>
+            <span>...</span>
+            <div className="flex justify-end">
+              <button
+                onClick={(event) => handleEyeIconClick(event, basket, sharereq)}
+              >
+                <Icon className="" name="eye" size={32} />
+              </button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No share request history available.</p>
+      )}
     </div>
-    <div className="p-4 bg-red-500">
-      <div className="flex justify-between">
-        <span>مبلغ</span>
-        <span>رد</span>
-      </div>
-      <div className="flex justify-between">
-        <span>تاریخ</span>
-      </div>
-      <span>علت رد</span>
-      <div className="flex justify-end ">
-        <Icon className="" name="eye" size={32} />
-      </div>
-    </div>
-    <div className="p-4 bg-blue-500">
-      <div className="flex justify-between">
-        <span>مبلغ</span>
-        <span>در انتظار ارسال سند واریز</span>
-      </div>
-      <div className="flex justify-between">
-        <span>تاریخ</span>
-      </div>
-      <div className="flex justify-between">
-        <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-        <Icon className="" name="eye" size={32} />
-      </div>
-    </div>
-    <div className="p-4 bg-green-500">
-      <div className="flex justify-between">
-        <span>مبلغ</span>
-        <span>انجام شده</span>
-      </div>
-      <div className="flex justify-between">
-        <span>تاریخ</span>
-      </div>
-      <div className="flex justify-between">
-        <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-        <Icon className="" name="eye" size={32} />
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 const ShareRequestModalContent = ({
   handleButtonConfirmSharerequestClick,
@@ -519,6 +515,7 @@ const InvestorPaymentRequest = () => {
     useState(false);
   const [isRejectRequestshareisible, setRejectRequestshareisible] =
     useState(false);
+      const [sharereq, setSharereq] = useState();
 
   const handleBasketClick = (basket) => {
     // Reset all modal visibility states to false
@@ -532,16 +529,38 @@ const InvestorPaymentRequest = () => {
 
     setSelectedBasket(basket);
 
-    if (basket.shareRequest === "تایید") {
-      setConfirmedPortfolioShareRequestModalVisible(true);
-    } else if (basket.shareRequest == "درخواست سهم") {
-      setShareRequestModalVisible(true);
-    } else if (basket.sharedocument) {
-      setShareDocumentModalVisible(true);
-    } else if (basket.shareRequest === "رد") {
-      setRejectedBasketModalVisible(true);
-    }
+    // if (basket.shareRequest === "تایید") {
+    //   setConfirmedPortfolioShareRequestModalVisible(true);
+    // } else if (basket.shareRequest == "درخواست سهم") {
+    //   setShareRequestModalVisible(true);
+    // } else if (basket.sharedocument) {
+    //   setShareDocumentModalVisible(true);
+    // } else if (basket.shareRequest === "رد") {
+    //   setRejectedBasketModalVisible(true);
+    // }
   };
+
+    const handleEyeIconClick = (event, basket, sharereq) => {
+      event.stopPropagation();
+
+      if (sharereq.shareRequestStatus === "رد") {
+        setSelectedBasket(basket);
+        setSharereq(sharereq);
+        setRejectedBasketModalVisible(true);
+      } else if (sharereq.shareRequestStatus === "انجام شده") {
+        setSelectedBasket(basket);
+        setSharereq(sharereq);
+        setConfirmedPortfolioShareRequestModalVisible(true);
+      // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+      //   setSelectedBasket(basket);
+      //   setSharereq(sharereq);
+      //   setDepositDocumentModalVisible(true);
+        // } else if (sharereq.cashRequestStatus === "در انتظار سند واریز") {
+        //   setSelectedBasket(basket);
+        //   setCashreq(sharereq);
+        //   setIsUploadDocumentModalVisible(true);
+      }
+    };
 
   const handleTransactionIconClick = (basket, event) => {
     event.stopPropagation();
@@ -642,7 +661,10 @@ const InvestorPaymentRequest = () => {
           selectedBasket?.contractNumber || "شماره سبد"
         })`}
       >
-        <HistoryModalContent />
+        <HistoryModalContent
+          basket={selectedBasket}
+          handleEyeIconClick={handleEyeIconClick}
+        />
       </Modal>
 
       <Modal
