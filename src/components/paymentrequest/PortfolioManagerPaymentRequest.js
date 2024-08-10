@@ -37,12 +37,12 @@ const getStatusColor = (status) => {
 
 // Specific Modal Content for "history"
 const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
-  const shareRequestHistory = basket?.shareRequestHistory || [];
+  // const shareRequestHistory = basket?.shareRequestHistory || [];
 
   return (
     <div>
-      {shareRequestHistory.length > 0 ? (
-        shareRequestHistory.map((sharereq, index) => (
+      {
+        basket.shareRequestHistory.map((sharereq, index) => (
           <div
             key={index}
             className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
@@ -50,7 +50,7 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
             <div className="flex justify-between">
               <label>مبلغ</label>
               <span>{sharereq.amount}</span>
-              <span>رد</span>
+              <span>{sharereq.shareRequestStatus}</span>
             </div>
             <div className="flex justify-between">
               <label>تاریخ</label>
@@ -67,9 +67,9 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
             </div>
           </div>
         ))
-      ) : (
-        <p>No share request history available.</p>
-      )}
+      // ) : (
+        // <p>No share request history available.</p>
+      }
     </div>
   );
 };
@@ -321,14 +321,14 @@ const PortfolioManagerPaymentRequest = () => {
         setSelectedBasket(basket);
         setSharereq(sharereq);
           setConfirmedPortfolioShareRequestModalVisible(true);
-        } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
-          setSelectedBasket(basket);
-          setSharereq(sharereq);
+        // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+        //   setSelectedBasket(basket);
+        //   setSharereq(sharereq);
+        //     setDepositDocumentModalVisible(true);
+          } else if (sharereq.shareRequestStatus === "در انتظار سند واریز") {
+            setSelectedBasket(basket);
+            setSharereq(sharereq);
             setDepositDocumentModalVisible(true);
-          // } else if (sharereq.cashRequestStatus === "در انتظار سند واریز") {
-          //   setSelectedBasket(basket);
-          //   setCashreq(sharereq);
-          //   setIsUploadDocumentModalVisible(true);
         }
   };
 
@@ -352,22 +352,22 @@ const PortfolioManagerPaymentRequest = () => {
 
   const handleCloseShareRequestModal = () => {
     setShareRequestModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseConfirmedPortfolioShareRequestModal = () => {
     setConfirmedPortfolioShareRequestModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseDepositDocumentModal = () => {
     setDepositDocumentModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseRejectedBasketModal = () => {
     setRejectedBasketModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   return (

@@ -43,39 +43,33 @@ const getStatusColor = (status) => {
 
 // Specific Modal Content for "history"
 const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
-  const shareRequestHistory = basket?.shareRequestHistory || [];
-
   return (
     <div>
-      {shareRequestHistory.length > 0 ? (
-        shareRequestHistory.map((sharereq, index) => (
-          <div
-            key={index}
-            className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
-          >
-            <div className="flex justify-between">
-              <label>مبلغ</label>
-              <span>{sharereq.amount}</span>
-              <span>رد</span>
-            </div>
-            <div className="flex justify-between">
-              <label>تاریخ</label>
-              <span>{sharereq.Date}</span>
-            </div>
-            <label>علت رد</label>
-            <span>...</span>
-            <div className="flex justify-end">
-              <button
-                onClick={(event) => handleEyeIconClick(event, basket, sharereq)}
-              >
-                <Icon className="" name="eye" size={32} />
-              </button>
-            </div>
+      {basket.shareRequestHistory.map((sharereq, index) => (
+        <div
+          key={index}
+          className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
+        >
+          <div className="flex justify-between">
+            <label>مبلغ</label>
+            <span>{sharereq.amount}</span>
+            <span>{sharereq.shareRequestStatus}</span>
           </div>
-        ))
-      ) : (
-        <p>No share request history available.</p>
-      )}
+          <div className="flex justify-between">
+            <label>تاریخ</label>
+            <span>{sharereq.Date}</span>
+          </div>
+          <label>علت رد</label>
+          <span>...</span>
+          <div className="flex justify-end">
+            <button
+              onClick={(event) => handleEyeIconClick(event, basket, sharereq)}
+            >
+              <Icon className="" name="eye" size={32} />
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
@@ -177,10 +171,9 @@ const ShareRequestModalContent = ({
           تایید
         </button>
         <button
-          onClick={handleButtonRejectSharerequestClick}
+          onClick={handleRejectShareRequestClick}
           className="px-6 py-1 text-white bg-red-500 "
         >
-          {" "}
           رد
         </button>
       </div>
@@ -515,7 +508,7 @@ const InvestorPaymentRequest = () => {
     useState(false);
   const [isRejectRequestshareisible, setRejectRequestshareisible] =
     useState(false);
-      const [sharereq, setSharereq] = useState();
+  const [sharereq, setSharereq] = useState();
 
   const handleBasketClick = (basket) => {
     // Reset all modal visibility states to false
@@ -540,27 +533,28 @@ const InvestorPaymentRequest = () => {
     // }
   };
 
-    const handleEyeIconClick = (event, basket, sharereq) => {
-      event.stopPropagation();
-
-      if (sharereq.shareRequestStatus === "رد") {
-        setSelectedBasket(basket);
-        setSharereq(sharereq);
-        setRejectedBasketModalVisible(true);
-      } else if (sharereq.shareRequestStatus === "انجام شده") {
-        setSelectedBasket(basket);
-        setSharereq(sharereq);
-        setConfirmedPortfolioShareRequestModalVisible(true);
-      // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+  const handleEyeIconClick = (event, basket, sharereq) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setSharereq(sharereq);
+    if (sharereq.shareRequestStatus === "رد") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setRejectedBasketModalVisible(true);
+    } else if (sharereq.shareRequestStatus === "انجام شده") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setConfirmedPortfolioShareRequestModalVisible(true);
+    } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setShareRequestModalVisible(true);
+    } else if (sharereq.shareRequestStatus === "در انتظار سند واریز") {
       //   setSelectedBasket(basket);
-      //   setSharereq(sharereq);
-      //   setDepositDocumentModalVisible(true);
-        // } else if (sharereq.cashRequestStatus === "در انتظار سند واریز") {
-        //   setSelectedBasket(basket);
-        //   setCashreq(sharereq);
-        //   setIsUploadDocumentModalVisible(true);
-      }
-    };
+      // setSharereq(sharereq);
+      setShareDocumentModalVisible(true);
+    }
+  };
 
   const handleTransactionIconClick = (basket, event) => {
     event.stopPropagation();
@@ -580,37 +574,37 @@ const InvestorPaymentRequest = () => {
 
   const handleCloseHistoryModal = () => {
     setHistoryModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseShareRequestModal = () => {
     setShareRequestModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseConfirmShareRequestModal = () => {
     setConfirmShareRequestModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseShareDocumentModal = () => {
     setShareDocumentModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseRejectedBasketModal = () => {
     setRejectedBasketModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseConfirmedPortfolioShareRequestModal = () => {
     setConfirmedPortfolioShareRequestModalVisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   const handleCloseRejectRequestshare = () => {
     setRejectRequestshareisible(false);
-    setSelectedBasket(null);
+    // setSelectedBasket(null);
   };
 
   return (
