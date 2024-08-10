@@ -67,279 +67,216 @@ const IncreaseCapitalHistoryModal = ({ basket, handleEyeIconClick }) => (
   </div>
 );
 
-const RequestIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
-  <div className="">درخواست افزایش سرمایه</div>
+const RequestIncreaseCapitalModal = ({
+  basket,
+  handleConfirm,
+  handleReject,
+}) => (
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">درخواست افزایش سرمایه:</div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4">
+      <div className="mb-2">مبلغ:</div>
+      <div className="flex items-center">
+        <input
+          type="text"
+          value="10.000.000"
+          className="w-full p-2 text-left border border-gray-300 rounded"
+          readOnly
+        />
+        <span className="mr-2">ریال</span>
+      </div>
+    </div>
+    <div className="mb-4">
+      <div className="mb-2">تاریخ:</div>
+      <input
+        type="text"
+        value="1398/03/12"
+        className="w-full p-2 border border-gray-300 rounded"
+        readOnly
+      />
+    </div>
+    <div className="mb-4 space-y-2">
+      <div className="flex items-center">
+        <input type="radio" name="depositMethod" className="mr-2" />
+        <span>واریز به‌صورت مستقیم</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="depositMethod" className="mr-2" />
+        <span>واریز به حساب کارگزاری</span>
+      </div>
+    </div>
+    <div className="flex justify-between">
+      <button
+        onClick={handleConfirm}
+        className="w-24 px-4 py-2 text-white bg-green-500 rounded"
+      >
+        تایید
+      </button>
+      <button
+        onClick={handleReject}
+        className="w-24 px-4 py-2 text-white bg-red-500 rounded"
+      >
+        رد
+      </button>
+    </div>
+  </div>
 );
 
 const RejectedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
-  <div className="">رد شده</div>
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">شماره سبد (رد شده)</div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div className="flex justify-between">
+        <span>مبلغ:</span>
+        <span>10.000.000 ریال</span>
+      </div>
+      <div className="flex justify-between">
+        <span>تاریخ:</span>
+        <span>1398/03/12</span>
+      </div>
+      <div>واریز به‌صورت مستقیم</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div>پیام سرمایه‌گذار :</div>
+      <div>علت رد :</div>
+      <div>پیام سبدگردان :</div>
+    </div>
+    <button className="w-full px-4 py-2 text-gray-700 bg-gray-300 rounded">
+      بازگشت
+    </button>
+  </div>
 );
 
 const ConfirmedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
-  <div className="">تایید شده</div>
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">شماره سبد (تایید شده)</div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div className="flex justify-between">
+        <span>مبلغ:</span>
+        <span>10.000.000 ریال</span>
+      </div>
+      <div className="flex justify-between">
+        <span>تاریخ:</span>
+        <span>1398/03/12</span>
+      </div>
+      <div>واریز به‌صورت مستقیم</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div>پیام سرمایه‌گذار :</div>
+      <div>پیام سبدگردان :</div>
+      <div>سند واریز:</div>
+    </div>
+    <div className="h-32 p-4 mb-4 border-2 border-gray-300 rounded-lg"></div>
+    <button className="w-full px-4 py-2 text-gray-700 bg-gray-300 rounded">
+      بازگشت
+    </button>
+  </div>
 );
 
 const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => (
-  <div className="">آپلود سند واریز</div>
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">
+        بررسی سند واریز سبد (شماره سبد)
+      </div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4">
+      <div className="h-48 p-4 border-2 border-gray-300 rounded-lg"></div>
+    </div>
+    <div className="mb-4">
+      <input
+        type="text"
+        placeholder="نوشتن توضیحات..."
+        className="w-full p-2 border border-gray-300 rounded"
+      />
+    </div>
+    <div className="flex justify-between">
+      <button className="w-24 px-4 py-2 text-white bg-green-500 rounded">
+        تایید
+      </button>
+      <button className="w-24 px-4 py-2 text-white bg-red-500 rounded">
+        رد
+      </button>
+    </div>
+  </div>
 );
 
-const ConfirmIncreaseCapitalModal = ({
-  onClose,
-  onConfirm,
-  handleUpdateBasket,
-}) => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [messageToInvestor, setMessageToInvestor] = useState("");
-
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  const handleMessageChange = (event) => {
-    setMessageToInvestor(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    let updateData = {};
-
-    if (selectedOption === "upload") {
-      updateData = {
-        status: "درخواست سند واریز",
-        approveDocSituation: "سند واریز را ارسال کنید",
-      };
-    } else if (selectedOption === "noUpload") {
-      updateData = {
-        status: "تایید",
-      };
-    } else if (selectedOption === "coordinate") {
-      updateData = {
-        status: "تایید",
-        approveDocSituation:
-          " این سری تایید میشود ولی بهتر است برای سری های بعد قبل از تصمیم هماهنگ کنید",
-      };
-    }
-
-    onConfirm(selectedOption, messageToInvestor);
-    handleUpdateBasket(updateData);
-  };
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-md p-6 bg-white">
-        <div className="flex mb-6">
-          {" "}
-          <button onClick={onClose} className="">
-            <Icon name="arrowright" size={16} className="ml-4" />
-          </button>
-          <h2 className="text-xl font-bold ">تایید درخواست افزایش سرمایه</h2>
-        </div>
-        <div className="mb-6 mr-8 space-y-4">
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="option"
-              value="upload"
-              checked={selectedOption === "upload"}
-              onChange={handleOptionChange}
-              className="form-radio"
-            />
-            <span className="mr-2">لطفا سند واریز وجه را بارگذاری کنید.</span>
-          </label>
-
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="option"
-              value="noUpload"
-              checked={selectedOption === "noUpload"}
-              onChange={handleOptionChange}
-              className="form-radio"
-            />
-            <span className="mr-2">نیازی به اسکن سند واریز نیست.</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="option"
-              value="coordinate"
-              checked={selectedOption === "coordinate"}
-              onChange={handleOptionChange}
-              className="form-radio"
-            />
-            <span className="mr-2">
-              این سری تایید میشود ولی بهتر است برای سری های بعد قبل از تصمیم
-              هماهنگ کنید.
-            </span>
-          </label>
-        </div>
-        <textarea
-          className="w-full p-2 mb-4 border rounded"
-          placeholder="متن خطاب به سرمایه‌گذار"
-          rows="3"
-          value={messageToInvestor}
-          onChange={handleMessageChange}
-        ></textarea>
-        <div className="flex justify-end">
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-1 text-white bg-green-500 rounded hover:bg-green-600"
-          >
-            تایید درخواست
-          </button>
-        </div>
+const ConfirmingIncreaseCapitalModal = () => (
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">تایید درخواست افزایش سرمایه</div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div className="flex items-center">
+        <input type="radio" name="approvalOption" className="ml-2" />
+        <span>لطفا سند واریز وجه را بارگزاری کنید.</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="approvalOption" className="ml-2" />
+        <span>نیازی به اسکن سند واریز نیست.</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="approvalOption" className="ml-2" />
+        <span>
+          این سری تایید می‌شود ولی بهتر است برای سری‌های بعد قبل از تصمیم هماهنگ
+          کنید.
+        </span>
       </div>
     </div>
-  );
-};
+    <div className="mb-4">
+      <div className="mb-2">متن خطاب به سرمایه‌گذار</div>
+      <textarea className="w-full h-24 p-2 border border-gray-300 rounded resize-none"></textarea>
+    </div>
+    <button className="w-full px-4 py-2 text-white bg-green-500 rounded">
+      تایید درخواست
+    </button>
+  </div>
+);
 
-const RejectIncreaseCapitalModal = ({ onClose, onReject }) => {
-  const [reason, setReason] = useState("");
-  const [comment, setComment] = useState("");
-
-  const handleReasonChange = (event) => {
-    setReason(event.target.value);
-  };
-
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    onReject(reason, comment);
-  };
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-md p-6 bg-white">
-        <div className="flex mb-8">
-          {" "}
-          <button onClick={onClose} className="">
-            <Icon name="arrowright" size={16} className="ml-4" />
-          </button>
-          <h2 className="text-xl font-bold ">رد درخواست افزایش سرمایه</h2>
-        </div>
-        <div className="mb-4 mr-8 space-y-2">
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="reason"
-              value="باتوجه به روند بازار زمان مناسبی جهت افزایش سرمایه نیست."
-              checked={
-                reason ===
-                "باتوجه به روند بازار زمان مناسبی جهت افزایش سرمایه نیست."
-              }
-              onChange={handleReasonChange}
-              className="ml-2"
-            />
-            <span>
-              باتوجه به روند بازار زمان مناسبی جهت افزایش سرمایه نیست.
-            </span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="reason"
-              value="مبلغ سرمایه زیاد است (ریسک بالایی دارد)."
-              checked={reason === "مبلغ سرمایه زیاد است (ریسک بالایی دارد)."}
-              onChange={handleReasonChange}
-              className="ml-2"
-            />
-            <span>مبلغ سرمایه زیاد است (ریسک بالایی دارد).</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="reason"
-              value="تاریخ صحیح نیست."
-              checked={reason === "تاریخ صحیح نیست."}
-              onChange={handleReasonChange}
-              className="ml-2"
-            />
-            <span>تاریخ صحیح نیست.</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="reason"
-              value="سایر دلایل"
-              checked={reason === "سایر دلایل"}
-              onChange={handleReasonChange}
-              className="ml-2"
-            />
-            <span>سایر دلایل</span>
-          </label>
-        </div>
-        <textarea
-          className="w-full p-2 mb-4 border rounded"
-          placeholder="نوشتن توضیحات..."
-          rows="3"
-          value={comment}
-          onChange={handleCommentChange}
-        ></textarea>
-        <div className="flex justify-end">
-          <button
-            onClick={handleSubmit}
-            className="px-8 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-          >
-            رد
-          </button>
-        </div>
+const RejectingIncreaseCapitalModal = () => (
+  <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center justify-between mb-4">
+      <div className="text-xl text-blue-500">رد درخواست افزایش سرمایه</div>
+      <div className="text-2xl text-blue-500">&gt;</div>
+    </div>
+    <div className="mb-4 space-y-2">
+      <div className="flex items-center">
+        <input type="radio" name="rejectionReason" className="ml-2" />
+        <span>باتوجه به روند بازار زمان مناسبی جهت افزایش سرمایه نیست.</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="rejectionReason" className="ml-2" />
+        <span>مبلغ سرمایه زیاد است (ریسک بالایی دارد).</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="rejectionReason" className="ml-2" />
+        <span>تاریخ صحیح نیست.</span>
+      </div>
+      <div className="flex items-center">
+        <input type="radio" name="rejectionReason" className="ml-2" />
+        <span>سایر دلایل</span>
       </div>
     </div>
-  );
-};
-
-const DepositDocumentIncreaseCapitalModal = ({
-  onClose,
-  onConfirm,
-  onReject,
-}) => {
-  const [comment, setComment] = useState("");
-
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
-  };
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-md p-6 bg-gray-200">
-        <div className="flex mb-4">
-          <button onClick={onClose} className="ml-2">
-            <Icon name="arrowright" size={16} />
-          </button>
-          <h2 className="text-xl font-bold">بررسی سند واریز سبد (شماره سبد)</h2>
-        </div>
-        <div
-          className="mb-4 bg-white border border-gray-300"
-          style={{ height: "200px" }}
-        >
-          {/* Placeholder for the deposit document image */}
-        </div>
-        <textarea
-          className="w-full p-2 mb-4 border rounded"
-          placeholder="نوشتن توضیحات..."
-          rows="2"
-          value={comment}
-          onChange={handleCommentChange}
-        ></textarea>
-        <div className="flex justify-between">
-          <button
-            onClick={() => onReject(comment)}
-            className="px-8 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-          >
-            رد
-          </button>
-          <button
-            onClick={() => onConfirm(comment)}
-            className="px-8 py-1 text-white bg-green-500 rounded hover:bg-green-600"
-          >
-            تایید
-          </button>
-        </div>
-      </div>
+    <div className="mb-4">
+      <div className="mb-2">نوشتن توضیحات...</div>
+      <textarea className="w-full h-24 p-2 border border-gray-300 rounded resize-none"></textarea>
     </div>
-  );
-};
+    <button className="w-full px-4 py-2 text-white bg-red-500 rounded">
+      رد
+    </button>
+  </div>
+);
 
 const PortfolioManagerIncreaseCapital = () => {
   const {
@@ -390,6 +327,10 @@ const PortfolioManagerIncreaseCapital = () => {
     setUploadIncreaseCapitalDocumentModalVisible,
   ] = useState(false);
 
+  const [isConfirmingModalVisible, setConfirmingModalVisible] = useState(false);
+  const [isRejectingModalVisible, setRejectingModalVisible] = useState(false);
+
+
 
   const handleEyeIconClick = (event, basket, incaptreq) => {
     event.stopPropagation();
@@ -403,17 +344,17 @@ const PortfolioManagerIncreaseCapital = () => {
       // setSelectedBasket(basket);
       // setSharereq(sharereq);
       setConfirmedIncreaseCapitalModalVisible(true);
-      // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
-      //   // setSelectedBasket(basket);
-      //   // setSharereq(sharereq);
-      //   setShareRequestModalVisible(true);
-    } else if (
-      incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
-    ) {
-      //   setSelectedBasket(basket);
-      // setSharereq(sharereq);
-      setUploadIncreaseCapitalDocumentModalVisible(true);
-    }
+      } else if (incaptreq.increaseCapitalStatus === "در انتظار تایید") {
+        //   // setSelectedBasket(basket);
+        //   // setSharereq(sharereq);
+          setRequestIncreaseCapitalModalVisible(true);
+      } else if (
+        incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
+      ) {
+        //   setSelectedBasket(basket);
+        // setSharereq(sharereq);
+        setUploadIncreaseCapitalDocumentModalVisible(true);
+      }
   };
 
     const closeRejectedIncreaseCapitalModal = () => {
@@ -427,6 +368,10 @@ const PortfolioManagerIncreaseCapital = () => {
     const closeUploadIncreaseCapitalDocumentModal = () => {
       setUploadIncreaseCapitalDocumentModalVisible(false);
     };
+
+        const closeRequestIncreaseCapitalModal = () => {
+          setRequestIncreaseCapitalModalVisible(false);
+        };
   const showIncreaseCapitalHistoryModal = (event, basket) => {
     event.stopPropagation();
     setSelectedBasket(basket);
@@ -437,6 +382,24 @@ const PortfolioManagerIncreaseCapital = () => {
     setIncreaseCapitalHistoryModalVisible(false);
   }
 
+const handleConfirmIncreaseCapital = () => {
+  setRequestIncreaseCapitalModalVisible(false);
+  setConfirmingModalVisible(true);
+};
+
+const handleRejectIncreaseCapital = () => {
+  setRequestIncreaseCapitalModalVisible(false);
+  setRejectingModalVisible(true);
+};
+
+const closeConfirmingModal = () => {
+  setConfirmingModalVisible(false);
+};
+
+const closeRejectingModal = () => {
+  setRejectingModalVisible(false);
+};
+  
   return (
     <div className="flex flex-col items-center justify-center p-4">
       {baskets.map((basket) => (
@@ -525,6 +488,32 @@ const PortfolioManagerIncreaseCapital = () => {
           basket={selectedBasket}
           // handleEyeIconClick={handleEyeIconClick}
         />
+      </Modal>
+      <Modal
+        isVisible={isRequestIncreaseCapitalModalVisible}
+        onClose={closeRequestIncreaseCapitalModal}
+        title={` درخواست سند `}
+      >
+        <RequestIncreaseCapitalModal
+          basket={selectedBasket}
+          handleConfirm={handleConfirmIncreaseCapital}
+          handleReject={handleRejectIncreaseCapital}
+        />
+      </Modal>
+      <Modal
+        isVisible={isConfirmingModalVisible}
+        onClose={closeConfirmingModal}
+        title={`تایید افزایش سرمایه`}
+      >
+        <ConfirmingIncreaseCapitalModal />
+      </Modal>
+
+      <Modal
+        isVisible={isRejectingModalVisible}
+        onClose={closeRejectingModal}
+        title={`رد افزایش سرمایه`}
+      >
+        <RejectingIncreaseCapitalModal />
       </Modal>
     </div>
   );
