@@ -51,8 +51,8 @@ const Dashboard = () => {
 
   return (
     <div
-      className={`font-sans ${
-        isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+      className={`${
+        isDarkMode ? "bg-gray-800 text-white" : "text-gray-800"
       } min-h-screen pb-20 relative`}
     >
       <div className="grid grid-cols-3 gap-4 p-4">
@@ -60,9 +60,9 @@ const Dashboard = () => {
           <Link
             key={index}
             to={item.path}
-            className={`flex flex-col items-center justify-center p-4 rounded-lg ${
-              isDarkMode ? "bg-gray-700" : "bg-white"
-            } shadow-md`}
+            className={`flex flex-col items-center justify-center p-1 rounded-lg border border-gray-300 ${
+              isDarkMode ? "bg-gray-700" : ""
+            } shadow-m`}
           >
             <img
               src={item.icon}

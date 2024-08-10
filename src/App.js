@@ -48,13 +48,13 @@ function AppContent() {
   return (
     <div
       className={`flex flex-col min-h-screen ${
-        isDarkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+        isDarkMode ? "bg-gray-800 text-white" : ""
       }`}
     >
       <Header />
       <div className="relative flex flex-1">
         {isAuthenticated && <Sidebar />}
-        <main className="flex-1 p-4 pb-20 overflow-x-hidden">
+        <main className="flex-1 pb-20 overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

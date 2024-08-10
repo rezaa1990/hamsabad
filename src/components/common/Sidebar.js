@@ -1,29 +1,29 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import * as icons from "../../assets/icons";
 // import { useTheme } from "../../contexts/ThemeContext";
 import AppContext from "../../contexts/AppContext";
 
 const Sidebar = ({ isOpen, onClose }) => {
-    const {
-      isAuthenticated,
-      setIsAuthenticated,
-      role,
-      setRole,
-      login,
-      logout,
-      baskets,
-      setBaskets,
-      handleUpdateBasket,
-      phoneNumber,
-      setPhoneNumber,
-      nationalId,
-      setNationalId,
-      isDarkMode,
-      setIsDarkMode,
-      toggleDarkMode,
-    } = useContext(AppContext);
-  
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   // const { isDarkMode } = useTheme();
 
   return (
@@ -35,9 +35,9 @@ const Sidebar = ({ isOpen, onClose }) => {
         z-50 overflow-y-auto`}
     >
       <div
-        className={`flex items-center justify-between p-4 ${
-          isDarkMode ? "border-gray-700" : "border-gray-200"
-        } border-b`}
+        className={`flex items-center justify-between p-4 border-b-4 border ${
+          isDarkMode ? "border-gray-700" : "border-b-gray-300 border-b-2"
+        }`}
       >
         <div className="w-6 h-6"></div>
         <img src={icons.hamsabad} alt="هم‌سبد" className="w-12 h-12" />
@@ -47,11 +47,15 @@ const Sidebar = ({ isOpen, onClose }) => {
       </div>
 
       <div className="flex justify-center my-6">
-        <img
-          src={icons.profile}
-          alt="تصویر پروفایل"
-          className="w-20 h-20 rounded-full"
-        />
+        <div>
+          {" "}
+          <img
+            src={icons.profile}
+            alt="تصویر پروفایل"
+            className="w-20 h-20 rounded-full"
+          />
+          <span>سامان کشوری</span>
+        </div>
       </div>
 
       <nav
@@ -68,7 +72,12 @@ const Sidebar = ({ isOpen, onClose }) => {
             }
           `}
         </style>
+
+        <button onClick={toggleDarkMode}>
+          {isDarkMode ? "حالت روشن":"حالت تاریک"}
+        </button>
         <Link
+          onClick={onClose}
           to="/profile"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -78,9 +87,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
+
         <Link
+          onClick={onClose}
           to="/profile"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -90,9 +101,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
         <Link
+          onClick={onClose}
           to="/services"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -102,9 +114,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
         <Link
+          onClick={onClose}
           to="/my-baskets"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -114,9 +127,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
         <Link
+          onClick={onClose}
           to="/messages"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -126,9 +140,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
         <Link
+          onClick={onClose}
           to="/contact"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -138,9 +153,10 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
         <Link
+          onClick={onClose}
           to="/share"
           className="flex items-center space-x-2 space-x-reverse"
         >
@@ -154,16 +170,19 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div
           className={`my-2 ${
             isDarkMode ? "border-gray-700" : "border-gray-200"
-          } border-b`}
+          } border-b-2`}
         ></div>
-        <button className="flex items-center space-x-2 space-x-reverse text-red-600">
-          <img
-            src={icons.exit1}
-            alt="خروج از حساب کاربری"
-            className="w-6 h-6"
-          />
-          <span>خروج</span>
-        </button>
+        <Link to="/" onClick={onClose} className="pb-3 border-b-2">
+          {" "}
+          <button className="flex items-center space-x-2 space-x-reverse text-red-600">
+            <img
+              src={icons.exit1}
+              alt="خروج از حساب کاربری"
+              className="w-6 h-6"
+            />
+            <span>خروج</span>
+          </button>
+        </Link>
       </nav>
     </aside>
   );

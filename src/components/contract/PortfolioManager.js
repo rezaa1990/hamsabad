@@ -272,10 +272,10 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
 
       {!showForm ? (
         <div
-          className={`flex flex-col items-center w-full p-6 text-center border ${
+          className={`flex flex-col items-center mx-4 p-6 text-center border ${
             isDarkMode
               ? "border-gray-600 bg-gray-700 text-white"
-              : "border-gray-300 bg-gray-100 text-gray-800"
+              : "border-gray-300 text-gray-800"
           } cursor-pointer`}
           onClick={toggleForm}
         >
@@ -297,7 +297,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           } rounded-lg max-w-xl w-full`}
         >
           <div
-            className={`flex items-center justify-between mb-8 text-sm border-b pb-4 ${
+            className={`flex items-center justify-around mb-8 text-sm border-b pb-4 ${
               isDarkMode
                 ? "text-white border-gray-600"
                 : "text-gray-800 border-gray-300"
@@ -559,7 +559,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
             </div>
             <div className="mt-2 mb-4">
               <img
-                src={icons.contract}
+                src={icons.add}
                 alt="Contract Icon"
                 className="w-12 h-12 m-auto mt-8 cursor-pointer"
                 onClick={handleAddClause}
@@ -587,13 +587,13 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                   <img
                     src={icons.pencil}
                     alt="edit"
-                    className="w-6 h-6 m-2 cursor-pointer"
+                    className="w-6 h-6 mx-2 cursor-pointer"
                     onClick={() => handleEditClause(index)}
                   />
                   <img
                     src={icons.Delete}
                     alt="Delete"
-                    className="w-6 h-6 ml-2 cursor-pointer"
+                    className="w-6 h-6 cursor-pointer"
                     onClick={() => handleDeleteConfirmation(index)}
                   />
                 </div>
@@ -604,7 +604,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           <div className="justify-between mt-8">
             <div className="flex flex-col justify-center m-1 sm:flex-row">
               <button
-                className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#891BBF] rounded hover:bg-opacity-90"
+                className="w-full sm:w-40 px-1 py-1 mx-1 my-1 sm:my-0 font-bold text-white bg-[#5D9CEC] rounded hover:bg-opacity-90"
                 onClick={handleSaveDraft}
               >
                 ذخیره پیش‌نویس
@@ -635,7 +635,7 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div
-            className={`p-6 rounded-lg w-full max-w-md ${
+            className={`p-6 max-w-md ${
               isDarkMode ? "bg-gray-700 text-white" : "bg-white text-gray-800"
             }`}
           >
@@ -653,10 +653,10 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
               }`}
               placeholder="متن تبصره را وارد کنید"
             />
-            <div className="flex justify-end">
+            <div className="flex justify-around">
               <button
                 onClick={handleClauseSubmit}
-                className={`px-4 py-2 m-1 text-white rounded ${
+                className={`px-4 py-1 m-1 text-white rounded ${
                   isDarkMode
                     ? "bg-blue-600 hover:bg-blue-700"
                     : "bg-blue-500 hover:bg-blue-600"
@@ -666,10 +666,10 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className={`px-4 py-2 m-1 rounded ${
+                className={`px-4 py-1 m-1 rounded ${
                   isDarkMode
-                    ? "bg-gray-600 hover:bg-gray-500 text-white"
-                    : "bg-gray-300 hover:bg-gray-400 text-gray-800"
+                    ? "bg-red-500 hover:bg-gray-500 text-white"
+                    : "bg-red-500 hover:bg-gray-400 text-gray-800"
                 }`}
               >
                 لغو

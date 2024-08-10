@@ -46,6 +46,7 @@ import dollarbag2 from "./dollarbag2.png";
 import transactionicon from "./transaction-icon.png";
 import cashrequesthistory from "./cashrequesthistory.png";
 import cashrequest from "./cashrequest.png";
+import add from "./add.png";
 
 export {
   merchantPrograms,
@@ -95,5 +96,6 @@ export {
   transactionicon,
   dollarbag2,
   cashrequesthistory,
-  cashrequest
+  cashrequest,
+  add,
 };

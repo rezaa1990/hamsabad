@@ -41,7 +41,7 @@ const Header = () => {
             <img
               src={icons.menubutton}
               alt={"menubutton"}
-              className="object-contain w-12 h-12 mb-2"
+              className="object-contain w-10 h-10 mb-2"
             />
           </button>
           <img
@@ -56,13 +56,11 @@ const Header = () => {
             <img
               src={icons.search}
               alt={"search"}
-              className="object-contain w-12 h-12 mb-2"
+              className="object-contain w-10 h-10 mb-2"
             />
           </button>
         </div>
-        <button onClick={toggleDarkMode}>
-          {isDarkMode ? " روشن" : " تاریک"}
-        </button>
+
       </header>
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
     </div>
