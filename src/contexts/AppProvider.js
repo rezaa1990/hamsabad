@@ -21,6 +21,32 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       approveDocSituation: "",
       shareRequest: "تایید",
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",
@@ -74,6 +100,32 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "رد",
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",
@@ -127,6 +179,32 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "غیر مستقیم",
       shareRequest: "درخواست سند نقد کردن",
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",
@@ -180,6 +258,32 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "تایید",
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",
@@ -233,6 +337,32 @@ function AppProvider({ children }) {
       depositDate: "2024-08-04",
       paymentMethod: "مستقیم",
       shareRequest: "درخواست سهم",
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",
@@ -287,6 +417,32 @@ function AppProvider({ children }) {
       paymentMethod: "مستقیم",
       shareRequest: "",
       sharedocument: true,
+      increaseCapitalHistory: [
+        {
+          increaseCapitalStatus: "انجام شده",
+          amount: "۱۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۰۹",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "رد",
+          amount: "۲۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۰",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار ارسال سند واریز",
+          amount: "۳۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۱",
+          directIncreaseCapital: true,
+        },
+        {
+          increaseCapitalStatus: "در انتظار تایید",
+          amount: "۴۰۰۰۰۰",
+          date: "۱۴۰۳/۱۲/۱۲",
+          directIncreaseCapital: true,
+        },
+      ],
       shareRequestHistory: [
         {
           shareRequestStatus: "انجام شده",

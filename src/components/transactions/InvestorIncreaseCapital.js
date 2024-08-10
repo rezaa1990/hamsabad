@@ -7,6 +7,86 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import AppContext from "../../contexts/AppContext";
 
+const Modal = ({ isVisible, onClose, title, children }) => {
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-lg p-4 bg-gray-100">
+        <div className="flex items-center mb-4">
+          <button onClick={onClose} className="">
+            <Icon name="arrowright" size={16} className="ml-4" />
+          </button>
+          <h2 className="text-xl font-bold">{title}</h2>
+        </div>
+        <div className="space-y-4">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const getStatusColor = (status) => {
+  switch (status) {
+    case "در انتظار ارسال سند واریز":
+      return "bg-blue-300";
+    case "انجام شده":
+      return "bg-green-300";
+    case "رد":
+      return "bg-red-300";
+    default:
+      return "bg-bg-gray-300";
+  }
+};
+
+const IncreaseCapitalHistoryModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">
+    {basket.increaseCapitalHistory.map((incaptreq, index) => (
+      <div
+        key={index}
+        className={`p-4 mb-1 ${getStatusColor(
+          incaptreq.increaseCapitalStatus
+        )}`}
+      >
+        <div className="flex justify-between mb-1">
+          <span className="font-bold">وضعیت:</span>
+          <span>{incaptreq.increaseCapitalStatus}</span>
+        </div>
+        <div className="mb-1">
+          <span className="font-bold">تاریخ:</span> {incaptreq.date}
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="font-bold">
+            {incaptreq.directIncreaseCapital
+              ? "واریز مستقیم"
+              : "واریز به حساب کارگزاری"}
+          </span>
+          <button
+            onClick={(event) => handleEyeIconClick(event, basket, incaptreq)}
+          >
+            <Icon className="mx-2" name="eye" size={32} />
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const RequestIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">درخواست افزایش سرمایه</div>
+);
+
+const RejectedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">رد شده</div>
+);
+
+const ConfirmedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">تایید شده</div>
+);
+
+const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">آپلود سند واریز</div>
+);
+
 const InvestorIncreaseCapital = () => {
   const {
     isAuthenticated,
@@ -27,396 +107,193 @@ const InvestorIncreaseCapital = () => {
     toggleDarkMode,
   } = useContext(AppContext);
   const navigate = useNavigate();
-  const [showForm, setShowForm] = useState(null);
-  const [showModal, setShowModal] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showDepositModal, setShowDepositModal] = useState(null);
-  const [fileName, setFileName] = useState("");
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
-  const [showBasketDetails, setShowBasketDetails] = useState(null);
 
   const handleNavigate = () => {
     navigate("/dashboard");
   };
 
-  const toggleForm = (id) => {
-    setShowForm(showForm === id ? null : id);
+  const [selectedBasket, setSelectedBasket] = useState(null);
+  const [incaptreq, setIncaptreq] = useState();
+  const [
+    isIncreaseCapitalHistoryModalVisible,
+    setIncreaseCapitalHistoryModalVisible,
+  ] = useState(false);
+
+  const [
+    isRequestIncreaseCapitalModalVisible,
+    setRequestIncreaseCapitalModalVisible,
+  ] = useState(false);
+
+  const [
+    isRejectedIncreaseCapitalModalVisible,
+    setRejectedIncreaseCapitalModalVisible,
+  ] = useState(false);
+  const [
+    isConfirmedIncreaseCapitalModalVisible,
+    setConfirmedIncreaseCapitalModalVisible,
+  ] = useState(false);
+  const [
+    isUploadIncreaseCapitalDocumentModalVisible,
+    setUploadIncreaseCapitalDocumentModalVisible,
+  ] = useState(false);
+
+  const handleEyeIconClick = (event, basket, incaptreq) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setIncaptreq(incaptreq);
+    if (incaptreq.increaseCapitalStatus === "رد") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setRejectedIncreaseCapitalModalVisible(true);
+      } else if (incaptreq.increaseCapitalStatus === "انجام شده") {
+        // setSelectedBasket(basket);
+        // setSharereq(sharereq);
+        setConfirmedIncreaseCapitalModalVisible(true);
+        // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+        //   // setSelectedBasket(basket);
+        //   // setSharereq(sharereq);
+        //   setShareRequestModalVisible(true);
+        } else if (incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز") {
+          //   setSelectedBasket(basket);
+          // setSharereq(sharereq);
+          setUploadIncreaseCapitalDocumentModalVisible(true);
+        }
   };
 
-  const toggleModal = (id) => {
-    setShowModal(showModal === id ? null : id);
+ 
+  const closeRejectedIncreaseCapitalModal = () => {
+    setRejectedIncreaseCapitalModalVisible(false);
   };
 
-  const toggleDepositModal = (id) => {
-    setShowDepositModal(showDepositModal === id ? null : id);
+    const closeConfirmedIncreaseCapitalModalModal = () => {
+      setConfirmedIncreaseCapitalModalVisible(false);
+    };
+
+     const closeUploadIncreaseCapitalDocumentModal = () => {
+       setUploadIncreaseCapitalDocumentModalVisible(false);
+     };
+
+  const showIncreaseCapitalHistoryModal = (event, basket) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setIncreaseCapitalHistoryModalVisible(true);
   };
 
-  const toggleBasketDetails = (id) => {
-    setShowBasketDetails(showBasketDetails === id ? null : id);
+  const closeIncreaseCapitalHistoryModal = () => {
+    setIncreaseCapitalHistoryModalVisible(false);
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "در انتظار بررسی":
-        return "bg-gray-300";
-      case "درخواست سند واریز":
-        return "bg-orange-300";
-      case "بررسی سند واریز":
-        return "bg-blue-300";
-      case "تایید":
-        return "bg-green-300";
-      case "رد":
-        return "bg-red-300";
-      default:
-        return "bg-white";
-    }
+  const showIncreaseCapitalRequest = (event, basket) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setRequestIncreaseCapitalModalVisible(true);
   };
 
-  const handleSubmitIncreaseCapital = (basketId, event) => {
-    event.preventDefault();
-    handleUpdateBasket(basketId, {
-      status: "در انتظار بررسی",
-      InvestAmount: 33000000,
-    });
-    toggleForm(null);
-    alert("درخواست افزایش سرمایه با موفقیت ثبت شد.");
-  };
-
-  const handleSubmitDepositDocument = (basketId, event) => {
-    event.preventDefault();
-    handleUpdateBasket(basketId, {
-      status: "بررسی سند واریز",
-    });
-    toggleDepositModal(null);
-    alert("سند واریز با موفقیت ثبت شد.");
-  };
-
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      setImagePreviewUrl(URL.createObjectURL(file));
-    } else {
-      setImagePreviewUrl("");
-    }
+  const closeIncreaseCapitalRequest = () => {
+    setRequestIncreaseCapitalModalVisible(false);
   };
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <div className="w-full bg-white shadow-lg">
-        <div className="flex items-center justify-between p-4">
-          <div className="flex">
-            <button
-              onClick={handleNavigate}
-              className="flex items-center text-gray-600 hover:text-gray-800"
-            >
-              <Icon name="arrowright" size={16} className="ml-4" />
-            </button>
-            <span className="text-lg">افزایش سرمایه</span>
-          </div>
-        </div>
-      </div>
-
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="w-full bg-white shadow-lg cursor-pointer"
-          onClick={() => toggleDepositModal(basket.id)}
+          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          onClick={""}
         >
-          <div className="p-4">
-            <div className={`p-4 ${getStatusColor(basket.status)}`}>
-              <div className="mb-4 text-center">
-                <span className="text-xl font-bold">شماره سبد</span>
-                <div className="mt-2">{basket.contractNumber}</div>
-                <span className="flex justify-end">وضعیت: {basket.status}</span>
-              </div>
-
-              <div className="flex mb-4">
-                <span>سبدگردان: {basket.portfolioManager}</span>
-              </div>
-
-              <div className="flex items-center justify-between mb-4">
-                <span>میزان سرمایه: {basket.InvestAmount} ریال</span>
-                <div className="flex">
-                  <button className="p-2 bg-gray-200">
-                    <Icon
-                      name="messages2"
-                      size={20}
-                      className="text-gray-600"
-                    />
-                  </button>
-                  <button className="p-2 bg-gray-200">
-                    <Icon name="call" size={20} className="text-gray-600" />
-                  </button>
-                  <button
-                    className="p-2 bg-gray-200"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleBasketDetails(basket.id);
-                    }}
-                  >
-                    <Icon name="eye" size={25} className="text-gray-600" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span></span>
-                <div className="flex">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleForm(basket.id);
-                    }}
-                    className=""
-                  >
-                    <Icon className="mx-1" name="dollar" size={30} />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleModal(basket.id);
-                    }}
-                    className=""
-                  >
-                    <Icon className="mx-1" name="capital" size={30} />
-                  </button>
-                </div>
-              </div>
+          <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">
+            <label className="mx-2 font-bold">شماره سبد: </label>
+            <span>{basket.contractNumber}</span>
+          </div>
+          <div className="flex flex-col items-start justify-between mb-4 space-y-4 sm:flex-row sm:items-center sm:space-y-0">
+            <div className="mb-2 sm:mb-0">
+              <label className="font-semibold">سرمایه گذار: </label>
+              <span>{basket.investor}</span>
+            </div>
+            <div className="">
+              <label className="font-semibold">میزان سرمایه: </label>
+              <span>{basket.InvestAmount}</span>
             </div>
           </div>
-
-          {showForm === basket.id && (
-            <div
-              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-lg">
-                <div className="flex mb-4">
-                  <button
-                    onClick={() => toggleForm(basket.id)}
-                    className="flex items-center text-gray-600 hover:text-gray-800"
-                  >
-                    <Icon name="arrowright" size={16} className="ml-4" />
-                  </button>
-                  <h2 className="text-xl font-bold ">درخواست افزایش سرمایه:</h2>
-                </div>
-                <form
-                  onSubmit={(e) => handleSubmitIncreaseCapital(basket.id, e)}
-                >
-                  <div className="mb-4">
-                    <label className="block mb-2">مبلغ:</label>
-                    <div className="flex items-center">
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded-lg"
-                        defaultValue={basket.InvestAmount}
-                      />
-                      <span className="mr-2">ریال</span>
-                    </div>
-                  </div>
-                  <div className="mb-4">
-                    <label className="block mb-2">تاریخ:</label>
-                    <DatePicker
-                      value={selectedDate}
-                      onChange={setSelectedDate}
-                      calendar={persian}
-                      locale={persian_fa}
-                      className=""
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="flex items-center">
-                      <input type="checkbox" className="ml-2" />
-                      واریز به صورت مستقیم
-                    </label>
-                  </div>
-                  <div className="mb-4">
-                    <label className="flex items-center">
-                      <input type="checkbox" className="ml-2" />
-                      واریز به حساب کارگزاری
-                    </label>
-                  </div>
-                  <div className="flex justify-end mt-4">
-                    <button
-                      type="submit"
-                      className="px-4 py-2 text-white bg-green-500 rounded-lg"
-                    >
-                      ثبت درخواست افزایش سرمایه
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {showModal === basket.id && (
-            <div
-              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="max-w-md p-8 mx-auto bg-white rounded-lg shadow-lg">
-                <h2 className="mb-4 text-2xl font-bold">قیمت افزایش سرمایه</h2>
-                <p>مبلغ سرمایه‌گذاری: {basket.InvestAmount} ریال</p>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={() => toggleModal(basket.id)}
-                    className="px-4 py-2 text-white bg-green-500 rounded-lg"
-                  >
-                    بستن
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {showDepositModal === basket.id &&
-            basket.status === "درخواست سند واریز" && (
-              <div
-                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-                onClick={(e) => e.stopPropagation()}
+          <div className="flex justify-center mt-10">
+            <div className="flex justify-center px-4 py-2 bg-gray-200">
+              <button
+              // onClick={() => handleMessageClick("0912")}
               >
-                <div className="max-w-md p-8 mx-auto bg-gray-200 shadow-lg">
-                  <div className="flex mb-4">
-                    <button
-                      onClick={() => toggleDepositModal(null)}
-                      className="flex items-center text-gray-600 hover:text-gray-800"
-                    >
-                      <Icon name="arrowright" size={16} className="ml-4" />
-                    </button>
-                    <h2 className="text-xl font-bold ">ثبت سند واریز:</h2>
-                  </div>
-                  <form
-                    onSubmit={(e) => handleSubmitDepositDocument(basket.id, e)}
-                  >
-                    {imagePreviewUrl && (
-                      <div className="flex justify-center mt-6">
-                        <img
-                          src={imagePreviewUrl}
-                          alt="تصویر انتخاب شده"
-                          className="justify-center w-44 h-44"
-                        />
-                      </div>
-                    )}
-                    <div className="mb-2">
-                      <div className="flex justify-center">
-                        <label
-                          htmlFor="file-upload"
-                          className="px-2 py-1 mt-1 text-white bg-blue-500 cursor-pointer"
-                        >
-                          انتخاب سند
-                        </label>
-                        <input
-                          id="file-upload"
-                          type="file"
-                          className="hidden"
-                          accept=".jpg,.jpeg,.png"
-                          onChange={handleFileChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="mb-">
-                      <label className="block">توضیحات:</label>
-                      <textarea
-                        placeholder="نوشتن توضیحات"
-                        className="w-full p-2 border"
-                        rows="1"
-                      ></textarea>
-                    </div>
-                    <div className="flex justify-between">
-                      <button
-                        type="submit"
-                        className="px-8 py-1 text-white bg-red-500"
-                      >
-                        رد
-                      </button>
-                      <button
-                        type="submit"
-                        className="px-8 py-1 text-white bg-green-500"
-                      >
-                        ثبت
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            )}
-
-          {showBasketDetails === basket.id && (
-            <div
-              className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="bg-gray-200 shadow-lg p-8 mx-6 w-full max-w-4xl h-auto max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center mb-4">
-                  <button
-                    onClick={() => toggleBasketDetails(null)}
-                    className="mr-2 text-gray-600 hover:text-gray-800"
-                  >
-                    <Icon name="arrowright" size={20} />
-                  </button>
-                  <h2 className="flex-grow text-xl font-bold">
-                    {basket.status === "تایید"
-                      ? `شماره سبد (${basket.status})`
-                      : `شماره سبد (${basket.status})`}
-                  </h2>
-                </div>
-                <div className="p-4 my-4">
-                  <div className="flex mb-2">
-                    <span className="ml-2 font-semibold">مبلغ:</span>
-                    <span className="mx-2">{basket.InvestAmount}</span>
-                    <span>ریال</span>
-                  </div>
-                  <div className="flex mb-2">
-                    <span className="ml-2 font-semibold">تاریخ:</span>
-                    <span className="mr-2">{basket.date || "1398/03/12"}</span>
-                  </div>
-                  <div className="mb-2">
-                    <span className="font-semibold">واریز به صورت مستقیم</span>
-                  </div>
-                  <div className="flex mb-2">
-                    <span className="ml-2 font-semibold">
-                      پیام سرمایه‌گذار:
-                    </span>
-                    <span className="mr-2">
-                      {basket.investorMessage || "-"}
-                    </span>
-                  </div>
-                  <div className="flex mb-2">
-                    <span className="ml-2 font-semibold">پیام سبدگردان:</span>
-                    <span className="mr-2">{basket.managerMessage || "-"}</span>
-                  </div>
-                  {basket.status === "رد" && (
-                    <div className="flex mb-2">
-                      <span className="ml-2 font-semibold">علت رد:</span>
-                      <span className="mr-2">{basket.rejectReason || "-"}</span>
-                    </div>
-                  )}
-                  <div className="mb-2">
-                    <span className="font-semibold">سند واریز:</span>
-                    {basket.depositDocument && (
-                      <div className="inline-block p-2 mt-2 bg-white">
-                        <img
-                          src={basket.depositDocument}
-                          alt="سند واریز"
-                          className="object-contain h-auto max-w-full max-h-60"
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={() => toggleBasketDetails(null)}
-                    className="px-4 py-2 text-gray-800 transition-colors bg-gray-300 rounded hover:bg-gray-400"
-                  >
-                    بازگشت
-                  </button>
-                </div>
-              </div>
+                <Icon className="mx-2" name="messages2" size={32} />
+              </button>
+              <button
+              // onClick={() => handleCallClick("0912")}
+              >
+                <Icon className="mx-2" name="call" size={32} />
+              </button>
+              <Icon className="mx-2" name="eye" size={32} />
+              <button
+                onClick={(event) =>
+                  showIncreaseCapitalHistoryModal(event, basket)
+                }
+              >
+                <Icon className="mx-2" name="dollar" size={32} />
+              </button>
+              <button
+                onClick={(event) => showIncreaseCapitalRequest(event, basket)}
+              >
+                <Icon className="mx-2" name="capital" size={32} />
+              </button>
             </div>
-          )}
+          </div>
         </div>
       ))}
+      <Modal
+        isVisible={isIncreaseCapitalHistoryModalVisible}
+        onClose={closeIncreaseCapitalHistoryModal}
+        title={`افزایش سرمایه`}
+      >
+        <IncreaseCapitalHistoryModal
+          basket={selectedBasket}
+          handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isRequestIncreaseCapitalModalVisible}
+        onClose={closeIncreaseCapitalRequest}
+        title={`درخواست افزایش سرمایه`}
+      >
+        <RequestIncreaseCapitalModal
+          basket={selectedBasket}
+          handleEyeIconClick={"handleEyeIconClick"}
+        />
+      </Modal>
+      <Modal
+        isVisible={isRejectedIncreaseCapitalModalVisible}
+        onClose={closeRejectedIncreaseCapitalModal}
+        title={` رد `}
+      >
+        <RejectedIncreaseCapitalModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isConfirmedIncreaseCapitalModalVisible}
+        onClose={closeConfirmedIncreaseCapitalModalModal}
+        title={` رد `}
+      >
+        <ConfirmedIncreaseCapitalModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isUploadIncreaseCapitalDocumentModalVisible}
+        onClose={closeUploadIncreaseCapitalDocumentModal}
+        title={` درخواست سند `}
+      >
+        <UploadIncreaseCapitalDocumentModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
     </div>
   );
 };

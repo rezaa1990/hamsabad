@@ -3,277 +3,91 @@ import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
 import AppContext from "../../contexts/AppContext";
 
-const PortfolioManagerIncreaseCapital = () => {
-  const {
-    isAuthenticated,
-    setIsAuthenticated,
-    role,
-    setRole,
-    login,
-    logout,
-    baskets,
-    setBaskets,
-    handleUpdateBasket,
-    phoneNumber,
-    setPhoneNumber,
-    nationalId,
-    setNationalId,
-    isDarkMode,
-    setIsDarkMode,
-    toggleDarkMode,
-  } = useContext(AppContext);
-  const navigate = useNavigate();
-
-  const [selectedBasket, setSelectedBasket] = useState(null);
-  const [showConfirmForm, setShowConfirmForm] = useState(false);
-  const [showRejectForm, setShowRejectForm] = useState(false);
-  const [showDepositDocumentReviewModal, setShowDepositDocumentReviewModal] =
-    useState(false);
-
-  const handleNavigate = () => {
-    navigate("/dashboard");
-  };
-
-  const handleBasketClick = (basket) => {
-    if (basket.status === "در انتظار بررسی") {
-      setSelectedBasket(basket);
-    } else if (basket.status === "بررسی سند واریز") {
-      setSelectedBasket(basket);
-      setShowDepositDocumentReviewModal(true);
-    }
-  };
-
-  const handleConfirm = () => {
-    setShowConfirmForm(true);
-  };
-
-  const handleReject = () => {
-    setShowRejectForm(true);
-  };
-
-  const handleConfirmRequest = (option, message) => {
-    if (selectedBasket) {
-      const updatedBaskets = baskets.map((basket) =>
-        basket.id === selectedBasket.id
-          ? {
-              ...basket,
-              status: option === "upload" ? "درخواست سند واریز" : "تایید",
-              message: message,
-            }
-          : basket
-      );
-      setBaskets(updatedBaskets);
-      setSelectedBasket(null);
-      setShowConfirmForm(false);
-    }
-  };
-
-  const handleRejectRequest = (reason, comment) => {
-    if (selectedBasket) {
-      const updatedBaskets = baskets.map((basket) =>
-        basket.id === selectedBasket.id
-          ? {
-              ...basket,
-              status: "رد",
-              rejectionReason: reason,
-              rejectionComment: comment,
-            }
-          : basket
-      );
-      setBaskets(updatedBaskets);
-      setSelectedBasket(null);
-      setShowRejectForm(false);
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "در انتظار بررسی":
-        return "bg-gray-300";
-      case "درخواست سند واریز":
-        return "bg-orange-300";
-      case "بررسی سند واریز":
-        return "bg-blue-300";
-      case "تایید":
-        return "bg-green-300";
-      case "رد":
-        return "bg-red-300";
-      default:
-        return "bg-white";
-    }
-  };
+const Modal = ({ isVisible, onClose, title, children }) => {
+  if (!isVisible) return null;
 
   return (
-    <div
-      className={`flex items-center justify-center min-h-screen ${
-        isDarkMode ? "bg-gray-800" : "bg-gray-100"
-      }`}
-    >
-      <div
-        className={`w-full p-8 shadow-lg ${
-          isDarkMode ? "bg-gray-700 text-white" : "bg-white"
-        }`}
-      >
-        <div className="flex items-center mb-6">
-          <button
-            onClick={handleNavigate}
-            className={`flex items-center ${
-              isDarkMode
-                ? "text-gray-300 hover:text-gray-100"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-          >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-lg p-4 bg-gray-100">
+        <div className="flex items-center mb-4">
+          <button onClick={onClose} className="">
             <Icon name="arrowright" size={16} className="ml-4" />
           </button>
-          <h2 className="text-xl font-bold">افزایش سرمایه</h2>
+          <h2 className="text-xl font-bold">{title}</h2>
         </div>
-
-        {baskets.map((basket) => (
-          <div
-            key={basket.id}
-            className={`mb-3 mx-auto p-4 ${getStatusColor(
-              basket.status
-            )} cursor-pointer`}
-            onClick={() => handleBasketClick(basket)}
-          >
-            <div className="flex mb-2">
-              <label>مبلغ:</label>
-              <span className="mr-4">{basket.InvestAmount} ریال</span>
-              <span className="mr-auto font-bold">{basket.status}</span>
-            </div>
-            <label className="">تاریخ:</label>
-            <span className="mb-2 mr-4">{basket.depositDate}</span>
-            <div className="flex items-center">
-              <span>
-                {basket.paymentMethod === "مستقیم"
-                  ? "واریز مستقیم"
-                  : "واریز به حساب کارگزاری"}
-              </span>
-              <Icon name="eye" size={35} className="mr-auto" />
-            </div>
-            {basket.status === "رد" && (
-              <div className="mt-2">علت رد: {basket.rejectionReason}</div>
-            )}
-          </div>
-        ))}
+        <div className="space-y-4">{children}</div>
       </div>
-
-      {selectedBasket && selectedBasket.status === "در انتظار بررسی" && (
-        <div
-          className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}
-        >
-          <div
-            className={`w-full max-w-md p-6 ${
-              isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100"
-            }`}
-          >
-            <div className="flex mb-8">
-              {" "}
-              <button onClick={() => setSelectedBasket(null)} className="">
-                <Icon className="ml-2" name="arrowright" size={20} />
-              </button>
-              <h2 className="text-xl font-bold ">درخواست افزایش سرمایه</h2>
-            </div>
-            <div className="mb-4">
-              <label className="block mb-2 font-medium">مبلغ:</label>
-              <div className="text-center">
-                <span
-                  className={`p-2 w-full ${isDarkMode ? "bg-gray-600" : ""}`}
-                >
-                  {selectedBasket.InvestAmount}
-                </span>
-
-                <span className="p-2">ریال</span>
-              </div>
-            </div>
-            <div className="mb-4">
-              <label className="block mb-2 font-medium">تاریخ:</label>
-              <div
-                className={`text-center p-2 rounded ${
-                  isDarkMode ? "bg-gray-600" : ""
-                }`}
-              >
-                <span className="text-lg">{selectedBasket.depositDate}</span>
-              </div>
-            </div>
-            <div className="my-8 font-medium text-center">
-              <span>
-                {selectedBasket.paymentMethod === "مستقیم"
-                  ? "واریز به صورت مستقیم"
-                  : "واریز به حساب کارگزاری"}
-              </span>
-            </div>
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={handleReject}
-                className="px-8 py-1 text-white transition duration-300 bg-red-500 rounded hover:bg-red-600"
-              >
-                رد
-              </button>
-              <button
-                onClick={handleConfirm}
-                className="px-8 py-1 text-white transition duration-300 bg-green-500 rounded hover:bg-green-600"
-              >
-                تایید
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showConfirmForm && (
-        <ConfirmForm
-          onClose={() => setShowConfirmForm(false)}
-          onConfirm={handleConfirmRequest}
-          handleUpdateBasket={handleUpdateBasket}
-        />
-      )}
-
-      {showRejectForm && (
-        <RejectForm
-          onClose={() => setShowRejectForm(false)}
-          onReject={handleRejectRequest}
-        />
-      )}
-
-      {showDepositDocumentReviewModal && (
-        <DepositDocumentReviewModal
-          onClose={() => setShowDepositDocumentReviewModal(false)}
-          onConfirm={(message) => {
-            const updatedBaskets = baskets.map((basket) =>
-              basket.id === selectedBasket.id
-                ? {
-                    ...basket,
-                    status: "تایید",
-                    message: message,
-                  }
-                : basket
-            );
-            setBaskets(updatedBaskets);
-            setSelectedBasket(null);
-            setShowDepositDocumentReviewModal(false);
-          }}
-          onReject={(message) => {
-            const updatedBaskets = baskets.map((basket) =>
-              basket.id === selectedBasket.id
-                ? {
-                    ...basket,
-                    status: "رد",
-                    message: message,
-                  }
-                : basket
-            );
-            setBaskets(updatedBaskets);
-            setSelectedBasket(null);
-            setShowDepositDocumentReviewModal(false);
-          }}
-        />
-      )}
     </div>
   );
 };
 
-const ConfirmForm = ({ onClose, onConfirm, handleUpdateBasket }) => {
+const getStatusColor = (status) => {
+  switch (status) {
+    case "در انتظار ارسال سند واریز":
+      return "bg-blue-300";
+    case "انجام شده":
+      return "bg-green-300";
+    case "رد":
+      return "bg-red-300";
+    default:
+      return "bg-bg-gray-300";
+  }
+};
+
+const IncreaseCapitalHistoryModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">
+    {basket.increaseCapitalHistory.map((incaptreq, index) => (
+      <div
+        key={index}
+        className={`p-4 mb-1 ${getStatusColor(
+          incaptreq.increaseCapitalStatus
+        )}`}
+      >
+        <div className="flex justify-between mb-1">
+          <span className="font-bold">وضعیت:</span>
+          <span>{incaptreq.increaseCapitalStatus}</span>
+        </div>
+        <div className="mb-1">
+          <span className="font-bold">تاریخ:</span> {incaptreq.date}
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="font-bold">
+            {incaptreq.directIncreaseCapital
+              ? "واریز مستقیم"
+              : "واریز به حساب کارگزاری"}
+          </span>
+          <button
+            onClick={(event) => handleEyeIconClick(event, basket, incaptreq)}
+          >
+            <Icon className="mx-2" name="eye" size={32} />
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const RequestIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">درخواست افزایش سرمایه</div>
+);
+
+const RejectedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">رد شده</div>
+);
+
+const ConfirmedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">تایید شده</div>
+);
+
+const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => (
+  <div className="">آپلود سند واریز</div>
+);
+
+const ConfirmIncreaseCapitalModal = ({
+  onClose,
+  onConfirm,
+  handleUpdateBasket,
+}) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [messageToInvestor, setMessageToInvestor] = useState("");
 
@@ -378,7 +192,7 @@ const ConfirmForm = ({ onClose, onConfirm, handleUpdateBasket }) => {
   );
 };
 
-const RejectForm = ({ onClose, onReject }) => {
+const RejectIncreaseCapitalModal = ({ onClose, onReject }) => {
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");
 
@@ -475,7 +289,11 @@ const RejectForm = ({ onClose, onReject }) => {
   );
 };
 
-const DepositDocumentReviewModal = ({ onClose, onConfirm, onReject }) => {
+const DepositDocumentIncreaseCapitalModal = ({
+  onClose,
+  onConfirm,
+  onReject,
+}) => {
   const [comment, setComment] = useState("");
 
   const handleCommentChange = (event) => {
@@ -519,6 +337,195 @@ const DepositDocumentReviewModal = ({ onClose, onConfirm, onReject }) => {
           </button>
         </div>
       </div>
+    </div>
+  );
+};
+
+const PortfolioManagerIncreaseCapital = () => {
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/dashboard");
+  };
+
+  const [selectedBasket, setSelectedBasket] = useState(null);
+  const [incaptreq, setIncaptreq] = useState();
+  const [
+    isIncreaseCapitalHistoryModalVisible,
+    setIncreaseCapitalHistoryModalVisible,
+  ] = useState(false);
+
+  const [
+    isRequestIncreaseCapitalModalVisible,
+    setRequestIncreaseCapitalModalVisible,
+  ] = useState(false);
+
+  const [
+    isRejectedIncreaseCapitalModalVisible,
+    setRejectedIncreaseCapitalModalVisible,
+  ] = useState(false);
+  const [
+    isConfirmedIncreaseCapitalModalVisible,
+    setConfirmedIncreaseCapitalModalVisible,
+  ] = useState(false);
+  const [
+    isUploadIncreaseCapitalDocumentModalVisible,
+    setUploadIncreaseCapitalDocumentModalVisible,
+  ] = useState(false);
+
+
+  const handleEyeIconClick = (event, basket, incaptreq) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setIncaptreq(incaptreq);
+    if (incaptreq.increaseCapitalStatus === "رد") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setRejectedIncreaseCapitalModalVisible(true);
+    } else if (incaptreq.increaseCapitalStatus === "انجام شده") {
+      // setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setConfirmedIncreaseCapitalModalVisible(true);
+      // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
+      //   // setSelectedBasket(basket);
+      //   // setSharereq(sharereq);
+      //   setShareRequestModalVisible(true);
+    } else if (
+      incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
+    ) {
+      //   setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setUploadIncreaseCapitalDocumentModalVisible(true);
+    }
+  };
+
+    const closeRejectedIncreaseCapitalModal = () => {
+      setRejectedIncreaseCapitalModalVisible(false);
+    };
+
+    const closeConfirmedIncreaseCapitalModalModal = () => {
+      setConfirmedIncreaseCapitalModalVisible(false);
+    };
+
+    const closeUploadIncreaseCapitalDocumentModal = () => {
+      setUploadIncreaseCapitalDocumentModalVisible(false);
+    };
+  const showIncreaseCapitalHistoryModal = (event, basket) => {
+    event.stopPropagation();
+    setSelectedBasket(basket);
+    setIncreaseCapitalHistoryModalVisible(true);
+  };
+
+  const closeIncreaseCapitalHistoryModal = () => {
+    setIncreaseCapitalHistoryModalVisible(false);
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center p-4">
+      {baskets.map((basket) => (
+        <div
+          key={basket.id}
+          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          onClick={""}
+        >
+          <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">
+            <label className="mx-2 font-bold">شماره سبد: </label>
+            <span>{basket.contractNumber}</span>
+          </div>
+          <div className="flex flex-col items-start justify-between mb-4 space-y-4 sm:flex-row sm:items-center sm:space-y-0">
+            <div className="mb-2 sm:mb-0">
+              <label className="font-semibold">سرمایه گذار: </label>
+              <span>{basket.investor}</span>
+            </div>
+            <div className="">
+              <label className="font-semibold">میزان سرمایه: </label>
+              <span>{basket.InvestAmount}</span>
+            </div>
+          </div>
+          <div className="flex justify-center mt-10">
+            <div className="flex justify-center px-4 py-2 bg-gray-200">
+              <button
+              // onClick={() => handleMessageClick("0912")}
+              >
+                <Icon className="mx-2" name="messages2" size={32} />
+              </button>
+              <button
+              // onClick={() => handleCallClick("0912")}
+              >
+                <Icon className="mx-2" name="call" size={32} />
+              </button>
+              <Icon className="mx-2" name="eye" size={32} />
+              <button
+                onClick={(event) =>
+                  showIncreaseCapitalHistoryModal(event, basket)
+                }
+              >
+                <Icon className="mx-2" name="dollar" size={32} />
+              </button>
+              {/* <button onClick={""}>
+                <Icon className="mx-2" name="capital" size={32} />
+              </button> */}
+            </div>
+          </div>
+        </div>
+      ))}
+      <Modal
+        isVisible={isIncreaseCapitalHistoryModalVisible}
+        onClose={closeIncreaseCapitalHistoryModal}
+        title={`افزایش سرمایه`}
+      >
+        <IncreaseCapitalHistoryModal
+          basket={selectedBasket}
+          handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isRejectedIncreaseCapitalModalVisible}
+        onClose={closeRejectedIncreaseCapitalModal}
+        title={` رد `}
+      >
+        <RejectedIncreaseCapitalModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isConfirmedIncreaseCapitalModalVisible}
+        onClose={closeConfirmedIncreaseCapitalModalModal}
+        title={` رد `}
+      >
+        <ConfirmedIncreaseCapitalModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
+      <Modal
+        isVisible={isUploadIncreaseCapitalDocumentModalVisible}
+        onClose={closeUploadIncreaseCapitalDocumentModal}
+        title={` درخواست سند `}
+      >
+        <UploadIncreaseCapitalDocumentModal
+          basket={selectedBasket}
+          // handleEyeIconClick={handleEyeIconClick}
+        />
+      </Modal>
     </div>
   );
 };
