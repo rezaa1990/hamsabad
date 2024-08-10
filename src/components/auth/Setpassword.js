@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 // import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const SetPassword = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-  
+
   // const { isDarkMode } = useTheme();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -66,7 +66,7 @@ const SetPassword = () => {
       <div
         className={`mb-8 relative w-full ${
           isDarkMode ? "bg-blue-600" : "bg-blue-500"
-        } h-20 py-2 my-4 flex items-center justify-between px-4`}
+        } h-20 py-2 mb-4 flex items-center justify-between px-4`}
       >
         <div className="absolute flex items-center right-4">
           <button
@@ -77,12 +77,12 @@ const SetPassword = () => {
           >
             <Icon
               name="arrowright"
-              size={20}
+              size={15}
               className={isDarkMode ? "text-white" : "text-gray-800"}
             />
           </button>
           <h1
-            className={`mr-2 text-2xl font-bold ${
+            className={`mr-2 text-xl font-bold ${
               isDarkMode ? "text-white" : "text-gray-800"
             }`}
           >
@@ -92,8 +92,8 @@ const SetPassword = () => {
         <div className="flex items-center justify-center flex-1">
           <Icon
             name="hamsabad"
-            size={150}
-            className="text-white transform translate-y-6"
+            // size={120}
+            className="w-[5.625rem] h-[5.625rem] md:w-[8.125rem] md:h-[8.125rem] text-white transform translate-y-8"
           />
         </div>
       </div>
@@ -106,13 +106,13 @@ const SetPassword = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          <label className="absolute text-sm right-3 top-2.5">
-            لطفا رمز عبور مد نظر خود را وارد نمایید
-          </label>
+          {/* <label className="absolute text-sm right-3 top-2.5 hidden sm:block">
+            لطفا رمز عبور خود را وارد نمایید
+          </label> */}
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="رمز عبور"
-            className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
+            placeholder="لطفا رمز عبور خود را وارد نمایید"
+            className={`w-full py-2 pl-10 pr-3 rounded-lg text-lef placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
@@ -133,13 +133,13 @@ const SetPassword = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          <label className="absolute text-sm right-3 top-2.5">
-            لطفا رمز عبور مد نظر خود را مجددا وارد نمایید
-          </label>
+          {/* <label className="absolute text-sm right-3 top-2.5 hidden sm:block">
+            لطفا رمز عبور خود را مجددا وارد نمایید
+          </label> */}
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="رمز عبور"
-            className={`w-full py-2 pl-10 pr-3 rounded-lg text-left placeholder-right ${
+            placeholder="لطفا رمز عبور خود را مجددا وارد نمایید"
+            className={`w-full py-2 pl-10 pr-3 rounded-lg placeholder-right ${
               isDarkMode
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
@@ -153,7 +153,7 @@ const SetPassword = () => {
             className="absolute text-gray-400 left-3 top-3"
           />
         </div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-around mb-4">
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"

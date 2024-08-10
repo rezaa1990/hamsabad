@@ -38,10 +38,10 @@ const Login = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const bottomIcons = [
-    { name: "exit", label: "خروج" },
-    { name: "contact", label: "ارتباط با ما" },
-    { name: "emk", label: "امکانات من" },
     { name: "help", label: "راهنما" },
+    { name: "emk", label: "امکانات من" },
+    { name: "contact", label: "ارتباط با ما" },
+    { name: "exit", label: "خروج" },
   ];
 
   const handleRegister = () => {
@@ -69,7 +69,7 @@ const Login = () => {
       <div
         className={`mb-8 relative w-full ${
           isDarkMode ? "bg-blue-600" : "bg-blue-500"
-        } h-40 py-2 my-4 flex flex-col items-center`}
+        } h-40 py-2 mb-4 flex flex-col items-center`}
       >
         <h1
           className={`text-2xl font-bold text-center ${
@@ -146,7 +146,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-around mb-4">
           <div className="flex items-center">
             <input
               type="checkbox"

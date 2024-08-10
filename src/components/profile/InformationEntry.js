@@ -28,7 +28,7 @@ const InformationEntry = () => {
   // const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   // const { phoneNumber, nationalId, setPhoneNumber, setNationalId } =
-    useContext(RegistrationContext);
+    // useContext(RegistrationContext);
   const [formData, setFormData] = useState({
     name: "",
     familyName: "",
@@ -88,11 +88,11 @@ const InformationEntry = () => {
       <div
         className={`mb-8 relative w-full ${
           isDarkMode ? "bg-blue-600" : "bg-blue-500"
-        } h-20 py-2 my-4 flex items-center justify-between px-4`}
+        } h-20 py-2 mb-4 flex items-center justify-between px-4`}
       >
         <div className="absolute flex items-center right-4">
           <h1
-            className={`mr-2 text-2xl font-bold ${
+            className={`mr-2 text-xl font-bold ${
               isDarkMode ? "text-white" : "text-gray-800"
             }`}
           >
@@ -102,8 +102,8 @@ const InformationEntry = () => {
         <div className="flex items-center justify-center flex-1">
           <Icon
             name="hamsabad"
-            size={150}
-            className="text-white transform translate-y-6"
+            // size={150}
+            className="w-[5.625rem] h-[5.625rem] md:w-[8.125rem] md:h-[8.125rem] text-white transform translate-y-8"
           />
         </div>
       </div>
