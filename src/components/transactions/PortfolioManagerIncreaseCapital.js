@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../common/Icon";
 import AppContext from "../../contexts/AppContext";
+import DatePicker from "react-multi-date-picker";
 
 const Modal = ({ isVisible, onClose, title, children }) => {
   if (!isVisible) return null;
@@ -72,18 +73,18 @@ const RequestIncreaseCapitalModal = ({
   handleConfirm,
   handleReject,
 }) => (
-  <div className="p-4 bg-white rounded-lg shadow-md">
+  <div className="p-4">
     <div className="flex items-center justify-between mb-4">
-      <div className="text-xl text-blue-500">درخواست افزایش سرمایه:</div>
-      <div className="text-2xl text-blue-500">&gt;</div>
+      {/* <div className="text-xl text-blue-500">درخواست افزایش سرمایه:</div> */}
+      {/* <div className="text-2xl text-blue-500">&gt;</div> */}
     </div>
     <div className="mb-4">
       <div className="mb-2">مبلغ:</div>
-      <div className="flex items-center">
+      <div className="flex items-center justify-center">
         <input
           type="text"
           value="10.000.000"
-          className="w-full p-2 text-left border border-gray-300 rounded"
+          className="p-1 text-left border border-gray-300"
           readOnly
         />
         <span className="mr-2">ریال</span>
@@ -91,33 +92,42 @@ const RequestIncreaseCapitalModal = ({
     </div>
     <div className="mb-4">
       <div className="mb-2">تاریخ:</div>
-      <input
-        type="text"
-        value="1398/03/12"
-        className="w-full p-2 border border-gray-300 rounded"
-        readOnly
-      />
-    </div>
-    <div className="mb-4 space-y-2">
-      <div className="flex items-center">
-        <input type="radio" name="depositMethod" className="mr-2" />
-        <span>واریز به‌صورت مستقیم</span>
-      </div>
-      <div className="flex items-center">
-        <input type="radio" name="depositMethod" className="mr-2" />
-        <span>واریز به حساب کارگزاری</span>
+      <div className="flex justify-center">
+        <DatePicker
+          // calendar={persian}
+          // locale={persian_fa}
+          calendarPosition="bottom-right"
+          // value={startDate}
+          // onChange={setStartDate}
+          format="YYYY/MM/DD"
+          inputClass="p-1 border text-left cursor-pointer"
+          containerClassName=""
+        />
       </div>
     </div>
-    <div className="flex justify-between">
+    <div className="flex justify-center mb-4 space-y-2">
+      <div className="">
+        {" "}
+        <div className="flex items-center">
+          <input type="radio" name="depositMethod" className="mr-2" />
+          <span className="mr-1">واریز به‌صورت مستقیم</span>
+        </div>
+        <div className="flex items-center">
+          <input type="radio" name="depositMethod" className="mr-2" />
+          <span className="mr-1">واریز به حساب کارگزاری</span>
+        </div>
+      </div>
+    </div>
+    <div className="flex justify-between mt-16">
       <button
         onClick={handleConfirm}
-        className="w-24 px-4 py-2 text-white bg-green-500 rounded"
+        className="w-24 px-4 py-1 text-white bg-[#1BBF89]"
       >
         تایید
       </button>
       <button
         onClick={handleReject}
-        className="w-24 px-4 py-2 text-white bg-red-500 rounded"
+        className="w-24 px-4 py-1 text-white bg-[#DB524B]"
       >
         رد
       </button>
@@ -212,11 +222,8 @@ const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => (
 );
 
 const ConfirmingIncreaseCapitalModal = () => (
-  <div className="p-4 bg-white rounded-lg shadow-md">
-    <div className="flex items-center justify-between mb-4">
-      <div className="text-xl text-blue-500">تایید درخواست افزایش سرمایه</div>
-      <div className="text-2xl text-blue-500">&gt;</div>
-    </div>
+  <div className="px-8">
+    <div className="flex items-center justify-between mb-4"></div>
     <div className="mb-4 space-y-2">
       <div className="flex items-center">
         <input type="radio" name="approvalOption" className="ml-2" />
@@ -235,21 +242,21 @@ const ConfirmingIncreaseCapitalModal = () => (
       </div>
     </div>
     <div className="mb-4">
-      <div className="mb-2">متن خطاب به سرمایه‌گذار</div>
-      <textarea className="w-full h-24 p-2 border border-gray-300 rounded resize-none"></textarea>
+      {/* <div className="mb-2">متن خطاب به سرمایه‌گذار</div> */}
+      <textarea
+        placeholder="متن خطاب به سرمایه‌گذار"
+        className="w-full h-24 p-2 border border-gray-300 rounded resize-none"
+      ></textarea>
     </div>
-    <button className="w-full px-4 py-2 text-white bg-green-500 rounded">
-      تایید درخواست
-    </button>
+    <div className="flex justify-center">
+      <button className="px-2 py-1 bg-[#1BBF89]">تایید درخواست</button>
+    </div>
   </div>
 );
 
 const RejectingIncreaseCapitalModal = () => (
-  <div className="p-4 bg-white rounded-lg shadow-md">
-    <div className="flex items-center justify-between mb-4">
-      <div className="text-xl text-blue-500">رد درخواست افزایش سرمایه</div>
-      <div className="text-2xl text-blue-500">&gt;</div>
-    </div>
+  <div className="px-6">
+    <div className="flex items-center justify-between mb-4"></div>
     <div className="mb-4 space-y-2">
       <div className="flex items-center">
         <input type="radio" name="rejectionReason" className="ml-2" />
@@ -272,9 +279,9 @@ const RejectingIncreaseCapitalModal = () => (
       <div className="mb-2">نوشتن توضیحات...</div>
       <textarea className="w-full h-24 p-2 border border-gray-300 rounded resize-none"></textarea>
     </div>
-    <button className="w-full px-4 py-2 text-white bg-red-500 rounded">
-      رد
-    </button>
+    <div className="flex justify-center">
+      <button className="px-4 py-1 bg-[#DB524B]">رد</button>
+    </div>
   </div>
 );
 
@@ -296,6 +303,10 @@ const PortfolioManagerIncreaseCapital = () => {
     isDarkMode,
     setIsDarkMode,
     toggleDarkMode,
+    green,
+    red,
+    blue,
+    orange,
   } = useContext(AppContext);
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -330,8 +341,6 @@ const PortfolioManagerIncreaseCapital = () => {
   const [isConfirmingModalVisible, setConfirmingModalVisible] = useState(false);
   const [isRejectingModalVisible, setRejectingModalVisible] = useState(false);
 
-
-
   const handleEyeIconClick = (event, basket, incaptreq) => {
     event.stopPropagation();
     setSelectedBasket(basket);
@@ -344,34 +353,34 @@ const PortfolioManagerIncreaseCapital = () => {
       // setSelectedBasket(basket);
       // setSharereq(sharereq);
       setConfirmedIncreaseCapitalModalVisible(true);
-      } else if (incaptreq.increaseCapitalStatus === "در انتظار تایید") {
-        //   // setSelectedBasket(basket);
-        //   // setSharereq(sharereq);
-          setRequestIncreaseCapitalModalVisible(true);
-      } else if (
-        incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
-      ) {
-        //   setSelectedBasket(basket);
-        // setSharereq(sharereq);
-        setUploadIncreaseCapitalDocumentModalVisible(true);
-      }
+    } else if (incaptreq.increaseCapitalStatus === "در انتظار تایید") {
+      //   // setSelectedBasket(basket);
+      //   // setSharereq(sharereq);
+      setRequestIncreaseCapitalModalVisible(true);
+    } else if (
+      incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
+    ) {
+      //   setSelectedBasket(basket);
+      // setSharereq(sharereq);
+      setUploadIncreaseCapitalDocumentModalVisible(true);
+    }
   };
 
-    const closeRejectedIncreaseCapitalModal = () => {
-      setRejectedIncreaseCapitalModalVisible(false);
-    };
+  const closeRejectedIncreaseCapitalModal = () => {
+    setRejectedIncreaseCapitalModalVisible(false);
+  };
 
-    const closeConfirmedIncreaseCapitalModalModal = () => {
-      setConfirmedIncreaseCapitalModalVisible(false);
-    };
+  const closeConfirmedIncreaseCapitalModalModal = () => {
+    setConfirmedIncreaseCapitalModalVisible(false);
+  };
 
-    const closeUploadIncreaseCapitalDocumentModal = () => {
-      setUploadIncreaseCapitalDocumentModalVisible(false);
-    };
+  const closeUploadIncreaseCapitalDocumentModal = () => {
+    setUploadIncreaseCapitalDocumentModalVisible(false);
+  };
 
-        const closeRequestIncreaseCapitalModal = () => {
-          setRequestIncreaseCapitalModalVisible(false);
-        };
+  const closeRequestIncreaseCapitalModal = () => {
+    setRequestIncreaseCapitalModalVisible(false);
+  };
   const showIncreaseCapitalHistoryModal = (event, basket) => {
     event.stopPropagation();
     setSelectedBasket(basket);
@@ -380,32 +389,41 @@ const PortfolioManagerIncreaseCapital = () => {
 
   const closeIncreaseCapitalHistoryModal = () => {
     setIncreaseCapitalHistoryModalVisible(false);
-  }
+  };
 
-const handleConfirmIncreaseCapital = () => {
-  setRequestIncreaseCapitalModalVisible(false);
-  setConfirmingModalVisible(true);
-};
+  const handleConfirmIncreaseCapital = () => {
+    setRequestIncreaseCapitalModalVisible(false);
+    setConfirmingModalVisible(true);
+  };
 
-const handleRejectIncreaseCapital = () => {
-  setRequestIncreaseCapitalModalVisible(false);
-  setRejectingModalVisible(true);
-};
+  const handleRejectIncreaseCapital = () => {
+    setRequestIncreaseCapitalModalVisible(false);
+    setRejectingModalVisible(true);
+  };
 
-const closeConfirmingModal = () => {
-  setConfirmingModalVisible(false);
-};
+  const closeConfirmingModal = () => {
+    setConfirmingModalVisible(false);
+  };
 
-const closeRejectingModal = () => {
-  setRejectingModalVisible(false);
-};
-  
+  const closeRejectingModal = () => {
+    setRejectingModalVisible(false);
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center p-4">
+    <div className="items-center justify-center p-4 ">
+      <div className="flex">
+        <button
+          onClick={handleNavigate}
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
+          <Icon name="arrowright" size={16} className="ml-2" />
+        </button>
+        <span className="font-bold">افزایش سرمایه</span>
+      </div>
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          className={`p-4 mb-4 mx-4 bg-${green} shadow-md cursor-pointer`}
           onClick={""}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">

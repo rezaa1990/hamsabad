@@ -7,6 +7,11 @@ function AppProvider({ children }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [nationalId, setNationalId] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const red = "[#DB524B]";
+  const blue = "[#5D9CEC]";
+  const green = "[#1BBF89]";
+  const orange = "[#F7AF3E]";
+
   const [baskets, setBaskets] = useState([
     {
       id: 1,
@@ -572,6 +577,10 @@ function AppProvider({ children }) {
         isDarkMode,
         setIsDarkMode,
         toggleDarkMode,
+        red,
+        blue,
+        green,
+        orange,
       }}
     >
       {children}

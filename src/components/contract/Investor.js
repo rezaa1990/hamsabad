@@ -131,64 +131,71 @@ const Investor = () => {
           </button>
           <h2 className="text-lg font-semibold text-center">بستن قرارداد</h2>
         </div>
-        <div className="w-full p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="w-full p-4 bg-gray-300 shadow-md">
           <div className="flex flex-col items-center mb-3 space-y-10">
-            <div className="text-center">
-              <div className="font-medium">شماره قرارداد</div>
+            <div className="flex justify-center w-full sm:flex-row">
+              <div className="font-bold ">شماره قرارداد:</div>
+              <span className="mr-1 font-semibold">۱۲۳۴۵۶</span>
             </div>
-            <div className="flex flex-col justify-between w-full sm:flex-row">
-              <div className="text-right">
-                <div className="font-medium ">تاریخ ثبت</div>
-              </div>
-              <div className="ml-16 text-right">
-                <div className="font-medium ">سرمایه گذار</div>
-              </div>
-            </div>
-            <div className="flex flex-col justify-between w-full sm:flex-row">
-              <div className="text-right">
-                <div className="font-medium ">تاریخ ویرایش</div>
-              </div>
-              <div className="ml-16 text-right">
-                <div className="font-medium ">سبدگردان</div>
+            <div className="flex justify-between w-full sm:flex-row">
+              <div className="font-medium ">سرمایه گذار</div>
+              <div className="font-medium ">
+                <span className="">تاریخ ثبت:</span>
+                <span className="mr-1">۱۲۳۴/۱۲/۱۲</span>
               </div>
             </div>
-            <div className="text-center">
-              <div className="font-medium">وضعیت</div>
+            <div className="flex justify-between w-full sm:flex-row">
+              <div className="font-medium ">سبد گردان</div>
+              <div className="font-medium ">
+                <span className="">تاریخ ویرایش:</span>
+                <span className="mr-1">۱۲۳۴/۱۲/۱۲</span>
+              </div>
+            </div>
+            <div className="flex justify-center w-full sm:flex-row">
+              <div className="font-medium ">وضعیت</div>
+              <div className="font-medium ">
+                <span className="mr-1">پیش نویس</span>
+              </div>
             </div>
           </div>
-          <div className="flex justify-center py-2 mb-3 border-t border-b border-gray-200">
-            <button className="p-2">
-              <Icon name="one" size={20} className="text-gray-600" />
-            </button>
-            <button className="p-2">
-              <Icon name="messages2" size={20} className="text-gray-600" />
-            </button>
-            <button className="p-2">
-              <Icon name="call" size={20} className="text-gray-600" />
-            </button>
-            <button className="p-2" onClick={toggleModal}>
-              <Icon name="eye" size={26} className="text-gray-600" />
-            </button>
+          <div className="flex justify-center mb-3">
+            <div className="border-2 border-gray-400">
+              {" "}
+              <button onClick={toggleModal} className="px-1">
+                <Icon name="one" size={22} className="" />
+              </button>
+              <button className="px-1">
+                <Icon name="messages2" size={22} className="" />
+              </button>
+              <button className="px-1">
+                <Icon name="call" size={22} className="" />
+              </button>
+              <button className="px-1 ">
+                <Icon name="eye" size={28} className="" />
+              </button>
+            </div>
           </div>
           <div className="flex flex-wrap justify-center">
-            <button
-              className="px-4 py-2 m-1 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600"
-              onClick={toggleEditRequestModal}
-            >
-              درخواست اصلاح
-            </button>
-            <button
-              className="px-4 py-2 m-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-              onClick={toggleRejectModal}
-            >
-              رد
-            </button>
-            <button
-              className="px-4 py-2 m-1 text-sm text-white bg-green-500 rounded hover:bg-green-600"
-              onClick={toggleConfirmationModal}
-            >
-              تایید
-            </button>
+            <div className="flex w-full max-w-md">
+              <button
+                className="flex-1 text-black px-4 py-1 m-1 text-sm font-bold bg-[#F7AF3E] whitespace-nowrap"
+                onClick={toggleEditRequestModal}
+              >
+                درخواست اصلاح
+              </button>
+              <button
+                className="flex-1 text-black px-4 py-1 m-1 text-sm font-bold bg-[#DB524B] whitespace-nowrap"
+                onClick={toggleRejectModal}
+              >
+                رد
+              </button>
+              <button
+                className="flex-1 text-black px-4 py-1 m-1 text-sm font-bold bg-[#1BBF89] whitespace-nowrap"
+                onClick={toggleConfirmationModal}
+              >
+                تایید
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -203,24 +210,36 @@ const Investor = () => {
             >
               <Icon name="close" size={24} />
             </button>
-            <div className="text-right">
-              <h2 className="mb-4 text-xl font-semibold">اطلاعات سبدگردان:</h2>
-              <div className="flex flex-col sm:flex-row">
-                <div className="flex flex-col space-y-2 text-right">
-                  <div>
-                    <span className="font-medium">نام و نام خانوادگی:</span>
-                  </div>
-                  <div>
-                    <span className="font-medium">کد ملی:</span>
-                  </div>
-                  <div>
-                    <span className="font-medium">شماره همراه:</span>
-                  </div>
-                  <div>
-                    <span className="font-medium">تاریخ عضویت در هم سبد:</span>
+            <div className="flex justify-between pb-8">
+              <div>
+                {" "}
+                <h2 className="mb-4 text-xl font-semibold">
+                  اطلاعات سبدگردان:
+                </h2>
+                <div className="flex flex-col sm:flex-row">
+                  <div className="flex flex-col space-y-2 text-right">
+                    <div>
+                      <span className="font-medium">نام و نام خانوادگی:</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">کد ملی:</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">شماره همراه:</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        تاریخ عضویت در هم سبد:
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="w-24 h-32 mt-4 bg-gray-300 sm:mt-0 sm:mr-auto"></div>
+              </div>
+              <div className="">
+                <img
+                  alt=""
+                  className="w-24 mt-4 bg-gray-300 h-28 sm:mt-0 sm:mr-auto"
+                />
               </div>
             </div>
 
@@ -250,9 +269,9 @@ const Investor = () => {
             >
               <Icon name="close" size={24} />
             </button>
-            <div className="text-right">
+            <div className="px-4 text-right">
               <h2 className="mb-4 text-xl font-semibold">علت رد:</h2>
-              <form>
+              <form className="">
                 <div className="space-y-2">
                   <label className="flex items-center">
                     <input type="radio" name="rejectReason" className="ml-2" />
@@ -279,18 +298,15 @@ const Investor = () => {
                   className="w-full p-2 mt-4 border border-gray-300 rounded"
                   placeholder="نوشتن توضیحات..."
                 />
-                <div className="flex justify-between mt-4">
+                <div className="flex justify-around mt-4">
                   <button
                     type="button"
                     onClick={toggleRejectModal}
-                    className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                    className="px-4 py-1 bg-[#5D9CEC]"
                   >
                     بازگشت
                   </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
-                  >
+                  <button type="submit" className="px-4 py-1 bg-[#DB524B]">
                     ثبت رد
                   </button>
                 </div>
@@ -303,7 +319,7 @@ const Investor = () => {
       {/* Edit Request Modal */}
       {showEditRequestModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-700 bg-opacity-50">
-          <div className="relative w-full max-w-md p-6 bg-white shadow-xl">
+          <div className="relative w-full max-w-md px-8 py-4 bg-white shadow-xl">
             <button
               onClick={toggleEditRequestModal}
               className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
@@ -370,13 +386,13 @@ const Investor = () => {
                   <button
                     type="button"
                     onClick={toggleEditRequestModal}
-                    className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                    className="px-4 py-1 text-white bg-[#5D9CEC]"
                   >
                     بازگشت
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-600"
+                    className="px-4 py-1 text-white bg-[#F7AF3E]"
                   >
                     درخواست اصلاح
                   </button>
@@ -399,7 +415,7 @@ const Investor = () => {
             </button>
             <div className="text-right">
               <p className="mb-4">
-                اینجانب نام و نام خانوادگی
+                ` اینجانب نام و نام خانوادگی`
                 <br />
                 ضمن مطالعه موارد اشاره شده در قرارداد شماره فلان
               </p>
@@ -412,15 +428,15 @@ const Investor = () => {
                 />
                 <span>بندهای موجود در این قرارداد مورد تایید می‌باشد.</span>
               </div>
-              <div className="flex justify-between mt-4">
+              <div className="flex justify-around mt-4">
                 <button
                   onClick={toggleConfirmationModal}
-                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className="px-4 py-1 text-white bg-[#5D9CEC]"
                 >
                   بازگشت
                 </button>
                 <button
-                  className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+                  className="px-4 py-1 text-white bg-[#1BBF89]"
                   disabled={!isTermsAccepted}
                   onClick={handleConfirmation}
                 >
@@ -464,7 +480,7 @@ const Investor = () => {
                 </span>
                 <button
                   onClick={clearSignature}
-                  className="absolute p-1 bg-white border border-gray-300 rounded top-2 left-2 hover:bg-gray-100"
+                  className="absolute p-1 bg-white top-2 left-2 hover:bg-gray-100"
                 >
                   <Icon name="eraser" size={20} />
                 </button>
@@ -472,13 +488,13 @@ const Investor = () => {
               <div className="flex justify-between">
                 <button
                   onClick={toggleSignatureModal}
-                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className="px-4 py-1 text-white bg-blue-500"
                 >
                   بازگشت
                 </button>
                 <button
                   onClick={handleSignatureSubmit}
-                  className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+                  className="px-4 py-1 text-white bg-green-500"
                 >
                   تایید
                 </button>
