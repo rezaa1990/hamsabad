@@ -47,8 +47,10 @@ import transactionicon from "./transaction-icon.png";
 import cashrequesthistory from "./cashrequesthistory.png";
 import cashrequest from "./cashrequest.png";
 import add from "./add.png";
+import rec from "./rec.png";
 
 export {
+  rec,
   merchantPrograms,
   notes,
   shoppingBasket,

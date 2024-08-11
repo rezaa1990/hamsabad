@@ -485,6 +485,48 @@ function AppProvider({ children }) {
       ],
     },
   ]);
+  const [contracts, setContracts] = useState([
+    {
+      contractNumber: "۱۰۰۱",
+      contractStatus: "پیش نویس",
+      investor: "رضا زارعی",
+      portfolioManager: "سامان کشوری",
+      edithedDate: "۱۲۳۴/۱۲/۱۲",
+      makeDate: "۱۲۳۴/۱۲/۱۲",
+    },
+    {
+      contractNumber: "۱۰۰۲",
+      contractStatus: "ارسال شده",
+      investor: "رضا زارعی",
+      portfolioManager: "سامان کشوری",
+      edithedDate: "۱۲۳۴/۱۲/۱۲",
+      makeDate: "۱۲۳۴/۱۲/۱۲",
+    },
+    {
+      contractNumber: "۱۰۰۳",
+      contractStatus: "رد شده",
+      investor: "رضا زارعی",
+      portfolioManager: "سامان کشوری",
+      edithedDate: "۱۲۳۴/۱۲/۱۲",
+      makeDate: "۱۲۳۴/۱۲/۱۲",
+    },
+    {
+      contractNumber: "۱۰۰۴",
+      contractStatus: "نیازمند بازنگری",
+      investor: "رضا زارعی",
+      portfolioManager: "سامان کشوری",
+      edithedDate: "۱۲۳۴/۱۲/۱۲",
+      makeDate: "۱۲۳۴/۱۲/۱۲",
+    },
+    {
+      contractNumber: "۱۰۰۵",
+      contractStatus: "تایید شده",
+      investor: "رضا زارعی",
+      portfolioManager: "سامان کشوری",
+      edithedDate: "۱۲۳۴/۱۲/۱۲",
+      makeDate: "۱۲۳۴/۱۲/۱۲",
+    },
+  ]);
 
   const login = (phoneNumber, password) => {
     if (phoneNumber && password) {
@@ -520,6 +562,8 @@ function AppProvider({ children }) {
         logout,
         baskets,
         setBaskets,
+        contracts,
+        setContracts,
         handleUpdateBasket,
         phoneNumber,
         setPhoneNumber,

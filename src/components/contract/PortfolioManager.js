@@ -4,30 +4,33 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import * as icons from "../../assets/icons";
+import Icon from "../common/Icon";
 // import { useTheme } from "../../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 
 const PortfolioManager = () => {
-   const {
-     isAuthenticated,
-     setIsAuthenticated,
-     role,
-     setRole,
-     login,
-     logout,
-     baskets,
-     setBaskets,
-     handleUpdateBasket,
-     phoneNumber,
-     setPhoneNumber,
-     nationalId,
-     setNationalId,
-     isDarkMode,
-     setIsDarkMode,
-     toggleDarkMode,
-   } = useContext(AppContext);
-  
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    contracts,
+    setContracts,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   // const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
@@ -50,7 +53,20 @@ const PortfolioManager = () => {
     nationalCode: "",
     phoneNumber: "",
   });
-
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "تایید شده":
+        return "bg-[#1BBF89]";
+      case "ارسال شده":
+        return "bg-gray-500";
+      case "رد شده":
+        return "bg-[#DB524B]";
+      case "نیازمند بازنگری":
+        return "bg-[#5D9CEC]";
+      default:
+        return "bg-gray-50";
+    }
+  };
   const handleBack = () => {
     navigate("/dashboard");
   };
@@ -167,89 +183,6 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
     URL.revokeObjectURL(url);
   };
 
-  // const PreviewModal = () => {
-  //   return (
-  //     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-  //       <div className="relative w-auto max-w-3xl mx-auto my-6">
-  //         <div
-  //           className={`relative flex flex-col w-full border-0 rounded-lg shadow-lg outline-none focus:outline-none ${
-  //             isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-  //           }`}
-  //         >
-  //           <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
-  //             <h3 className="text-2xl font-semibold">پیش‌نمایش قرارداد</h3>
-  //             <button
-  //               className="float-right text-3xl font-semibold leading-none"
-  //               onClick={handleClosePreview}
-  //             >
-  //               ×
-  //             </button>
-  //           </div>
-  //           <div
-  //             className="relative flex-auto p-6"
-  //             style={{ maxHeight: "70vh", overflowY: "auto" }}
-  //           >
-  //             <div className="mb-6">
-  //               <h4 className="mb-2 text-xl font-semibold">
-  //                 اطلاعات سرمایه گذار
-  //               </h4>
-  //               <p>نام: {investorInfo.name}</p>
-  //               <p>نام خانوادگی: {investorInfo.lastName}</p>
-  //               <p>کد ملی: {investorInfo.nationalCode}</p>
-  //               <p>شماره همراه: {investorInfo.phoneNumber}</p>
-  //             </div>
-
-  //             <div className="mb-6">
-  //               <h4 className="mb-2 text-xl font-semibold">اطلاعات قرارداد</h4>
-  //               <p>سرمایه اولیه: {initialCapital} ریال</p>
-  //               <p>میزان کارمزد: {commissionRate}٪</p>
-  //               <p>مدت قرارداد: {contractDuration} ماه</p>
-  //               <p>
-  //                 از تاریخ:{" "}
-  //                 {startDate instanceof Date
-  //                   ? startDate.toLocaleDateString("fa-IR")
-  //                   : "تاریخ نامعتبر"}
-  //               </p>
-  //               <p>
-  //                 تا تاریخ:{" "}
-  //                 {endDate instanceof Date
-  //                   ? endDate.toLocaleDateString("fa-IR")
-  //                   : "تاریخ نامعتبر"}
-  //               </p>
-  //               <p>بازه گزارش‌دهی: {reportingPeriod}</p>
-  //             </div>
-
-  //             {clauses.length > 0 && (
-  //               <div className="mb-6">
-  //                 <h4 className="mb-2 text-xl font-semibold">
-  //                   تبصره‌های اختیاری قرارداد
-  //                 </h4>
-  //                 {clauses.map((clause, index) => (
-  //                   <p key={index}>
-  //                     تبصره {index + 1}: {clause}
-  //                   </p>
-  //                 ))}
-  //               </div>
-  //             )}
-  //           </div>
-  //           <div className="flex items-center justify-end p-6 border-t border-solid rounded-b">
-  //             <button
-  //               className={`px-6 py-2 mb-1 mr-1 text-sm font-bold uppercase rounded shadow outline-none ${
-  //                 isDarkMode
-  //                   ? "bg-gray-700 text-white active:bg-gray-600"
-  //                   : "bg-gray-200 text-gray-800 active:bg-gray-300"
-  //               } hover:shadow-lg focus:outline-none ease-linear transition-all duration-150`}
-  //               type="button"
-  //               onClick={handleClosePreview}
-  //             >
-  //               بستن
-  //             </button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
   return (
     <div
       className={`${
@@ -269,7 +202,6 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
         />
         <span>بستن قرارداد</span>
       </div>
-
       {!showForm ? (
         <div
           className={`flex flex-col items-center mx-4 p-6 text-center border ${
@@ -630,7 +562,6 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           </div>
         </div>
       )}
-
       {/* Modal for adding new clause */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -678,7 +609,6 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           </div>
         </div>
       )}
-
       {/* Delete confirmation modal */}
       {showDeleteConfirmation && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -714,7 +644,6 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
           </div>
         </div>
       )}
-
       {/* Preview Modal */}
       {showPreview && (
         <>
@@ -790,6 +719,66 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
             </div>
           </div>
         </>
+      )}
+      {/* my contracts */}
+      {/* className={`p-4 mb-1 ${getStatusColor(contract.contractStatus)}`} */}
+      {!showForm && (
+        <div className="p-4 bg-white">
+          {contracts.map((contract, index) => (
+            <div
+              key={index}
+              className={`border border-gray-400 p-4 mb-1 ${getStatusColor(
+                contract.contractStatus
+              )}`}
+            >
+              <div className="flex justify-center mb-2">
+                <span>شماره قرارداد:</span>
+                <span className="mr-1">{contract.contractNumber}</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                <div>
+                  <span>سرمایه گذار: </span>
+                  <span>{contract.investor}</span>
+                </div>
+                <div>
+                  <span className="">تاریخ ثبت: </span>
+                  <span>{contract.makeDate}</span>
+                </div>
+              </div>
+              <div className="flex justify-between mb-2">
+                <div>
+                  <span>سهامدار: </span>
+                  <span>{contract.portfolioManager}</span>
+                </div>
+                <div>
+                  <span className="">تاریخ ویرایش: </span>
+                  <span>{contract.edithedDate}</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <span>وضعیت: </span>
+                  <span>{contract.contractStatus}</span>
+                </div>
+
+                <div className="flex py-1 bg-gray-200">
+                  <button className="mx-2">
+                    <Icon name="rec" size={21} />
+                  </button>
+                  <button className="mx-2">
+                    <Icon name="messages2" size={24} />
+                  </button>
+                  <button className="mx-2">
+                    <Icon name="mobile" size={24} />
+                  </button>
+                  <button className="mx-2">
+                    <Icon name="eye" size={24} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

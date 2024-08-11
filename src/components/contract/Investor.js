@@ -14,6 +14,8 @@ const Investor = () => {
     logout,
     baskets,
     setBaskets,
+    contracts,
+    setContracts,
     handleUpdateBasket,
     phoneNumber,
     setPhoneNumber,
