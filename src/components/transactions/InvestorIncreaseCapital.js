@@ -118,60 +118,90 @@ const RequestIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
   </div>
 );
 
-const RejectedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
-  <div className="p-4 bg-white rounded-lg shadow-md">
-    <div className="flex items-center justify-between mb-4">
-      <div className="text-xl text-blue-500">شماره سبد (رد شده)</div>
-      <div className="text-2xl text-blue-500">&gt;</div>
-    </div>
+const RejectedIncreaseCapitalModal = ({
+  basket,
+  handleEyeIconClick,
+  onClose,
+}) => (
+  <div className="px-8">
     <div className="mb-4 space-y-2">
-      <div className="flex justify-between">
-        <span>مبلغ:</span>
-        <span>10.000.000 ریال</span>
+      <div className="flex items-center space-y-3">
+        <span className="flex-shrink-0 w-20">مبلغ:</span>
+        <div className="flex flex-grow">
+          <div className="flex items-center justify-end w-full">
+            <div className="whitespace-nowrap">۱۰۰۰۰۰۰۰۰</div>
+          </div>
+          <div className="flex justify-end w-20">ریال</div>
+        </div>
       </div>
-      <div className="flex justify-between">
-        <span>تاریخ:</span>
-        <span>1398/03/12</span>
+      <div className="flex items-center">
+        <span className="flex-shrink-0 w-20">تاریخ:</span>
+        <div className="flex flex-grow">
+          <div className="flex items-center justify-end w-full">
+            <div className="text-left whitespace-nowrap">۱۲۳۴/۱۲/۱۲</div>
+          </div>
+          <div className="w-20"></div>
+        </div>
       </div>
       <div>واریز به‌صورت مستقیم</div>
     </div>
-    <div className="mb-4 space-y-2">
+    <div className="mb-4 space-y-4">
       <div>پیام سرمایه‌گذار :</div>
-      <div>علت رد :</div>
+      <div>علت رد:</div>
       <div>پیام سبدگردان :</div>
+      <div>سند واریز:</div>
     </div>
-    <button className="w-full px-4 py-2 text-gray-700 bg-gray-300 rounded">
-      بازگشت
-    </button>
+    <div className="flex justify-center">
+      <div className="w-48 h-48 p-4 mb-4 bg-white border-2 border-gray-300"></div>
+    </div>
+    <div className="flex justify-center">
+      <button onClick={onClose} className="px-4 py-1 font-bold bg-white border">
+        بازگشت
+      </button>
+    </div>
   </div>
 );
 
-const ConfirmedIncreaseCapitalModal = ({ basket, handleEyeIconClick }) => (
-  <div className="p-4 bg-white rounded-lg shadow-md">
-    <div className="flex items-center justify-between mb-4">
-      <div className="text-xl text-blue-500">شماره سبد (تایید شده)</div>
-      <div className="text-2xl text-blue-500">&gt;</div>
-    </div>
-    <div className="mb-4 space-y-2">
-      <div className="flex justify-between">
-        <span>مبلغ:</span>
-        <span>10.000.000 ریال</span>
+const ConfirmedIncreaseCapitalModal = ({
+  basket,
+  handleEyeIconClick,
+  onClose,
+}) => (
+  <div className="px-8">
+    <div className="mb-4 space-y-4">
+      <div className="flex items-center">
+        <span className="flex-shrink-0 w-20">مبلغ:</span>
+        <div className="flex flex-grow">
+          <div className="flex items-center justify-end w-full">
+            <div className="whitespace-nowrap">۱۰۰۰۰۰۰۰۰</div>
+          </div>
+          <div className="flex justify-end w-20">ریال</div>
+        </div>
       </div>
-      <div className="flex justify-between">
-        <span>تاریخ:</span>
-        <span>1398/03/12</span>
+      <div className="flex items-center">
+        <span className="flex-shrink-0 w-20">تاریخ:</span>
+        <div className="flex flex-grow">
+          <div className="flex items-center justify-end w-full">
+            <div className="text-left whitespace-nowrap">۱۲۳۴/۱۲/۱۲</div>
+          </div>
+          <div className="w-20"></div>
+        </div>
       </div>
       <div>واریز به‌صورت مستقیم</div>
     </div>
-    <div className="mb-4 space-y-2">
+    <div className="mb-4 space-y-4">
       <div>پیام سرمایه‌گذار :</div>
       <div>پیام سبدگردان :</div>
       <div>سند واریز:</div>
     </div>
-    <div className="h-32 p-4 mb-4 border-2 border-gray-300 rounded-lg"></div>
-    <button className="w-full px-4 py-2 text-gray-700 bg-gray-300 rounded">
-      بازگشت
-    </button>
+    <div className="flex justify-center">
+      <div className="w-48 h-48 p-4 mb-4 bg-white border-2 border-gray-300"></div>
+    </div>
+    <div className="flex justify-center">
+      <button onClick={onClose} className="px-4 py-1 font-bold bg-white border">
+        بازگشت
+      </button>
+    </div>
   </div>
 );
 
@@ -398,20 +428,22 @@ const InvestorIncreaseCapital = () => {
       <Modal
         isVisible={isRejectedIncreaseCapitalModalVisible}
         onClose={closeRejectedIncreaseCapitalModal}
-        title={` رد `}
+        title={` رد شده`}
       >
         <RejectedIncreaseCapitalModal
           basket={selectedBasket}
+          onClose={closeRejectedIncreaseCapitalModal}
           // handleEyeIconClick={handleEyeIconClick}
         />
       </Modal>
       <Modal
         isVisible={isConfirmedIncreaseCapitalModalVisible}
         onClose={closeConfirmedIncreaseCapitalModalModal}
-        title={` رد `}
+        title={`${selectedBasket?.contractNumber} (تایید شده)`}
       >
         <ConfirmedIncreaseCapitalModal
           basket={selectedBasket}
+          onClose={closeConfirmedIncreaseCapitalModalModal}
           // handleEyeIconClick={handleEyeIconClick}
         />
       </Modal>
