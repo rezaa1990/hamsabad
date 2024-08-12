@@ -28,13 +28,13 @@ const Modal = ({ isVisible, onClose, title, children }) => {
 const getStatusColor = (status) => {
   switch (status) {
     case "در انتظار ارسال سند واریز":
-      return "bg-blue-300";
+      return "bg-[#5D9CEC]";
     case "انجام شده":
-      return "bg-green-300";
+      return "bg-[#1BBF89]";
     case "رد":
-      return "bg-red-300";
+      return "bg-[#DB524B]";
     default:
-      return "bg-bg-gray-300";
+      return "bg-gray-300";
   }
 };
 
