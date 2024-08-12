@@ -26,111 +26,16 @@ const Modal = ({ isVisible, onClose, title, children }) => {
   );
 };
 
-// Specific Modal Content for "history"
-// const HistoryModalContent = () => (
-//   <div>
-//     <div className="p-4 bg-gray-300">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>در انتظار تایید</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-red-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>رد</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <span>علت رد</span>
-//       <div className="flex justify-end ">
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-blue-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>در انتظار ارسال سند واریز</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-green-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>انجام شده</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//   </div>
-// );
-
-// const CashRequestModalContent = ({ cashrequestValue, setCashRequestValue }) => (
-//   <div className="p-4 px-8">
-//     {/* <h3 className="mb-4 text-lg font-bold">درخواست وجه</h3> */}
-//     <div className="mb-4">
-//       <label className="block mb-2">مبلغ درخواستی:</label>
-//       <div className="flex items-center justify-center">
-//         <input
-//           onChange={setCashRequestValue()}
-//           type="text"
-//           value={cashrequestValue}
-//           className="p-2 border"
-//           // readOnly
-//         />
-//         <span className="mr-2">ریال</span>
-//       </div>
-//     </div>
-//     <div className="mb-4">
-//       <label className="block mb-2">تاریخ:</label>
-
-//       <div className="flex justify-center ml-8">
-//         {" "}
-//         <DatePicker
-//           // value={selectedDate}
-//           // onChange={setSelectedDate}
-//           calendar={persian}
-//           locale={persian_fa}
-//         />
-//       </div>
-//     </div>
-//     <div className="flex justify-end mt-16">
-//       <button className="px-2 py-1 font-bold text-black bg-green-300">
-//         ثبت درخواست وجه از سبد
-//       </button>
-//     </div>
-//   </div>
-// );
-
 const getStatusColor = (status) => {
   switch (status) {
     case "رد":
-      return "bg-red-500";
+      return "bg-[#DB524B]";
     case "انجام شده":
-      return "bg-green-500";
+      return "bg-[#1BBF89]";
     case "در انتظار تایید":
       return "bg-gray-500";
     case "در انتظار سند واریز":
-      return "bg-blue-500";
+      return "bg-[#5D9CEC]";
     default:
       return "bg-gray-500";
   }
@@ -258,37 +163,29 @@ const ConfirmedCashRequestModal = ({ cashreq, onClose }) => {
 
 const WaitingForConfirmModal = ({ cashreq, onConfirm, onReject, onClose }) => {
   return (
-    <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
-      <div className="p-4 bg-gray-200">
-        <h2 className="text-xl font-bold text-center text-gray-800">
-          شماره قرارداد
-        </h2>
-      </div>
-      <div className="p-4">
-        <h3 className="mb-4 text-lg font-bold text-center">
-          درخواست افزایش سرمایه:
-        </h3>
+    <div className="w-full max-w-md mx-auto overflow-hidden">
+      <div className="p-6 space-y-16">
         <div className="space-y-4">
           <div className="flex justify-between">
             <span className="font-bold">مبلغ:</span>
-            <span>{cashreq.amount} ریال</span>
+            <div className="flex">
+              <div className="">{"۱۰۰۰۰۰۰۰"}</div>
+              <span className="mr-8">ریال</span>
+            </div>
           </div>
           <div className="flex justify-between">
             <span className="font-bold">تاریخ:</span>
-            <span>{cashreq.date}</span>
+            <div className="flex">
+              <div className="">{"۱۲۳۴/۱۲/۱۲"}</div>
+              <span className="mr-8 text-gray-100">ریال</span>
+            </div>
           </div>
         </div>
-        <div className="flex justify-between mt-6">
-          <button
-            onClick={onConfirm}
-            className="px-6 py-2 text-white transition-colors bg-green-500 rounded hover:bg-green-600"
-          >
+        <div className="flex justify-around mt-6">
+          <button onClick={onConfirm} className="w-16 px-6 py-1 bg-[#1BBF89]">
             تایید
           </button>
-          <button
-            onClick={onReject}
-            className="px-6 py-2 text-white transition-colors bg-red-500 rounded hover:bg-red-600"
-          >
+          <button onClick={onReject} className="w-16 px-6 py-1 bg-[#DB524B]">
             رد
           </button>
         </div>
@@ -306,17 +203,13 @@ const ConfirmingCashRequestModal = ({ onConfirm, onClose }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
-      <div className="p-4 bg-blue-500">
-        <h2 className="text-xl font-bold text-center text-white">
-          تایید درخواست وجه
-        </h2>
-      </div>
+    <div className="w-full max-w-md mx-auto overflow-hidden">
       <div className="p-4">
         <div className="space-y-4">
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="option1"
                 checked={selectedOption === "option1"}
@@ -328,6 +221,7 @@ const ConfirmingCashRequestModal = ({ onConfirm, onClose }) => {
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="option2"
                 checked={selectedOption === "option2"}
@@ -339,6 +233,7 @@ const ConfirmingCashRequestModal = ({ onConfirm, onClose }) => {
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="option3"
                 checked={selectedOption === "option3"}
@@ -351,19 +246,19 @@ const ConfirmingCashRequestModal = ({ onConfirm, onClose }) => {
             </label>
           </div>
           <div>
-            <label className="block mb-2">متن خطاب به سرمایه‌گذار:</label>
             <textarea
+              placeholder="متن خطاب به سرمایه‌گذار ..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="w-full p-2 border rounded"
-              rows="3"
+              rows="2"
             />
           </div>
         </div>
         <div className="mt-6 text-center">
           <button
             onClick={handleConfirm}
-            className="px-4 py-2 text-white transition-colors bg-green-500 rounded hover:bg-green-600"
+            className="px-2 py-1 font-bold bg-[#1BBF89]"
           >
             تایید اولیه درخواست
           </button>
@@ -382,17 +277,13 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
-      <div className="p-4 bg-red-500">
-        <h2 className="text-xl font-bold text-center text-white">
-          رد درخواست وجه نقد
-        </h2>
-      </div>
-      <div className="p-4">
+    <div className="w-full max-w-md">
+      <div className="p-6">
         <div className="space-y-4">
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="market_condition"
                 checked={selectedReason === "market_condition"}
@@ -407,6 +298,7 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="high_amount"
                 checked={selectedReason === "high_amount"}
@@ -418,6 +310,7 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="out_of_contract"
                 checked={selectedReason === "out_of_contract"}
@@ -429,6 +322,7 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
           <div>
             <label className="flex items-center space-x-2">
               <input
+                className="ml-2"
                 type="radio"
                 value="other"
                 checked={selectedReason === "other"}
@@ -438,20 +332,19 @@ const RejectingCashRequestModal = ({ onReject, onClose }) => {
             </label>
           </div>
           <div>
-            <label className="block mb-2">نوشتن توضیحات...</label>
             <textarea
               value={additionalComments}
               onChange={(e) => setAdditionalComments(e.target.value)}
               className="w-full p-2 border rounded"
-              rows="3"
+              rows="2"
               placeholder="نوشتن توضیحات..."
             />
           </div>
         </div>
         <div className="mt-6 text-center">
           <button
-            onClick={handleReject}
-            className="px-8 py-2 text-white transition-colors bg-red-500 rounded hover:bg-red-600"
+            // onClick={handleReject}
+            className="px-6 py-1 bg-[#DB524B]"
           >
             رد
           </button>
@@ -558,17 +451,17 @@ const InvestorCashRequest = () => {
 
   const [isWaitingForConfirmModalVisible, setIsWaitingForConfirmModalVisible] =
     useState(false);
- const [
-   isConfirmingCashRequestModalVisible,
-   setIsConfirmingCashRequestModalVisible,
- ] = useState(false);
- const [
-   isRejectingCashRequestModalVisible,
-   setIsRejectingCashRequestModalVisible,
- ] = useState(false);
+  const [
+    isConfirmingCashRequestModalVisible,
+    setIsConfirmingCashRequestModalVisible,
+  ] = useState(false);
+  const [
+    isRejectingCashRequestModalVisible,
+    setIsRejectingCashRequestModalVisible,
+  ] = useState(false);
 
- const [isUploadDocumentModalVisible, setIsUploadDocumentModalVisible] =
-   useState(false);
+  const [isUploadDocumentModalVisible, setIsUploadDocumentModalVisible] =
+    useState(false);
   //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
@@ -578,60 +471,60 @@ const InvestorCashRequest = () => {
     // setCashRequestHistoryModalVisible(true);
   };
 
-const handleEyeIconClick = (event, basket, cashreq) => {
-  event.stopPropagation();
+  const handleEyeIconClick = (event, basket, cashreq) => {
+    event.stopPropagation();
 
-  if (cashreq.cashRequestStatus === "رد") {
-    setSelectedBasket(basket);
-    setCashreq(cashreq);
-    setIsCashRequestDetailsModalVisible(true);
-  } else if (cashreq.cashRequestStatus === "انجام شده") {
-    setSelectedBasket(basket);
-    setCashreq(cashreq);
-    setIsConfirmedCashRequestModalVisible(true);
-  } else if (cashreq.cashRequestStatus === "در انتظار تایید") {
-    setSelectedBasket(basket);
-    setCashreq(cashreq);
-    setIsWaitingForConfirmModalVisible(true);
-  } else if (cashreq.cashRequestStatus === "در انتظار سند واریز") {
-    setSelectedBasket(basket);
-    setCashreq(cashreq);
-    setIsUploadDocumentModalVisible(true);
-  }
-};
+    if (cashreq.cashRequestStatus === "رد") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsCashRequestDetailsModalVisible(true);
+    } else if (cashreq.cashRequestStatus === "انجام شده") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsConfirmedCashRequestModalVisible(true);
+    } else if (cashreq.cashRequestStatus === "در انتظار تایید") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsWaitingForConfirmModalVisible(true);
+    } else if (cashreq.cashRequestStatus === "در انتظار سند واریز") {
+      setSelectedBasket(basket);
+      setCashreq(cashreq);
+      setIsUploadDocumentModalVisible(true);
+    }
+  };
 
-const handleDocumentUpload = (file, comments) => {
-  // Implement the logic for uploading the document
-  console.log("Document uploaded:", file);
-  console.log("Comments:", comments);
-  // You might want to update the cashreq status or perform other actions here
-  setIsUploadDocumentModalVisible(false);
-};
+  const handleDocumentUpload = (file, comments) => {
+    // Implement the logic for uploading the document
+    console.log("Document uploaded:", file);
+    console.log("Comments:", comments);
+    // You might want to update the cashreq status or perform other actions here
+    setIsUploadDocumentModalVisible(false);
+  };
 
-   const handleConfirmingCashRequest = () => {
-     setIsWaitingForConfirmModalVisible(false);
-     setIsConfirmingCashRequestModalVisible(true);
-   };
+  const handleConfirmingCashRequest = () => {
+    setIsWaitingForConfirmModalVisible(false);
+    setIsConfirmingCashRequestModalVisible(true);
+  };
 
-   const handleRejectingCashRequest = () => {
-     setIsWaitingForConfirmModalVisible(false);
-     setIsRejectingCashRequestModalVisible(true);
-   };
+  const handleRejectingCashRequest = () => {
+    setIsWaitingForConfirmModalVisible(false);
+    setIsRejectingCashRequestModalVisible(true);
+  };
 
-    const handleFinalConfirmCashRequest = (option, message) => {
-      // Implement the logic for final confirmation of the cash request
-      console.log(
-        "Cash request confirmed with option:",
-        option,
-        "and message:",
-        message
-      );
-      setIsConfirmingCashRequestModalVisible(false);
-    };
+  const handleFinalConfirmCashRequest = (option, message) => {
+    // Implement the logic for final confirmation of the cash request
+    console.log(
+      "Cash request confirmed with option:",
+      option,
+      "and message:",
+      message
+    );
+    setIsConfirmingCashRequestModalVisible(false);
+  };
 
-    const handleCloseRejectingModal = () => {
-      setIsRejectingCashRequestModalVisible(false);
-    };
+  const handleCloseRejectingModal = () => {
+    setIsRejectingCashRequestModalVisible(false);
+  };
 
   const handleConfirmCashRequest = () => {
     // Implement the logic for confirming the cash request
@@ -803,7 +696,7 @@ const handleDocumentUpload = (file, comments) => {
       <Modal
         isVisible={isWaitingForConfirmModalVisible}
         onClose={handleCloseWaitingForConfirmModal}
-        title={`درخواست افزایش سرمایه (شماره سبد: ${selectedBasket?.contractNumber})`}
+        title={`درخواست افزایش سرمایه`}
       >
         <WaitingForConfirmModal
           cashreq={cashreq}

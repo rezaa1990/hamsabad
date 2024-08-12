@@ -26,64 +26,6 @@ const Modal = ({ isVisible, onClose, title, children }) => {
   );
 };
 
-// Specific Modal Content for "history"
-// const HistoryModalContent = () => (
-//   <div>
-//     <div className="p-4 bg-gray-300">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>در انتظار تایید</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-red-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>رد</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <span>علت رد</span>
-//       <div className="flex justify-end ">
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-blue-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>در انتظار ارسال سند واریز</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//     <div className="p-4 bg-green-500">
-//       <div className="flex justify-between">
-//         <span>مبلغ</span>
-//         <span>انجام شده</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>تاریخ</span>
-//       </div>
-//       <div className="flex justify-between">
-//         <span>واریز مستقیم؟ واریز به حساب کارگزاری</span>
-//         <Icon className="" name="eye" size={32} />
-//       </div>
-//     </div>
-//   </div>
-// );
-
 const CashRequestModalContent = ({ cashrequestValue, setCashRequestValue }) => (
   <div className="p-4 px-8">
     {/* <h3 className="mb-4 text-lg font-bold">درخواست وجه</h3> */}
@@ -94,7 +36,7 @@ const CashRequestModalContent = ({ cashrequestValue, setCashRequestValue }) => (
           onChange={setCashRequestValue()}
           type="text"
           value={cashrequestValue}
-          className="p-2 border"
+          className="p-1 text-center border border-gray-300"
           // readOnly
         />
         <span className="mr-2">ریال</span>
@@ -104,17 +46,20 @@ const CashRequestModalContent = ({ cashrequestValue, setCashRequestValue }) => (
       <label className="block mb-2">تاریخ:</label>
 
       <div className="flex justify-center ml-8">
-        {" "}
         <DatePicker
-          // value={selectedDate}
-          // onChange={setSelectedDate}
           calendar={persian}
           locale={persian_fa}
+          calendarPosition="bottom-right"
+          // value={selectedDate}
+          // onChange={handleDateChange}
+          format="YYYY/MM/DD"
+          inputClass="p-1 text-center border border-gray-300"
+          containerClassName=""
         />
       </div>
     </div>
-    <div className="flex justify-end mt-16">
-      <button className="px-2 py-1 font-bold text-black bg-green-300">
+    <div className="flex justify-center mt-16">
+      <button className="px-2 py-1 font-bold text-black bg-[#1BBF89]">
         ثبت درخواست وجه از سبد
       </button>
     </div>
