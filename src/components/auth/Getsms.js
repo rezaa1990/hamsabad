@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
-// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
-// import { RegistrationContext } from "../../contexts/RegistrationContext"; // اضافه شدن کانتکست
 import AppContext from "../../contexts/AppContext";
 
 const GetSms = () => {
@@ -24,10 +22,7 @@ const GetSms = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-  
-  // const { isDarkMode } = useTheme();
-  // const { phoneNumber } = useContext(RegistrationContext); // گرفتن phoneNumber از کانتکست
-  // const [nationalId, setNationalId] = useState("");
+
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -97,8 +92,8 @@ const GetSms = () => {
                 ? "bg-gray-700 text-white"
                 : "bg-gray-100 text-gray-800"
             }`}
-            value={phoneNumber} // استفاده از phoneNumber از کانتکست
-            readOnly // جلوگیری از ویرایش شماره همراه
+            value={phoneNumber}
+            readOnly
           />
           <Icon
             name="mobile"
@@ -140,8 +135,8 @@ const GetSms = () => {
             onClick={goNext}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
-                ? "bg-green-600 text-white"
-                : "bg-green-500 text-gray-800"
+                ? "bg-[#1BBF89] text-white"
+                : "bg-[#1BBF89] text-gray-800"
             } mt-4 w-1/2`}
           >
             ادامه

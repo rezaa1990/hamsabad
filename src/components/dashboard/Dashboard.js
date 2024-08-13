@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import * as icons from "../../assets/icons";
-// import { useTheme } from "../../contexts/ThemeContext";
 import { Link } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 
@@ -24,7 +23,6 @@ const Dashboard = () => {
     toggleDarkMode,
   } = useContext(AppContext);
 
-  // const { isDarkMode } = useTheme();
   const menuItems = [
     { icon: icons.notes, label: "یادداشت", path: "" },
     { icon: icons.graf1, label: "بررسی شاخص", path: "" },

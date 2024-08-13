@@ -1,34 +1,33 @@
-import React, { useState,useContext } from "react";
-// import { useTheme } from "../../contexts/ThemeContext";
+import React, { useState, useContext } from "react";
 import * as icons from "../../assets/icons";
 import Sidebar from "../common/Sidebar";
 import AppContext from "../../contexts/AppContext";
 
 const Header = () => {
-    const {
-      isAuthenticated,
-      setIsAuthenticated,
-      role,
-      setRole,
-      login,
-      logout,
-      baskets,
-      setBaskets,
-      handleUpdateBasket,
-      phoneNumber,
-      setPhoneNumber,
-      nationalId,
-      setNationalId,
-      isDarkMode,
-      setIsDarkMode,
-      toggleDarkMode,
-    } = useContext(AppContext);
-  
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  // const { isDarkMode, toggleDarkMode } = useTheme();
+
   return (
     <div>
       <header
@@ -60,7 +59,6 @@ const Header = () => {
             />
           </button>
         </div>
-
       </header>
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
     </div>

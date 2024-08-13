@@ -1,31 +1,29 @@
 import React, { useState, useContext } from "react";
 import Icon from "../common/Icon";
-// import { useTheme } from "../../contexts/ThemeContext";
 import AppContext from "../../contexts/AppContext";
 
 const Captcha = ({ onClose, onSubmit }) => {
-    const {
-      isAuthenticated,
-      setIsAuthenticated,
-      role,
-      setRole,
-      login,
-      logout,
-      baskets,
-      setBaskets,
-      handleUpdateBasket,
-      phoneNumber,
-      setPhoneNumber,
-      nationalId,
-      setNationalId,
-      isDarkMode,
-      setIsDarkMode,
-      toggleDarkMode,
-    } = useContext(AppContext);
-  
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   const [captchaInput, setCaptchaInput] = useState("");
   const [error, setError] = useState("");
-  // const { isDarkMode } = useTheme();
 
   const handleSubmit = () => {
     if (!captchaInput) {
@@ -94,7 +92,7 @@ const Captcha = ({ onClose, onSubmit }) => {
         <button
           onClick={handleSubmit}
           className={`w-1/2 mx-auto block px-4 py-2 font-bold text-white rounded-lg ${
-            isDarkMode ? "bg-green-600" : "bg-green-500"
+            isDarkMode ? "bg-green-600" : "bg-[#1BBF89]"
           }`}
         >
           ارسال

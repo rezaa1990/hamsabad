@@ -1,36 +1,31 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useTheme } from "../../contexts/ThemeContext";
-// import { useAuth } from "../../hooks/useAuth";
 import Icon from "../common/Icon";
 import AppContext from "../../contexts/AppContext";
 
 const Login = () => {
-   const {
-     isAuthenticated,
-     setIsAuthenticated,
-     role,
-     setRole,
-     login,
-     logout,
-     baskets,
-     setBaskets,
-     handleUpdateBasket,
-     phoneNumber,
-     setPhoneNumber,
-     nationalId,
-     setNationalId,
-     isDarkMode,
-     setIsDarkMode,
-     toggleDarkMode,
-   } = useContext(AppContext);
-  
-  // const { isDarkMode } = useTheme();
-  // const { login } = useAuth();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  // const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -178,8 +173,8 @@ const Login = () => {
             onClick={handleRegister}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
-                ? "bg-yellow-600 text-white"
-                : "bg-yellow-500 text-gray-800"
+                ? "bg-[#F7AF3E] text-white"
+                : "bg-[#F7AF3E] text-gray-800"
             } w-[45%]`}
           >
             ثبت نام
@@ -188,8 +183,8 @@ const Login = () => {
             onClick={handleLogin}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
-                ? "bg-green-600 text-white"
-                : "bg-green-500 text-gray-800"
+                ? "bg-[#1BBF89] text-white"
+                : "bg-[#1BBF89] text-gray-800"
             } w-[45%]`}
           >
             ورود

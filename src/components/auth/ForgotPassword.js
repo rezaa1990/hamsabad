@@ -1,27 +1,27 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import AppContext from "../../contexts/AppContext";
 
 const ForgotPassword = () => {
-   const {
-     isAuthenticated,
-     setIsAuthenticated,
-     role,
-     setRole,
-     login,
-     logout,
-     baskets,
-     setBaskets,
-     handleUpdateBasket,
-     phoneNumber,
-     setPhoneNumber,
-     nationalId,
-     setNationalId,
-     isDarkMode,
-     setIsDarkMode,
-     toggleDarkMode,
-   } = useContext(AppContext);
-  
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   const [email, setEmail] = useState("");
   const { resetPassword } = useAuth();
 
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
             className="w-full p-2 border rounded"
           />
         </div>
-        <button type="submit" className="p-2 text-white bg-green-600 rounded">
+        <button type="submit" className="p-2 text-white bg-[#1BBF89] rounded">
           ارسال لینک بازیابی
         </button>
       </form>

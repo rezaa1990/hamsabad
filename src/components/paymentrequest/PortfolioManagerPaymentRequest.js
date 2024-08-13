@@ -67,7 +67,7 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
             </div>
           </div>
         ))
-      // ) : (
+        // ) : (
         // <p>No share request history available.</p>
       }
     </div>
@@ -254,8 +254,6 @@ const RejectedBasketModalContent = ({ basketNumber }) => (
   </div>
 );
 
-
-
 const PortfolioManagerPaymentRequest = () => {
   const {
     isAuthenticated,
@@ -300,36 +298,24 @@ const PortfolioManagerPaymentRequest = () => {
   //------------------------------------------------------------------------------------------------------
   const handleBasketClick = (basket) => {
     setSelectedBasket(basket);
-    // if (basket.shareRequest === "تایید") {
-    //   setConfirmedPortfolioShareRequestModalVisible(true);
-    // } else if (basket.shareRequest === "درخواست سند نقد کردن") {
-    //   setDepositDocumentModalVisible(true);
-    // } else if (basket.shareRequest === "رد") {
-    //   setRejectedBasketModalVisible(true);
-    // }
   };
-  
+
   const handleEyeIconClick = (event, basket, sharereq) => {
     event.stopPropagation();
 
     if (sharereq.shareRequestStatus === "رد") {
       setSelectedBasket(basket);
       setSharereq(sharereq);
-        setRejectedBasketModalVisible(true);
-        
-      } else if (sharereq.shareRequestStatus === "انجام شده") {
-        setSelectedBasket(basket);
-        setSharereq(sharereq);
-          setConfirmedPortfolioShareRequestModalVisible(true);
-        // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
-        //   setSelectedBasket(basket);
-        //   setSharereq(sharereq);
-        //     setDepositDocumentModalVisible(true);
-          } else if (sharereq.shareRequestStatus === "در انتظار سند واریز") {
-            setSelectedBasket(basket);
-            setSharereq(sharereq);
-            setDepositDocumentModalVisible(true);
-        }
+      setRejectedBasketModalVisible(true);
+    } else if (sharereq.shareRequestStatus === "انجام شده") {
+      setSelectedBasket(basket);
+      setSharereq(sharereq);
+      setConfirmedPortfolioShareRequestModalVisible(true);
+    } else if (sharereq.shareRequestStatus === "در انتظار سند واریز") {
+      setSelectedBasket(basket);
+      setSharereq(sharereq);
+      setDepositDocumentModalVisible(true);
+    }
   };
 
   const handleTransactionIconClick = (basket, event) => {

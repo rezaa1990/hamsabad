@@ -40,7 +40,6 @@ const Investor = () => {
   });
   const [editNotes, setEditNotes] = useState("");
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-  // const [signature, setSignature] = useState("");
   const [hasPreviousSignature, setHasPreviousSignature] = useState(false); // این باید بر اساس داده‌های بک‌اند تنظیم شود
 
   const handleNavigate = () => {

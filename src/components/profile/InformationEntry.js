@@ -6,29 +6,26 @@ import { RegistrationContext } from "../../contexts/RegistrationContext";
 import AppContext from "../../contexts/AppContext";
 
 const InformationEntry = () => {
-   const {
-     isAuthenticated,
-     setIsAuthenticated,
-     role,
-     setRole,
-     login,
-     logout,
-     baskets,
-     setBaskets,
-     handleUpdateBasket,
-     phoneNumber,
-     setPhoneNumber,
-     nationalId,
-     setNationalId,
-     isDarkMode,
-     setIsDarkMode,
-     toggleDarkMode,
-   } = useContext(AppContext);
-  
-  // const { isDarkMode } = useTheme();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
+
   const navigate = useNavigate();
-  // const { phoneNumber, nationalId, setPhoneNumber, setNationalId } =
-    // useContext(RegistrationContext);
   const [formData, setFormData] = useState({
     name: "",
     familyName: "",
@@ -87,7 +84,7 @@ const InformationEntry = () => {
     >
       <div
         className={`mb-8 relative w-full ${
-          isDarkMode ? "bg-blue-600" : "bg-blue-500"
+          isDarkMode ? "bg-blue-600" : "bg-[#5D9CEC]"
         } h-20 py-2 mb-4 flex items-center justify-between px-4`}
       >
         <div className="absolute flex items-center right-4">
@@ -163,8 +160,8 @@ const InformationEntry = () => {
               onClick={toggleNationalIdEdit}
               className={`m-2 px-4 rounded-lg ${
                 isDarkMode
-                  ? "bg-blue-600 text-white"
-                  : "bg-blue-500 text-gray-800"
+                  ? "bg-blue-500 text-white"
+                  : "bg-[#5D9CEC] text-gray-800"
               }`}
             >
               {isNationalIdEditable ? "ثبت" : "تغییر کد ملی"}
@@ -192,8 +189,8 @@ const InformationEntry = () => {
               onClick={togglePhoneNumberEdit}
               className={`m-2 px-4 rounded-lg ${
                 isDarkMode
-                  ? "bg-blue-600 text-white"
-                  : "bg-blue-500 text-gray-800"
+                  ? "bg-[#5D9CEC] text-white"
+                  : "bg-[#5D9CEC] text-gray-800"
               }`}
             >
               {isPhoneNumberEditable ? "ثبت" : "تغییر شماره"}
@@ -227,7 +224,7 @@ const InformationEntry = () => {
           <button
             onClick={handleSubmit}
             className={`py-2 px-4 rounded-lg ${
-              isDarkMode ? "bg-green-600 text-white" : "bg-green-500 text-white"
+              isDarkMode ? "bg-green-500 text-white" : "bg-[#1BBF89] text-white"
             } w-1/2`}
           >
             تایید

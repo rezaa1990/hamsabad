@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import Investor from "./Investor";
 import PortfolioManager from "./PortfolioManager";
-// import { useAuth } from "../../contexts/AuthContext";
 import AppContext from "../../contexts/AppContext";
 
 const UserRoleComponent = () => {
@@ -25,8 +24,7 @@ const UserRoleComponent = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-  
-  // const { role } = useAuth();
+
   const userRole = role;
   console.log("userRole", userRole);
 

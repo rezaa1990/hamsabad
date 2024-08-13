@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import * as icons from "../../assets/icons";
-// import { useTheme } from "../../contexts/ThemeContext";
 import AppContext from "../../contexts/AppContext";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -23,8 +22,6 @@ const Sidebar = ({ isOpen, onClose }) => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-
-  // const { isDarkMode } = useTheme();
 
   return (
     <aside
@@ -74,7 +71,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         </style>
 
         <button onClick={toggleDarkMode}>
-          {isDarkMode ? "حالت روشن":"حالت تاریک"}
+          {isDarkMode ? "حالت روشن" : "حالت تاریک"}
         </button>
         <Link
           onClick={onClose}

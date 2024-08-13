@@ -519,18 +519,7 @@ const InvestorPaymentRequest = () => {
     setConfirmedPortfolioShareRequestModalVisible(false);
     setRejectedBasketModalVisible(false);
     setRejectRequestshareisible(false);
-
     setSelectedBasket(basket);
-
-    // if (basket.shareRequest === "تایید") {
-    //   setConfirmedPortfolioShareRequestModalVisible(true);
-    // } else if (basket.shareRequest == "درخواست سهم") {
-    //   setShareRequestModalVisible(true);
-    // } else if (basket.sharedocument) {
-    //   setShareDocumentModalVisible(true);
-    // } else if (basket.shareRequest === "رد") {
-    //   setRejectedBasketModalVisible(true);
-    // }
   };
 
   const handleEyeIconClick = (event, basket, sharereq) => {
@@ -538,20 +527,12 @@ const InvestorPaymentRequest = () => {
     setSelectedBasket(basket);
     setSharereq(sharereq);
     if (sharereq.shareRequestStatus === "رد") {
-      // setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setRejectedBasketModalVisible(true);
     } else if (sharereq.shareRequestStatus === "انجام شده") {
-      // setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setConfirmedPortfolioShareRequestModalVisible(true);
     } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
-      // setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setShareRequestModalVisible(true);
     } else if (sharereq.shareRequestStatus === "در انتظار سند واریز") {
-      //   setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setShareDocumentModalVisible(true);
     }
   };

@@ -76,7 +76,7 @@ function AppContent() {
         </main>
       </div>
       {isAuthenticated && <BottomMenu />}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

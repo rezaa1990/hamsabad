@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
@@ -24,7 +23,6 @@ const SetPassword = () => {
     toggleDarkMode,
   } = useContext(AppContext);
 
-  // const { isDarkMode } = useTheme();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -54,7 +52,7 @@ const SetPassword = () => {
   const handleSubmit = () => {
     // Add submit logic here
     console.log("Password submitted:", password);
-    navigate("/informationentry"); // Adjust navigation as needed
+    navigate("/informationentry");
   };
 
   return (
@@ -106,9 +104,6 @@ const SetPassword = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          {/* <label className="absolute text-sm right-3 top-2.5 hidden sm:block">
-            لطفا رمز عبور خود را وارد نمایید
-          </label> */}
           <input
             type={showPassword ? "text" : "password"}
             placeholder="لطفا رمز عبور خود را وارد نمایید"
@@ -133,9 +128,6 @@ const SetPassword = () => {
               : "border-gray-400 bg-gray-100"
           } rounded-lg`}
         >
-          {/* <label className="absolute text-sm right-3 top-2.5 hidden sm:block">
-            لطفا رمز عبور خود را مجددا وارد نمایید
-          </label> */}
           <input
             type={showPassword ? "text" : "password"}
             placeholder="لطفا رمز عبور خود را مجددا وارد نمایید"
@@ -185,8 +177,8 @@ const SetPassword = () => {
             onClick={handleSubmit}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
-                ? "bg-green-600 text-white"
-                : "bg-green-500 text-gray-800"
+                ? "bg-[#1BBF89] text-white"
+                : "bg-[#1BBF89] text-gray-800"
             } mt-4 w-1/2`}
           >
             ادامه

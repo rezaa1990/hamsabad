@@ -5,7 +5,6 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import * as icons from "../../assets/icons";
 import Icon from "../common/Icon";
-// import { useTheme } from "../../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 
@@ -31,7 +30,6 @@ const PortfolioManager = () => {
     toggleDarkMode,
   } = useContext(AppContext);
 
-  // const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [initialCapital, setInitialCapital] = useState("");
@@ -647,25 +645,27 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
       {/* Preview Modal */}
       {showPreview && (
         <>
-          <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-            <div className="relative w-auto max-w-3xl mx-auto my-6">
+          <div className="fixed inset-0 z-40 flex bg-black opacity-25"></div>
+          <div className="fixed inset-0 z-50 w-6/12 bg-black bg-opacity-50">
+            <div className="">
               <div
-                className={`relative flex flex-col w-full border-0 rounded-lg shadow-lg outline-none focus:outline-none ${
+                className={`${
                   isDarkMode
                     ? "bg-gray-800 text-white"
                     : "bg-white text-gray-800"
                 }`}
               >
-                <div className="flex items-start justify-between p-5 border-b border-solid rounded-t">
-                  <h3 className="text-2xl font-semibold">پیش‌نمایش قرارداد</h3>
+                {/* <div className=""> */}
+                <div className="flex">
                   <button
-                    className="float-right p-1 mr-8 text-3xl font-semibold leading-none border-2 cursor-pointer"
+                    className="p-1 text-2xl cursor-pointer"
                     onClick={handleClosePreview}
                   >
-                    ×
+                    <Icon name="arrowright" size={16} className="" />
                   </button>
+                  <h3 className="text-xl font-semibold">پیش‌نمایش قرارداد</h3>
                 </div>
+                {/* </div> */}
                 <div
                   className="relative flex-auto p-6"
                   style={{ maxHeight: "70vh", overflowY: "auto" }}

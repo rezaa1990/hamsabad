@@ -1,29 +1,26 @@
-import React ,{useContext} from "react";
-// import { useTheme } from "../../contexts/ThemeContext";
+import React, { useContext } from "react";
 import * as icons from "../../assets/icons";
 import AppContext from "../../contexts/AppContext";
 
 const UserProfile = () => {
-   const {
-     isAuthenticated,
-     setIsAuthenticated,
-     role,
-     setRole,
-     login,
-     logout,
-     baskets,
-     setBaskets,
-     handleUpdateBasket,
-     phoneNumber,
-     setPhoneNumber,
-     nationalId,
-     setNationalId,
-     isDarkMode,
-     setIsDarkMode,
-     toggleDarkMode,
-   } = useContext(AppContext);
-  
-  // const { isDarkMode} = useTheme();
+  const {
+    isAuthenticated,
+    setIsAuthenticated,
+    role,
+    setRole,
+    login,
+    logout,
+    baskets,
+    setBaskets,
+    handleUpdateBasket,
+    phoneNumber,
+    setPhoneNumber,
+    nationalId,
+    setNationalId,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
+  } = useContext(AppContext);
 
   return (
     <div
@@ -68,7 +65,6 @@ const UserProfile = () => {
               کشوری
             </p>
           </div>
-          {/* اضافه کردن فیلدهای دیگر در صورت نیاز */}
         </div>
 
         {/* نقش من */}

@@ -448,16 +448,13 @@ const InvestorCashRequest = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-    const navigate = useNavigate();
-    const handleNavigate = () => {
-      navigate("/dashboard");
-    };
-  // const [cashrequestValue, setCashRequestValue] = useState();
-  
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/dashboard");
+  };
+
   //------------------------------------------------------------------------------------------
   const [selectedBasket, setSelectedBasket] = useState(null);
-  // const [isHistoryModalVisible, setHistoryModalVisible] = useState(false);
-  // const [isCashRequestModalVisible, setCashRequestModalVisible] =
   useState(false);
   const [isCashRequestHistoryModalVisible, setCashRequestHistoryModalVisible] =
     useState(false);
@@ -488,10 +485,7 @@ const InvestorCashRequest = () => {
   //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
-    // Reset all modal visibility states to false
-    // setHistoryModalVisible(false);
     setSelectedBasket(basket);
-    // setCashRequestHistoryModalVisible(true);
   };
 
   const handleEyeIconClick = (event, basket, cashreq) => {
@@ -520,7 +514,6 @@ const InvestorCashRequest = () => {
     // Implement the logic for uploading the document
     console.log("Document uploaded:", file);
     console.log("Comments:", comments);
-    // You might want to update the cashreq status or perform other actions here
     setIsUploadDocumentModalVisible(false);
   };
 
@@ -584,7 +577,6 @@ const InvestorCashRequest = () => {
     setSelectedBasket(basket);
     setCashRequestHistoryModalVisible(true);
   };
-
 
   return (
     <div className="w-full max-w-4xl mx-auto">

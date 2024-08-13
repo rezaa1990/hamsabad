@@ -1,9 +1,7 @@
 import React, { useState, useContext } from "react";
-// import { useTheme } from "../../contexts/ThemeContext";
 import Icon from "../common/Icon";
 import { useNavigate } from "react-router-dom";
 import Captcha from "../modals/Captcha";
-// import { RegistrationContext } from "../../contexts/RegistrationContext";
 import AppContext from "../../contexts/AppContext";
 
 const Register = () => {
@@ -26,13 +24,6 @@ const Register = () => {
     toggleDarkMode,
   } = useContext(AppContext);
 
-  // const { isDarkMode } = useTheme();
-  // const {
-  //   setPhoneNumber: setContextPhoneNumber,
-  //   setNationalId: setContextNationalId,
-  // } = useContext(RegistrationContext);
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [nationalId, setNationalId] = useState("");
   const [showCaptcha, setShowCaptcha] = useState(false);
   const navigate = useNavigate();
 
@@ -157,8 +148,8 @@ const Register = () => {
             onClick={handleContinue}
             className={`py-2 px-4 rounded-lg ${
               isDarkMode
-                ? "bg-green-600 text-white"
-                : "bg-green-500 text-gray-800"
+                ? "bg-[#1BBF89] text-white"
+                : "bg-[#1BBF89] text-gray-800"
             } mt-4 w-1/2`}
           >
             ادامه
@@ -170,7 +161,7 @@ const Register = () => {
             قبلا عضو شده‌اید؟{" "}
             <button
               onClick={goToLogin}
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:text-blue-700"
             >
               ورود به هم‌سبد
             </button>

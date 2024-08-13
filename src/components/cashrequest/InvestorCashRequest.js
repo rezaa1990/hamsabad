@@ -43,7 +43,6 @@ const getStatusColor = (status) => {
 
 const CashRequestModalContent = ({ cashrequestValue, setCashRequestValue }) => (
   <div className="p-4 px-8">
-    {/* <h3 className="mb-4 text-lg font-bold">درخواست وجه</h3> */}
     <div className="mb-4">
       <label className="block mb-2">مبلغ درخواستی:</label>
       <div className="flex items-center justify-center">
@@ -220,7 +219,7 @@ const UploadDocumentModal = ({ onClose, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(selectedFile, comments);
+    // onSubmit(selectedFile, comments);
     onClose();
   };
 
@@ -295,14 +294,15 @@ const InvestorCashRequest = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
-    const navigate = useNavigate();
-    const handleNavigate = () => {
-      navigate("/dashboard");
-    };
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/dashboard");
+  };
   const [cashrequestValue, setCashRequestValue] = useState();
   //------------------------------------------------------------------------------------------
   const [selectedBasket, setSelectedBasket] = useState(null);
-  const [isUploadDocumentModalVisible, setUploadDocumentModalVisible] = useState(false);
+  const [isUploadDocumentModalVisible, setUploadDocumentModalVisible] =
+    useState(false);
   const [isCashRequestModalVisible, setCashRequestModalVisible] =
     useState(false);
   const [isCashRequestHistoryModalVisible, setCashRequestHistoryModalVisible] =
@@ -320,14 +320,10 @@ const InvestorCashRequest = () => {
   //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
-    // Reset all modal visibility states to false
-    // setHistoryModalVisible(false);
     setSelectedBasket(basket);
-    // setCashRequestHistoryModalVisible(true);
   };
   const handleEyeIconClick = (event, basket, cashreq) => {
     event.stopPropagation();
-
     if (cashreq.cashRequestStatus === "رد") {
       setSelectedBasket(basket);
       setCashreq(cashreq);
@@ -336,7 +332,7 @@ const InvestorCashRequest = () => {
       setSelectedBasket(basket);
       setCashreq(cashreq);
       setIsConfirmedCashRequestModalVisible(true);
-    }else if (cashreq.cashRequestStatus === "در انتظار سند واریز") {
+    } else if (cashreq.cashRequestStatus === "در انتظار سند واریز") {
       setSelectedBasket(basket);
       setCashreq(cashreq);
       setUploadDocumentModalVisible(true);
@@ -357,20 +353,15 @@ const InvestorCashRequest = () => {
     setSelectedBasket(null);
   };
 
-    const handleCloseUploadDocumentModal = () => {
-      setUploadDocumentModalVisible(false);
-    };
+  const handleCloseUploadDocumentModal = () => {
+    setUploadDocumentModalVisible(false);
+  };
 
   const handleICashrequestHistoryconClick = (basket, event) => {
     event.stopPropagation();
     setSelectedBasket(basket);
     setCashRequestHistoryModalVisible(true);
   };
-
-  // const handleCloseHistoryModal = () => {
-  //   setHistoryModalVisible(false);
-  //   setSelectedBasket(null);
-  // };
 
   const handleCashRequestIconClick = (basket, event) => {
     event.stopPropagation();
@@ -443,14 +434,6 @@ const InvestorCashRequest = () => {
           </div>
         </div>
       ))}
-
-      {/* <Modal
-        isVisible={isHistoryModalVisible}
-        onClose={handleCloseHistoryModal}
-        title={`تاریخچه ی `}
-      >
-        <HistoryModalContent />
-      </Modal> */}
 
       <Modal
         isVisible={isCashRequestModalVisible}
