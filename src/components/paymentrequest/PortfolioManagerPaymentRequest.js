@@ -1,14 +1,19 @@
 import React, { useState, useContext } from "react";
 import Icon from "../common/Icon";
 import AppContext from "../../contexts/AppContext";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+
 
 // Generic Modal Component
 const Modal = ({ isVisible, onClose, title, children }) => {
   if (!isVisible) return null;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-lg p-8 bg-gray-200">
-        <div className="flex items-center">
+      <div className="w-full max-w-lg p-4 bg-gray-100">
+        <div className="flex items-center mb-4">
           <button onClick={onClose} className="">
             <Icon name="arrowright" size={16} className="ml-4" />
           </button>
@@ -23,13 +28,13 @@ const Modal = ({ isVisible, onClose, title, children }) => {
 const getStatusColor = (status) => {
   switch (status) {
     case "رد":
-      return "bg-red-500";
+      return "bg-[#DB524B]";
     case "انجام شده":
-      return "bg-green-500";
+      return "bg-[#1BBF89]";
     case "در انتظار تایید":
       return "bg-gray-500";
     case "در انتظار سند واریز":
-      return "bg-blue-500";
+      return "bg-[#5D9CEC]";
     default:
       return "bg-gray-500";
   }
@@ -76,78 +81,90 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
 
 // Specific Modal Content for "درخواست سهم"
 const ShareRequestModalContent = () => (
-  <div className="space-y-1">
-    <div className="p-6 border border-gray-400">
+  <div className="px-4 space-y-1">
+    <div className="px-4 py-3 border border-gray-400">
       <label>کل موجودی سبد (پرتفوی و نقد) :</label>
-      <div className="flex justify-center">
+      <div className="flex justify-between">
+        <span></span>
         <input
           type="text"
           className="pl-2 bg-gray-100 text-end"
-          value="1000000"
+          value="۱۰۰۰۰۰۰"
           readOnly
         />
-        <span className="mr-2">ریال</span>
+        <span className="">ریال</span>
       </div>
     </div>
-    <div className="p-6 border border-gray-400">
+    <div className="px-4 py-3 border border-gray-400">
       <div className="flex justify-between ">
-        <label>درصد توافق شده:</label>
-        {/* <span className="text-end">۳۰</span> */}
+        <span>درصد توافق شده:</span>
         <input
           type="text"
           className="bg-gray-200 text-end"
-          value="30"
+          value="۳۰"
           readOnly
         />
         <span>درصد</span>
       </div>
 
       <label>مبلغ سهم سبد گردان:</label>
-      <div className="flex justify-end">
+      <div className="flex justify-between">
+        <span></span>
         <input
           type="text"
-          className="ml-8 bg-gray-200 text-end"
-          value="10000000"
+          className="pl-2 bg-gray-200 text-end"
+          value="۱۰۰۰۰۰۰"
           readOnly
         />
         <span>ریال</span>
       </div>
     </div>
 
-    <div className="p-6 border border-gray-400">
+    <div className="px-4 py-3 border border-gray-400">
       <label>مبلغ درخواست شده:</label>
       <div className="flex justify-between">
+        <span></span>
         <input
           type="text"
-          className="text-center bg-gray-100"
-          value="10000000"
+          className="bg-gray-100 text-end"
+          value="۱۰۰۰۰۰"
           readOnly
         />
         <span>ریال</span>
       </div>
-    </div>
-    <div className="p-6 border border-gray-400">
       <label>مبلغ باقیمانده:</label>
       <div className="flex justify-between">
+        <span></span>
         <input
           type="text"
-          className="text-center bg-gray-100"
-          value="10000000"
+          className="text-left bg-gray-100"
+          value="۱۰۰۰۰۰۰"
           readOnly
         />
         <span>ریال</span>
       </div>
     </div>
-    <div className="p-6 border border-gray-400">
-      <label>تاریخ:</label>
-      <input
-        type="text"
-        className="text-center bg-gray-100"
-        value="1398/03/12"
-        readOnly
-      />
+    {/* <div className="px-4 py-3 border border-gray-400"></div> */}
+    <div className="flex justify-between p-6">
+      <span>تاریخ:</span>
+      <div className="">
+        <DatePicker
+          calendar={persian}
+          locale={persian_fa}
+          calendarPosition="bottom-right"
+          // value={startDate}
+          // onChange={setStartDate}
+          format="YYYY/MM/DD"
+          inputClass="sm:flex-1 border text-left cursor-pointer"
+          containerClassName="sm:flex-1"
+          
+        />
+      </div>
+      <span></span>
     </div>
-    <button className="p-1 text-white bg-green-500 ">ثبت درخواست سهم</button>
+    <div className="flex justify-center">
+      <button className="p-1 text-white bg-green-500 ">ثبت درخواست سهم</button>
+    </div>
   </div>
 );
 
@@ -361,7 +378,7 @@ const PortfolioManagerPaymentRequest = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          className="p-4 mb-4 bg-[#1BBF89] shadow-md cursor-pointer"
           onClick={() => handleBasketClick(basket)}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">

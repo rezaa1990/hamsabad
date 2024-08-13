@@ -593,7 +593,7 @@ const InvestorPaymentRequest = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          className="p-4 mb-4 bg-[#1BBF89] shadow-md cursor-pointer"
           onClick={() => handleBasketClick(basket)}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">
