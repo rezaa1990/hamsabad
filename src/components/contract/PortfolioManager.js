@@ -645,9 +645,9 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
       {/* Preview Modal */}
       {showPreview && (
         <>
-          <div className="fixed inset-0 z-40 flex bg-black opacity-25"></div>
-          <div className="fixed inset-0 z-50 w-6/12 bg-black bg-opacity-50">
-            <div className="">
+          <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="w-6/12 bg-black bg-opacity-50">
               <div
                 className={`${
                   isDarkMode
@@ -655,20 +655,18 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                     : "bg-white text-gray-800"
                 }`}
               >
-                {/* <div className=""> */}
-                <div className="flex">
+                <div className="flex items-center py-4">
                   <button
                     className="p-1 text-2xl cursor-pointer"
                     onClick={handleClosePreview}
                   >
-                    <Icon name="arrowright" size={16} className="" />
+                    <Icon name="arrowright" size={16} />
                   </button>
-                  <h3 className="text-xl font-semibold">پیش‌نمایش قرارداد</h3>
+                  <h3 className="mr-1 text-xl font-semibold">پیش‌نمایش قرارداد</h3>
                 </div>
-                {/* </div> */}
                 <div
-                  className="relative flex-auto p-6"
-                  style={{ maxHeight: "70vh", overflowY: "auto" }}
+                  className="relative flex-auto p-6 overflow-y-auto"
+                  // style={{ maxHeight: "70vh" }}
                 >
                   <div className="mb-6">
                     <h4 className="mb-2 text-xl font-semibold">
