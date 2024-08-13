@@ -69,7 +69,7 @@ const UserProfile = () => {
 
         {/* نقش من */}
         <div>
-          <h3 className="mb-2 text-lg font-semibold">نقش من</h3>
+          <h3 className="mb-2 text-lg">نقش من</h3>
           <p
             className={`w-full p-2 ${
               isDarkMode ? "bg-gray-700" : "bg-gray-100"
