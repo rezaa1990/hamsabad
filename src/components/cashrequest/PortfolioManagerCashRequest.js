@@ -40,6 +40,7 @@ const getStatusColor = (status) => {
       return "bg-gray-500";
   }
 };
+
 const CashRequestHistoryModalContent = ({ basket, handleEyeIconClick }) => (
   <div className="">
     {basket.cashRequestHistory.map((cashreq, index) => (
@@ -75,28 +76,43 @@ const CashRequestDetailsModal = ({
   basket,
   cashreq,
   setIsCashRequestDetailsModalVisible,
+  onClose,
 }) => {
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
-      <div className="space-y-4 text-right">
-        <div className="flex justify-between">
-          <span>:مبلغ</span>
-          <span>{cashreq.amount} ریال</span>
+    <div className="px-8">
+      <div className="mb-4 space-y-6">
+        <div className="flex items-center">
+          <span className="flex-shrink-0 w-20">مبلغ:</span>
+          <div className="flex flex-grow">
+            <div className="flex items-center justify-end w-full">
+              <div className="whitespace-nowrap">۱۰۰۰۰۰۰۰۰</div>
+            </div>
+            <div className="flex justify-end w-20">ریال</div>
+          </div>
         </div>
-        <div className="flex justify-between">
-          <span>:تاریخ</span>
-          <span>{cashreq.date}</span>
+        <div className="flex items-center">
+          <span className="flex-shrink-0 w-20">تاریخ:</span>
+          <div className="flex flex-grow">
+            <div className="flex items-center justify-end w-full">
+              <div className="text-left whitespace-nowrap">۱۲۳۴/۱۲/۱۲</div>
+            </div>
+            <div className="w-20"></div>
+          </div>
         </div>
-        <div>
-          <span>:علت رد</span>
-          <p>{cashreq.rejectionReason}</p>
-        </div>
-        {/* سایر داده‌ها */}
+        <div>واریز به‌صورت مستقیم</div>
       </div>
-      <div className="mt-6 text-center">
+      <div className="mb-4 space-y-4">
+        <div>پیام سرمایه‌گذار :</div>
+        <div> علت رد:</div>
+        <div>پیام سبدگردان :</div>
+      </div>
+      <div className="flex justify-center">
+        {/* <div className="w-48 h-48 p-4 mb-4 bg-white border-2 border-gray-300"></div> */}
+      </div>
+      <div className="flex justify-center">
         <button
-          onClick={() => setIsCashRequestDetailsModalVisible(false)}
-          className="px-4 py-2 text-white bg-gray-600 rounded"
+          onClick={onClose}
+          className="px-4 py-1 font-bold border bg-whit"
         >
           بازگشت
         </button>
@@ -107,52 +123,46 @@ const CashRequestDetailsModal = ({
 
 const ConfirmedCashRequestModal = ({ cashreq, onClose }) => {
   return (
-    <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
-      <div className="p-4 text-white bg-blue-500">
-        <h2 className="text-xl font-bold text-center">
-          درخواست وجه شماره سبد (تایید شده)
-        </h2>
-      </div>
-      <div className="p-4">
-        <div className="space-y-4">
+    <div className="w-full max-w-md mx-auto overflow-hidden">
+      <div className="p-6">
+        <div className="space-y-3">
           <div className="flex justify-between">
-            <span className="font-bold">مبلغ:</span>
-            <span>{cashreq.amount} ریال</span>
+            <span className="font">مبلغ:</span>
+            <div className="flex justify-around w-6/12">
+              <div>{cashreq.amount}</div>
+              <span>ریال</span>
+            </div>
           </div>
           <div className="flex justify-between">
-            <span className="font-bold">تاریخ:</span>
-            <span>{cashreq.date}</span>
+            <span className="font">تاریخ:</span>
+            <div className="flex justify-around w-6/12">
+              <div>{cashreq.date}</div>
+              <span className="text-gray-100">ریال</span>
+            </div>
           </div>
           <div>
-            <span className="font-bold">پیام سبدگردان:</span>
+            <span className="">پیام سبدگردان:</span>
             <p className="mt-1">
               {cashreq.portfolioManagerMessage || "بدون پیام"}
             </p>
           </div>
           <div>
-            <span className="font-bold">پیام سرمایه‌گذار:</span>
+            <span className="">پیام سرمایه‌گذار:</span>
             <p className="mt-1">{cashreq.investorMessage || "بدون پیام"}</p>
           </div>
           <div>
-            <span className="font-bold">سند واریز:</span>
-            <div className="flex items-center justify-center h-32 mt-2 bg-gray-100">
-              {cashreq.depositDocument ? (
-                <img
-                  src={cashreq.depositDocument}
-                  alt="سند واریز"
-                  className="max-h-full"
-                />
-              ) : (
-                <span>سند واریز موجود نیست</span>
-              )}
+            <span className="">سند واریز:</span>
+            <div className="flex items-center justify-center h-32 mt-2 bg-white border">
+              <img
+                src={cashreq.depositDocument}
+                alt=""
+                className="max-h-full"
+              />
             </div>
           </div>
         </div>
-        <div className="mt-6 text-center">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 text-white transition-colors bg-gray-500 rounded hover:bg-gray-600"
-          >
+        <div className="mt-5 text-center">
+          <button onClick={onClose} className="px-4 py-1 font-bold border">
             بازگشت
           </button>
         </div>
@@ -367,18 +377,23 @@ const UploadDocumentModal = ({ onClose, onSubmit }) => {
     onClose();
   };
 
+  const handleReject = () => {
+    // onReject(selectedFile, comments);
+    onClose();
+  };
+
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="mb-4 text-xl font-bold text-right">
+    <div className="p-6">
+      {/* <h2 className="mb-4 text-xl font-bold text-right">
         ثبت سند واریز وجه درخواستی به حساب (شماره)
-      </h2>
-      <div className="mb-4">
-        <div className="flex items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg">
-          {selectedFile ? (
+      </h2> */}
+      <div className="flex justify-center mb-4">
+        <div className="flex items-center justify-center w-56 h-40 bg-white border-2 border-gray-300">
+          {/* {selectedFile ? (
             <p className="text-gray-600">{selectedFile.name}</p>
           ) : (
             <p className="text-gray-400">برای انتخاب فایل کلیک کنید</p>
-          )}
+          )} */}
         </div>
         <input
           type="file"
@@ -386,25 +401,28 @@ const UploadDocumentModal = ({ onClose, onSubmit }) => {
           className="hidden"
           id="fileInput"
         />
-        <button
+        {/* <button
           onClick={() => document.getElementById("fileInput").click()}
           className="w-full mt-2 text-white bg-blue-500"
         >
           انتخاب سند
-        </button>
+        </button> */}
       </div>
-      <div className="mb-4">
+      <div className="flex justify-center mb-4">
         <textarea
           placeholder="نوشتن توضیحات..."
           value={comments}
           onChange={(e) => setComments(e.target.value)}
-          className="w-full p-2 border rounded"
-          rows="3"
+          className="w-8/12 p-2 border"
+          rows="2"
         />
       </div>
-      <div className="flex justify-end">
-        <button onClick={handleSubmit} className="text-white bg-green-500">
-          ثبت
+      <div className="flex justify-around">
+        <button onClick={handleSubmit} className="bg-[#1BBF89] py-1 w-20 ">
+          تایید
+        </button>
+        <button onClick={handleReject} className="bg-[#DB524B] py-1 w-20 ">
+          رد
         </button>
       </div>
     </div>
@@ -430,7 +448,12 @@ const InvestorCashRequest = () => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
+    const navigate = useNavigate();
+    const handleNavigate = () => {
+      navigate("/dashboard");
+    };
   // const [cashrequestValue, setCashRequestValue] = useState();
+  
   //------------------------------------------------------------------------------------------
   const [selectedBasket, setSelectedBasket] = useState(null);
   // const [isHistoryModalVisible, setHistoryModalVisible] = useState(false);
@@ -562,28 +585,22 @@ const InvestorCashRequest = () => {
     setCashRequestHistoryModalVisible(true);
   };
 
-  // const handleCloseHistoryModal = () => {
-  //   setHistoryModalVisible(false);
-  //   setSelectedBasket(null);
-  // };
-
-  // const handleCashRequestIconClick = (basket, event) => {
-  //   event.stopPropagation();
-  //   setSelectedBasket(basket);
-  //   setCashRequestModalVisible(true);
-  // };
-
-  // const handleCloseCashRequestModal = () => {
-  //   setCashRequestModalVisible(false);
-  //   setSelectedBasket(null);
-  // };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
+      <div className="flex py-4">
+        <button
+          onClick={handleNavigate}
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
+          <Icon name="arrowright" size={16} className="ml-2" />
+        </button>
+        <span className="font-bold">درخواست وجه</span>
+      </div>
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="p-4 mb-4 bg-green-500 shadow-md cursor-pointer"
+          className="p-4 mb-4 bg-[#1BBF89] shadow-md cursor-pointer"
           onClick={() => handleBasketClick(basket)}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">
@@ -620,36 +637,18 @@ const InvestorCashRequest = () => {
               >
                 <Icon className="mx-2" name="cashrequesthistory" size={32} />
               </button>
-              <button>
+              {/* <button>
                 <Icon className="mx-2" name="cashrequest" size={32} />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
       ))}
 
-      {/* <Modal
-        isVisible={isHistoryModalVisible}
-        onClose={handleCloseHistoryModal}
-        title={`تاریخچه ی `}
-      >
-        <HistoryModalContent />
-      </Modal> */}
-
-      {/* <Modal
-        isVisible={isCashRequestModalVisible}
-        onClose={handleCloseCashRequestModal}
-        title="درخواست وجه"
-      >
-        <CashRequestModalContent
-          cashrequestValue={cashrequestValue}
-          setCashRequestValue={setCashRequestValue}
-        />
-      </Modal> */}
       <Modal
         isVisible={isCashRequestHistoryModalVisible}
         onClose={handleCloseCashRequestHistoryModal}
-        title={`درخواست وجه نقد سبد (شماره سبد: ${selectedBasket?.contractNumber})`}
+        title={`درخواست وجه نقد سبد (${selectedBasket?.contractNumber})`}
       >
         <CashRequestHistoryModalContent
           basket={selectedBasket}
@@ -660,12 +659,13 @@ const InvestorCashRequest = () => {
       <Modal
         isVisible={isCashRequestDetailsModalVisible}
         onClose={handleCloseCashRequestDetailsModal}
-        title={` (رد شده) ${selectedBasket?.contractNumber}`}
+        title={`${selectedBasket?.contractNumber}(رد شده)`}
       >
         <CashRequestDetailsModal
           setIsCashRequestDetailsModalVisible={
             setIsCashRequestDetailsModalVisible
           }
+          onClose={handleCloseCashRequestDetailsModal}
           basket={selectedBasket}
           // handleEyeIconClick={handleEyeIconClick}
           cashreq={cashreq}
@@ -674,7 +674,7 @@ const InvestorCashRequest = () => {
       <Modal
         isVisible={isConfirmedCashRequestModalVisible}
         onClose={handleCloseConfirmedCashRequestModal}
-        title={`درخواست وجه تایید شده (شماره سبد: ${selectedBasket?.contractNumber})`}
+        title={`درخواست وجه ${selectedBasket?.contractNumber} (تایید شده)`}
       >
         <ConfirmedCashRequestModal
           cashreq={cashreq}
@@ -727,7 +727,7 @@ const InvestorCashRequest = () => {
       <Modal
         isVisible={isUploadDocumentModalVisible}
         onClose={() => setIsUploadDocumentModalVisible(false)}
-        title="ثبت سند واریز"
+        title={`بررسی سند واریز سبد  (${selectedBasket?.contractNumber})`}
       >
         <UploadDocumentModal
           onClose={() => setIsUploadDocumentModalVisible(false)}

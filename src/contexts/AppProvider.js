@@ -16,7 +16,7 @@ function AppProvider({ children }) {
     {
       id: 1,
       contractNumber: "CN-2023-001",
-      InvestAmount: 1000000,
+      InvestAmount: 10060000,
       status: "در انتظار بررسی",
       investor: "سرمایه‌گذار 1",
       investorPhone: "09121234567",
@@ -77,19 +77,22 @@ function AppProvider({ children }) {
       cashRequestHistory: [
         {
           cashRequestStatus: "انجام شده",
-          amount: 1000000,
+          amount: "۱۰۰۰۰۰۰",
           isDirectPayment: true,
+          date: "۱۲۳۴/۱۲/۱۲",
         },
         { cashRequestStatus: "رد", amount: 2000000, isDirectPayment: false },
         {
           cashRequestStatus: "در انتظار تایید",
-          amount: 3000000,
+          amount: "۱۰۰۰۰۰۰",
           isDirectPayment: false,
+          date: "۱۲۳۴/۱۲/۱۲",
         },
         {
           cashRequestStatus: "در انتظار سند واریز",
-          amount: 4000000,
+          amount: "۱۰۰۰۰۰۰",
           isDirectPayment: true,
+          date: "۱۲۳۴/۱۲/۱۲",
         },
       ],
     },

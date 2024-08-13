@@ -347,7 +347,7 @@ const InvestorIncreaseCapital = () => {
 
   return (
     <div className="items-center justify-start p-4">
-      <div className="flex">
+      <div className="flex py-4">
         <button
           onClick={handleNavigate}
           className="flex items-center text-gray-600 hover:text-gray-800"
