@@ -6,6 +6,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 import AppContext from "../../contexts/AppContext";
+import DateObject from "react-date-object";
 
 // Generic Modal Component
 const Modal = ({ isVisible, onClose, title, children }) => {
@@ -82,41 +83,23 @@ const ShareRequestModalContent = ({
   const handleRejectShareRequestClick = () => {
     handleButtonRejectSharerequestClick(basket);
   };
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    const date = new DateObject({ calendar: persian, locale: persian_fa });
+    setCurrentDate(date.format("YYYY/MM/DD"));
+  }, []);
 
   return (
-    <div className="px-6 space-y-1">
-      <div className="px-6 py-3 border border-gray-400">
-        <label>کل موجودی سبد (پرتفوی و نقد) :</label>
-        <div className="flex justify-end">
+    <div className="px-2 space-y-1 sm:px-6">
+      <div className="px-2 py-3 border border-gray-400 sm:px-6">
+        <label className="block mb-2">کل موجودی سبد (پرتفوی و نقد) :</label>
+        <div className="flex flex-col items-center justify-between sm:flex-row">
           <span></span>
-          <input
-            type="text"
-            className="p-2 bg-white text-end"
-            value="۱۰۰۰۰۰۰۰"
-            readOnly
-          />
-          <span className="p-2">ریال</span>
-        </div>
-      </div>
-      <div className="px-6 py-3 border border-gray-400 ">
-        <div className="flex justify-between mb-1">
-          <div className="flex justify-between">
-            <label className="">درصد توافق شده:</label>
+          <div className="flex items-center w-full sm:w-auto">
             <input
               type="text"
-              className="p-2 bg-gray-100 text-end"
-              value="۳۰"
-              readOnly
-            />
-            <span className="py-2 mr-2">درصد</span>
-          </div>
-        </div>
-        <div className="">
-          <label>مبلغ سهم سبد گردان:</label>
-          <div className="flex justify-end">
-            <input
-              type="text"
-              className="p-2 bg-gray-100 text-end"
+              className="w-full p-2 bg-white text-end sm:w-auto"
               value="۱۰۰۰۰۰۰۰"
               readOnly
             />
@@ -124,25 +107,51 @@ const ShareRequestModalContent = ({
           </div>
         </div>
       </div>
-      <div className="px-6 py-3 border border-gray-400 ">
-        <label>مبلغ درخواست شده:</label>
-        <div className="flex justify-end">
+      <div className="px-2 py-3 border border-gray-400 sm:px-6">
+        <div className="flex flex-col items-center justify-between mb-1 sm:flex-row">
+          <label className="mb-2 sm:mb-0">درصد توافق شده:</label>
+          <div className="flex items-center w-full sm:w-auto">
+            <input
+              type="text"
+              className="w-full p-2 bg-gray-100 text-end sm:w-auto"
+              value="۳۰"
+              readOnly
+            />
+            <span className="py-2 mr-2">درصد</span>
+          </div>
+        </div>
+        <div className="mt-4 sm:mt-0">
+          <label className="block mb-2">مبلغ سهم سبد گردان:</label>
+          <div className="flex items-center justify-end">
+            <input
+              type="text"
+              className="w-full p-2 bg-gray-100 text-end sm:w-auto"
+              value="۱۰۰۰۰۰۰۰"
+              readOnly
+            />
+            <span className="p-2">ریال</span>
+          </div>
+        </div>
+      </div>
+      <div className="px-2 py-3 border border-gray-400 sm:px-6">
+        <label className="block mb-2">مبلغ درخواست شده:</label>
+        <div className="flex items-center justify-end">
           <span></span>
           <input
             type="text"
-            className="p-2 bg-gray-100 text-end"
+            className="w-full p-2 bg-gray-100 text-end sm:w-auto"
             value="۱۰۰۰۰۰۰"
             readOnly
           />
           <span className="p-2">ریال</span>
         </div>
 
-        <label>مبلغ باقیمانده:</label>
-        <div className="flex justify-end">
+        <label className="block mt-4 mb-2">مبلغ باقیمانده:</label>
+        <div className="flex items-center justify-end">
           <span></span>
           <input
             type="text"
-            className="p-2 bg-gray-100 text-end"
+            className="w-full p-2 bg-gray-100 text-end sm:w-auto"
             value="۱۰۰۰۰۰"
             readOnly
           />
@@ -150,29 +159,55 @@ const ShareRequestModalContent = ({
         </div>
       </div>
 
-      <div className="px-6 py-3 ">
-        <div className="flex justify-between">
-          <label>تاریخ:</label>
-
-          <input
-            type="text"
-            className="bg-gray-100 text-end"
-            value="۱۴۰۰/۰۸/۱۲"
-            readOnly
+      <div className="px-2 py-3 sm:px-6">
+        <div className="flex flex-col items-center justify-between sm:flex-row">
+          <label className="mb-2 sm:mb-0">تاریخ:</label>
+          <DatePicker
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom-right"
+            format="YYYY/MM/DD"
+            inputClass="w-full sm:w-auto border text-left cursor-pointer"
+            containerClassName="w-full sm:w-auto"
+            value={currentDate}
+            onChange={setCurrentDate}
+            render={(value, openCalendar) => {
+              return (
+                <div
+                  onClick={openCalendar}
+                  className="flex items-center justify-between w-full p-2 bg-white border cursor-pointer sm:w-auto"
+                >
+                  <span>{value}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+              );
+            }}
           />
-          {/* <span className=""></span> */}
         </div>
       </div>
-      <div className="flex justify-around">
+      <div className="flex flex-col justify-around mt-4 sm:flex-row">
         <button
           onClick={() => handleButtonConfirmSharerequestClick(basket)}
-          className="px-6 py-1 text-white bg-green-500 "
+          className="w-full px-6 py-1 mb-2 text-white bg-green-500 sm:mb-0 sm:w-auto"
         >
           تایید
         </button>
         <button
           onClick={handleRejectShareRequestClick}
-          className="px-6 py-1 text-white bg-red-500 "
+          className="w-full px-6 py-1 text-white bg-red-500 sm:w-auto"
         >
           رد
         </button>
@@ -186,10 +221,10 @@ const ConfirmShareRequestModalContent = () => {
   const [text, setText] = useState("");
 
   return (
-    <div className="p-4 space-y-4 bg-white rounded-lg">
-      <div className="text-lg font-semibold text-right">
+    <div className="px-8 py-4 space-y-4">
+      {/* <div className="text-lg font-semibold text-right">
         تایید درخواست وجه (سرمایه‌گذار)
-      </div>
+      </div> */}
       <div className="space-y-2">
         <label className="flex items-center text-right">
           <input
@@ -214,19 +249,23 @@ const ConfirmShareRequestModalContent = () => {
           تشکر از زحمات جنابعالی، لطفا جهت واریز مبلغ را از سبد نقد کنید.
         </label>
       </div>
-      <input
+      <textarea
         type="text"
         placeholder="متن خطاب به سیدگردان"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="w-full p-2 text-right border border-gray-300 rounded-md"
+        className="w-full p-2 text-right border border-gray-300"
       />
-      <button
-        onClick={() => console.log("تایید اولیه درخواست", selectedOption, text)}
-        className="w-full py-2 text-white bg-green-500 rounded-md"
-      >
-        تایید اولیه درخواست
-      </button>
+      <div className="flex justify-center">
+        <button
+          onClick={() =>
+            console.log("تایید اولیه درخواست", selectedOption, text)
+          }
+          className="px-2 py-1 text-white bg-[#1BBF89]"
+        >
+          تایید اولیه درخواست
+        </button>
+      </div>
     </div>
   );
 };
@@ -664,7 +703,7 @@ const InvestorPaymentRequest = () => {
         isVisible={isConfirmShareRequestModalVisible}
         onClose={handleCloseConfirmShareRequestModal}
         title={` تایید درخواست وجه (${
-          selectedBasket?.contractNumber || "شماره سبد"
+          selectedBasket?.investor || "شماره سبد"
         })`}
       >
         <ConfirmShareRequestModalContent />

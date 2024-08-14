@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Icon from "../common/Icon";
 import AppContext from "../../contexts/AppContext";
 import DatePicker from "react-multi-date-picker";
@@ -81,132 +81,132 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
 
 // Specific Modal Content for "درخواست سهم"
 const ShareRequestModalContent = () => {
-    const [currentDate, setCurrentDate] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     const date = new DateObject({ calendar: persian, locale: persian_fa });
     setCurrentDate(date.format("YYYY/MM/DD"));
   }, []);
-return(
+  return (
     <div className="px-4 space-y-4">
-    <div className="px-4 py-3 border border-gray-400">
-      <label className="block mb-2">کل موجودی سبد (پرتفوی و نقد) :</label>
-      <div className="flex items-center justify-between">
-        <span></span>
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="w-24 pl-2 text-center bg-gray-100 sm:w-32"
-            value="۱۰۰۰۰۰۰"
-            readOnly
-          />
-          <span className="mr-2">ریال</span>
+      <div className="px-4 py-3 border border-gray-400">
+        <label className="block mb-2">کل موجودی سبد (پرتفوی و نقد) :</label>
+        <div className="flex items-center justify-between">
+          <span></span>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="w-24 pl-2 text-center bg-gray-100 sm:w-32"
+              value="۱۰۰۰۰۰۰"
+              readOnly
+            />
+            <span className="mr-2">ریال</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div className="px-4 py-3 border border-gray-400">
-      <div className="flex items-center justify-between mb-4">
-        <span>درصد توافق شده:</span>
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="w-16 text-center bg-white sm:w-24"
-            value="۳۰"
-            readOnly
-          />
-          <span className="mr-2">درصد</span>
+      <div className="px-4 py-3 border border-gray-400">
+        <div className="flex items-center justify-between mb-4">
+          <span>درصد توافق شده:</span>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="w-16 text-center bg-white sm:w-24"
+              value="۳۰"
+              readOnly
+            />
+            <span className="mr-2">درصد</span>
+          </div>
+        </div>
+
+        <label className="block mb-2">مبلغ سهم سبد گردان:</label>
+        <div className="flex items-center justify-between">
+          <span></span>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="w-24 text-center bg-white sm:w-32"
+              value="۱۰۰۰۰۰۰"
+              readOnly
+            />
+            <span className="mr-2">ریال</span>
+          </div>
         </div>
       </div>
 
-      <label className="block mb-2">مبلغ سهم سبد گردان:</label>
-      <div className="flex items-center justify-between">
-        <span></span>
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="w-24 text-center bg-white sm:w-32"
-            value="۱۰۰۰۰۰۰"
-            readOnly
-          />
-          <span className="mr-2">ریال</span>
+      <div className="px-4 py-3 border border-gray-400">
+        <label className="block mb-2">مبلغ درخواست شده:</label>
+        <div className="flex items-center justify-between mb-4">
+          <span></span>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="w-24 text-center bg-gray-100 sm:w-32"
+              value="۱۰۰۰۰۰"
+              readOnly
+            />
+            <span className="mr-2">ریال</span>
+          </div>
+        </div>
+        <label className="block mb-2">مبلغ باقیمانده:</label>
+        <div className="flex items-center justify-between">
+          <span></span>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="w-24 text-center bg-gray-100 sm:w-32"
+              value="۱۰۰۰۰۰۰"
+              readOnly
+            />
+            <span className="mr-2">ریال</span>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div className="px-4 py-3 border border-gray-400">
-      <label className="block mb-2">مبلغ درخواست شده:</label>
-      <div className="flex items-center justify-between mb-4">
-        <span></span>
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="w-24 text-center bg-gray-100 sm:w-32"
-            value="۱۰۰۰۰۰"
-            readOnly
-          />
-          <span className="mr-2">ریال</span>
-        </div>
-      </div>
-      <label className="block mb-2">مبلغ باقیمانده:</label>
-      <div className="flex items-center justify-between">
-        <span></span>
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="w-24 text-center bg-gray-100 sm:w-32"
-            value="۱۰۰۰۰۰۰"
-            readOnly
-          />
-          <span className="mr-2">ریال</span>
-        </div>
-      </div>
-    </div>
-    <div className="flex flex-col items-center justify-between p-6 sm:flex-row">
-      <span className="mb-2 sm:mb-0">تاریخ:</span>
-      <div className="w-full sm:w-auto">
-        <DatePicker
-          calendar={persian}
-          locale={persian_fa}
-          calendarPosition="bottom-right"
-          format="YYYY/MM/DD"
-          inputClass="w-full sm:w-auto border text-left cursor-pointer"
-          containerClassName="w-full sm:w-auto "
-          value={currentDate}
-          onChange={setCurrentDate}
-          render={(value, openCalendar) => {
-            return (
-              <div
-                onClick={openCalendar}
-                className="flex items-center justify-between p-2 bg-white border cursor-pointer"
-              >
-                <span>{value}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+      <div className="flex flex-col items-center justify-between px-6 sm:flex-row">
+        <span className="mb-2 sm:mb-0">تاریخ:</span>
+        <div className="w-full sm:w-auto">
+          <DatePicker
+            calendar={persian}
+            locale={persian_fa}
+            calendarPosition="bottom-right"
+            format="YYYY/MM/DD"
+            inputClass="w-full sm:w-auto border text-left cursor-pointer"
+            containerClassName="w-full sm:w-auto "
+            value={currentDate}
+            onChange={setCurrentDate}
+            render={(value, openCalendar) => {
+              return (
+                <div
+                  onClick={openCalendar}
+                  className="flex items-center justify-between p-2 bg-white border cursor-pointer"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-            );
-          }}
-        />
+                  <span>{value}</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+              );
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <button className="p-2 text-white bg-[#1BBF89] sm:w-auto">
+          ثبت درخواست سهم
+        </button>
       </div>
     </div>
-    <div className="flex justify-center">
-      <button className="p-2 text-white bg-green-500 sm:w-auto">
-        ثبت درخواست سهم
-      </button>
-    </div>
-  </div>
-);
+  );
 };
 
 // Modal Content for "درخواست سهم از سبد (تایید شده)"
@@ -473,7 +473,7 @@ const PortfolioManagerPaymentRequest = () => {
       <Modal
         isVisible={isShareRequestModalVisible}
         onClose={handleCloseShareRequestModal}
-        title={`درخواست سهم (${selectedBasket?.contractNumber || "شماره سبد"})`}
+        title={`درخواست سهم از سبد (${selectedBasket?.contractNumber || ""})`}
       >
         <ShareRequestModalContent />
       </Modal>
