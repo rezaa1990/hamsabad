@@ -63,7 +63,7 @@ const Login = () => {
     >
       <div
         className={`mb-8 relative w-full ${
-          isDarkMode ? "bg-blue-600" : "bg-blue-500"
+          isDarkMode ? "bg-blue-600" : "bg-[#5D9CEC]"
         } h-40 py-2 mb-4 flex flex-col items-center`}
       >
         <h1

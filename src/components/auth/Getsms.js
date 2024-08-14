@@ -41,7 +41,7 @@ const GetSms = () => {
     >
       <div
         className={`mb-8 relative w-full ${
-          isDarkMode ? "bg-blue-600" : "bg-blue-500"
+          isDarkMode ? "bg-blue-600" : "bg-[#5D9CEC]"
         } h-20 py-2 mb-4 flex items-center justify-between px-4`}
       >
         <div className="absolute flex items-center right-4">
