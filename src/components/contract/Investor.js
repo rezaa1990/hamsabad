@@ -470,9 +470,15 @@ const Investor = () => {
               >
                 <SignatureCanvas
                   ref={sigCanvas}
+                  penColor="blue"
                   canvasProps={{
-                    className: "signature-canvas",
+                    className: "signature-canvas w-full h-48", // canvas
+                    style: {
+                      touchAction: "none",
+                    },
                   }}
+                  minWidth={1}
+                  maxWidth={1} 
                 />
                 <span className="absolute text-gray-400 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none top-1/2 left-1/2">
                   محل امضا

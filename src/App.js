@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import AppProvider from "./contexts/AppProvider";
 import AppContext from "./contexts/AppContext";
-// import { useAuth } from "./hooks/useAuth";
-// import { useTheme } from "./contexts/ThemeContext";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Sidebar from "./components/common/Sidebar";
@@ -14,19 +12,12 @@ import Register from "./components/auth/Register";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import Dashboard from "./components/dashboard/Dashboard";
 import ContractList from "./components/contract/ContractList";
-// import ContractForm from "./components/contract/ContractForm";
-import ContractDetails from "./components/contract/ContractDetails";
-// import IncreaseCapital from "./components/transactions/IncreaseCapital";
-import WithdrawCash from "./components/transactions/WithdrawCash";
-import RequestShare from "./components/transactions/RequestShare";
-import ProfileEdit from "./components/profile/ProfileEdit";
 import GetSms from "./components/auth/Getsms";
 import SetPassword from "./components/auth/Setpassword";
 import InformationEntry from "./components/profile/InformationEntry";
 import UserProfile from "./components/profile/UserProfile";
 import UserRoleComponent from "./components/contract/UserRoleComponent";
 import InvestRoleComponent from "./components/transactions/InvestRoleComponent";
-// import DepositReceipt from "./components/notification/DepositReceipt";
 import InvestmentApproval from "./components/notification/DepositReceipt";
 import PaymentRequestRole from "./components/paymentrequest/PaymentRequestRole";
 import CashRequestRole from "./components/cashrequest/CashRequestRole";
@@ -43,7 +34,6 @@ function App() {
 
 function AppContent() {
   const { isAuthenticated, isDarkMode } = useContext(AppContext);
-  // const { isDarkMode } = AppProvider();
 
   return (
     <div
@@ -66,12 +56,10 @@ function AppContent() {
             <Route path="/user" element={<UserRoleComponent />} />
             <Route path="/contracts" element={<ContractList />} />
             <Route path="/notification" element={<InvestmentApproval />} />
-            <Route path="/contracts/:id" element={<ContractDetails />} />
             <Route path="/increasecapital" element={<InvestRoleComponent />} />
             <Route path="/share-request" element={<PaymentRequestRole />} />
             <Route path="/cashrequest" element={<CashRequestRole />} />
             <Route path="/profile" element={<UserProfile />} />
-            <Route path="/profile/edit" element={<ProfileEdit />} />
           </Routes>
         </main>
       </div>
