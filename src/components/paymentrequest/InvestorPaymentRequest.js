@@ -270,99 +270,114 @@ const ConfirmShareRequestModalContent = () => {
   );
 };
 
-const RejectRequestshare = () => {
+//Modal Component for Share Document
+const ShareDocumentModalContent = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(URL.createObjectURL(event.target.files[0]));
+  };
+
   return (
-    <div className="p-4 space-y-4 bg-gray-100 rounded-lg">
-      <div className="text-lg font-semibold text-right">
-        درخواست سهم از سبد (رد شده)
-      </div>
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <span>مبلغ:</span>
-          <span>100,000</span>
-          <span>ریال</span>
-        </div>
-        <div className="flex justify-between">
-          <span>تاریخ:</span>
-          <span>1400/08/12</span>
-          <span></span>
-        </div>
-        <div className="flex justify-between">
-          <span>واریز به صورت مستقیم</span>
-          <span></span>
-          <span></span>
-        </div>
-        <div>
-          <div className="flex justify-between">
-            <span>پیام سرمایه‌گذار:</span>
-            <span>
-              با تشکر از زحمات شما، ولی متأسفانه نمی‌توانم این درخواست را تأیید
-              کنم.
-            </span>
-            <span></span>
-          </div>
-        </div>
-        <div>
-          <div className="flex justify-between">
-            <span>علت رد:</span>
-            <span>تغییر در سبد سرمایه‌گذاری</span>
-            <span></span>
-          </div>
-        </div>
-        <div>
-          <div className="flex justify-between">
-            <span>پیام سبدگردان:</span>
-            <span>
-              با تشکر از درخواست شما، متأسفانه به دلیل تغییر در سبد سرمایه‌گذاری
-              امکان تأیید این درخواست وجود ندارد.
-            </span>
-            <span></span>
-          </div>
+    <div className="space-y-4">
+      <div className="flex justify-center">
+        <div className="flex items-center justify-center bg-white border-2 border-gray-300 h-36 w-52">
+          {selectedFile ? (
+            <img
+              src={selectedFile}
+              alt="Selected Document"
+              className="object-contain w-full h-full"
+            />
+          ) : (
+            <span className="text-gray-400">آپلود سند ...</span>
+          )}
         </div>
       </div>
-      <div className="flex justify-around">
-        <button className="px-6 py-2 text-white bg-green-500 rounded-md">
-          بازگشت
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+      <div className="flex justify-center">
+        <button
+          className="px-2 py-1  bg-[#5D9CEC] font-bold"
+          onClick={() => document.getElementById("fileInput").click()}
+        >
+          انتخاب سند
+        </button>
+      </div>
+
+      <div className="flex justify-center">
+        <div className="">
+          {/* <label className="flex items-center text-right">
+            <input
+              type="radio"
+              name="requestOption"
+              value="option1"
+              // checked={selectedOption === "option1"}
+              // onChange={(e) => setSelectedOption(e.target.value)}
+              className="ml-2"
+            />
+            مبلع جهت واریز درخواست شد
+          </label> */}
+
+          <textarea
+            className="p-2 border border-gray-300 "
+            placeholder="نوشتن توضیحات..."
+            rows="2"
+          ></textarea>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <button className="px-4 py-1 font-bold  bg-[#1BBF89]">
+          ثبت ثانویه
         </button>
       </div>
     </div>
   );
 };
 
-// New Modal Content Component for Share Document
-const ShareDocumentModalContent = () => {
-  const [description, setDescription] = useState("");
-
+const RejectRequestshare = () => {
   return (
-    <div className="space-y-4 text-right">
-      <div className="text-lg font-semibold">
-        ثبت سند واریز برای سبدگردان (شماره) - سرمایه گذار
+    <div className="px-8 py-2 space-y-4">
+      <div className="space-y-2">
+        <div className="flex items-center">
+          <input type="radio" id="option1" name="reason" className="ml-2" />
+          <label htmlFor="option1" className="text-right">
+            ضمن پوزش، اکنون امکان واریز سهم مشارکت مقدور نیست.
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input type="radio" id="option2" name="reason" className="ml-2" />
+          <label htmlFor="option2" className="text-right">
+            لطفا جهت اطمینان، رمز عبور را ارسال کرده سپس مجددا درخواست دهید.
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input type="radio" id="option3" name="reason" className="ml-2" />
+          <label htmlFor="option3" className="text-right">
+            تاریخ خارج از قرارداد است.
+          </label>
+        </div>
+        <div className="flex items-center">
+          <input type="radio" id="option4" name="reason" className="ml-2" />
+          <label htmlFor="option4" className="text-right">
+            سایر دلایل
+          </label>
+        </div>
+        <textarea
+          className="w-full p-2 border border-gray-300"
+          placeholder="نوشتن توضیحات..."
+          rows="2"
+        ></textarea>
       </div>
-      <div className="h-40 border border-gray-300"></div>
-      <button className="w-full py-2 text-white bg-blue-500 rounded">
-        انتخاب سند
-      </button>
-      <div className="flex items-center space-x-2">
-        <input
-          type="radio"
-          id="newContract"
-          name="contractOption"
-          className="ml-2"
-        />
-        <label htmlFor="newContract" className="text-gray-700">
-          لطفا قرارداد جدید را ثبت نمایید.
-        </label>
+      <div className="flex justify-center">
+        <button className="px-6 py-1 font-bold bg-[#DB524B]">
+          رد
+        </button>
       </div>
-      <input
-        type="text"
-        placeholder="نوشتن توضیحات..."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded-md"
-      />
-      <button className="w-full py-2 text-white bg-green-500 rounded-md">
-        تایید نهایی
-      </button>
     </div>
   );
 };
@@ -411,7 +426,7 @@ const ConfirmedPortfolioShareRequestModalContent = ({ onClose }) => (
   </div>
 );
 
-// New Modal Content for "رد شده" (Rejected) basket
+// Modal Content for "رد شده" (Rejected) basket
 const RejectedBasketModalContent = ({ basketNumber, onClose }) => (
   <div className="">
     <div className="px-8 space-y-8">
@@ -711,7 +726,7 @@ const InvestorPaymentRequest = () => {
       <Modal
         isVisible={isShareDocumentModalVisible}
         onClose={handleCloseShareDocumentModal}
-        title={`ثبت سند واریز`}
+        title={`ثبت سند واریز برای ${"سبدگردان ۱ - سرمایه گذار ۱"}`}
       >
         <ShareDocumentModalContent />
       </Modal>

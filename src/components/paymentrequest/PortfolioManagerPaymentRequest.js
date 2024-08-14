@@ -258,26 +258,73 @@ const ConfirmedPortfolioShareRequestModalContent = () => (
 );
 
 // New Modal Content for "ثبت سند واریز سبد"
-const DepositDocumentModalContent = () => (
-  <div className="space-y-4">
-    <h2 className="text-xl font-bold text-center">
-      ثبت سند واریز سبد (شماره سبد)
-    </h2>
-    <div className="flex items-center justify-center h-48 border-2 border-gray-300">
-      {/* Placeholder for image upload area */}
-      <span className="text-gray-400">محل آپلود تصویر</span>
+const DepositDocumentModalContent = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(URL.createObjectURL(event.target.files[0]));
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-center">
+        <div className="flex items-center justify-center bg-white border-2 border-gray-300 h-36 w-52">
+          {selectedFile ? (
+            <img
+              src={selectedFile}
+              alt="Selected Document"
+              className="object-contain w-full h-full"
+            />
+          ) : (
+            <span className="text-gray-400">آپلود سند ...</span>
+          )}
+        </div>
+      </div>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+      <div className="flex justify-center">
+        <button
+          className="px-2 py-1  bg-[#5D9CEC] font-bold"
+          onClick={() => document.getElementById("fileInput").click()}
+        >
+          انتخاب سند
+        </button>
+      </div>
+
+      <div className="flex justify-center">
+        <div className="">
+          {/* <label className="flex items-center text-right">
+            <input
+              type="radio"
+              name="requestOption"
+              value="option1"
+              // checked={selectedOption === "option1"}
+              // onChange={(e) => setSelectedOption(e.target.value)}
+              className="ml-2"
+            />
+            مبلع جهت واریز درخواست شد
+          </label> */}
+
+          <textarea
+            className="p-2 border border-gray-300 "
+            placeholder="نوشتن توضیحات..."
+            rows="2"
+          ></textarea>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <button className="px-4 py-1 font-bold  bg-[#1BBF89]">
+          ثبت ثانویه
+        </button>
+      </div>
     </div>
-    <button className="w-full p-2 text-white bg-blue-500 rounded">
-      انتخاب سند
-    </button>
-    <textarea
-      className="w-full p-2 border border-gray-300 rounded"
-      placeholder="نوشتن توضیحات..."
-      rows="3"
-    ></textarea>
-    <button className="w-full p-2 text-white bg-green-500 rounded">ثبت</button>
-  </div>
-);
+  );
+};
 
 // New Modal Content for "رد شده" (Rejected) basket
 const RejectedBasketModalContent = ({ basketNumber }) => (
