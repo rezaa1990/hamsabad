@@ -205,34 +205,50 @@ const ConfirmedIncreaseCapitalModal = ({
   </div>
 );
 
-const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => (
-  <div className="px-4">
-    <div className="flex items-center justify-between mb-4">
-      {/* <div className="text-xl text-blue-500">ثبت سند واریز سبد (شماره سبد)</div>
-      <div className="text-2xl text-blue-500">&gt;</div> */}
-    </div>
-    <div className="mb-4 ">
+const UploadIncreaseCapitalDocumentModal = ({ basket, handleEyeIconClick }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  return (
+    <div className="px-4">
+      <div className="flex items-center justify-between mb-4"></div>
+      <div className="mb-4">
+        <div className="flex justify-center">
+          <div className="flex items-center justify-center p-4 border-2 border-gray-300 w-44 h-44">
+            {selectedFile ? (
+              <div>{selectedFile.name}</div>
+            ) : (
+              <div className="text-gray-400">سندی انتخاب نشده</div>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-center mt-1">
+          <label className="px-2 py-1 text-white bg-[#5D9CEC] cursor-pointer">
+            انتخاب سند
+            <input
+              type="file"
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="mb-4">
+        {/* <div className="mb-2">نوشتن توضیحات...</div> */}
+        <textarea
+          placeholder="نوشتن توضیحات..."
+          className="w-full h-20 p-2 border border-gray-300 rounded resize-none"
+        ></textarea>
+      </div>
       <div className="flex justify-center">
-        <div className="flex items-center justify-center p-4 border-2 border-gray-300 w-44 h-44"></div>
-      </div>
-      <div className="flex justify-center mt-1">
-        <button className="px-2 py-1 text-white bg-[#5D9CEC]">
-          انتخاب سند
-        </button>
+        <button className="px-4 py-1 bg-[#1BBF89]">ثبت</button>
       </div>
     </div>
-    <div className="mb-4">
-      {/* <div className="mb-2">نوشتن توضیحات...</div> */}
-      <textarea
-        placeholder="نوشتن توضیحات..."
-        className="w-full h-20 p-2 border border-gray-300 rounded resize-none"
-      ></textarea>
-    </div>
-    <div className="flex justify-center">
-      <button className="px-4 py-1 bg-[#1BBF89]">ثبت</button>
-    </div>
-  </div>
-);
+  );
+};
 
 const InvestorIncreaseCapital = () => {
   const {
@@ -359,7 +375,7 @@ const InvestorIncreaseCapital = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className={`p-4 mb-4 mx-4 bg-${green} shadow-md cursor-pointer`}
+          className={`p-4 my-2 bg-${green} cursor-pointer`}
           onClick={""}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">

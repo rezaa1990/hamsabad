@@ -51,7 +51,7 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
         basket.shareRequestHistory.map((sharereq, index) => (
           <div
             key={index}
-            className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
+            className={`p-4 my-1  ${getStatusColor(sharereq.shareRequestStatus)}`}
           >
             <div className="flex justify-between">
               <label>مبلغ</label>
@@ -481,7 +481,7 @@ const PortfolioManagerPaymentRequest = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className="p-4 mb-4 bg-[#1BBF89] shadow-md cursor-pointer"
+          className="p-4 mb-2 mx-2 bg-[#1BBF89] shadow-md cursor-pointer"
           onClick={() => handleBasketClick(basket)}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">

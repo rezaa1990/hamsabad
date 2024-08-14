@@ -49,7 +49,7 @@ const HistoryModalContent = ({ basket, handleEyeIconClick }) => {
       {basket.shareRequestHistory.map((sharereq, index) => (
         <div
           key={index}
-          className={`p-4  ${getStatusColor(sharereq.shareRequestStatus)}`}
+          className={`p-4 my-1 ${getStatusColor(sharereq.shareRequestStatus)}`}
         >
           <div className="flex justify-between">
             <label>مبلغ</label>

@@ -83,38 +83,39 @@ const RequestIncreaseCapitalModal = ({
 
   return (
     <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        {/* <div className="text-xl text-blue-500">درخواست افزایش سرمایه:</div> */}
-        {/* <div className="text-2xl text-blue-500">&gt;</div> */}
-      </div>
-      <div className="mb-4">
+      <div className="flex items-center justify-between mb-4"></div>
+      <div className="flex mb-4">
         <div className="mb-2">مبلغ:</div>
         <div className="flex items-center justify-center">
           <input
             type="text"
-            value="10.000.000"
+            value="۱۰۰۰۰۰۰"
             className="p-1 text-left bg-gray-100"
             readOnly
           />
           <span className="mr-2">ریال</span>
         </div>
       </div>
-      <div className="mb-4">
-        <div className="mb-2">تاریخ:</div>
-        <div className="flex justify-center">
-          <DatePicker
-            calendar={persian}
-            locale={persian_fa}
-            calendarPosition="bottom-right"
-            value={selectedDate}
-            onChange={handleDateChange}
-            format="YYYY/MM/DD"
-            inputClass="p-1 bg-gray-100"
-            containerClassName=""
-          />
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex mb-4">
+          <div className="mb-2">تاریخ:</div>
+          <div className="flex items-center justify-center">
+            <DatePicker
+              calendar={persian}
+              locale={persian_fa}
+              calendarPosition="bottom-right"
+              value={selectedDate}
+              onChange={handleDateChange}
+              format="YYYY/MM/DD"
+              inputClass="p-1 text-left bg-gray-100"
+              containerClassName=""
+            />
+            {/* </div> */}
+            <span className="mr-2 text-gray-100">ریال</span>
+          </div>
         </div>
       </div>
-      <div className="flex justify-center mb-4 space-y-2">
+      <div className="flex items-center mb-4 space-y-2">
         <div className="">
           {" "}
           <div className="flex items-center">
@@ -459,7 +460,7 @@ const PortfolioManagerIncreaseCapital = () => {
       {baskets.map((basket) => (
         <div
           key={basket.id}
-          className={`p-4 mb-4 mx-4 bg-${green} shadow-md cursor-pointer`}
+          className={`p-4 my-2 bg-${green} cursor-pointer`}
           onClick={""}
         >
           <div className="flex justify-center mb-4 text-lg font-bold sm:mb-8 sm:text-xl">
