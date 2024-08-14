@@ -30,13 +30,13 @@ const Modal = ({ isVisible, onClose, title, children }) => {
 const getStatusColor = (status) => {
   switch (status) {
     case "رد":
-      return "bg-red-500";
+      return "bg-[#DB524B]";
     case "انجام شده":
-      return "bg-green-500";
+      return "bg-[#1BBF89]";
     case "در انتظار تایید":
       return "bg-gray-500";
     case "در انتظار سند واریز":
-      return "bg-blue-500";
+      return "bg-[#5D9CEC]";
     default:
       return "bg-gray-500";
   }
@@ -374,9 +374,7 @@ const RejectRequestshare = () => {
         ></textarea>
       </div>
       <div className="flex justify-center">
-        <button className="px-6 py-1 font-bold bg-[#DB524B]">
-          رد
-        </button>
+        <button className="px-6 py-1 font-bold bg-[#DB524B]">رد</button>
       </div>
     </div>
   );
@@ -397,7 +395,7 @@ const ConfirmedPortfolioShareRequestModalContent = ({ onClose }) => (
     </div>
     <div className="flex justify-between">
       <label className="">مبلغ سهم:</label>
-      <span className="">۱۰۰۰۰۰۰۰۰۰</span>
+      <span className="">۱۰۰۰۰۰۰۰۰۰۰</span>
       <span className="mr-2">ریال</span>
     </div>
     <div className="flex justify-between">
@@ -415,7 +413,7 @@ const ConfirmedPortfolioShareRequestModalContent = ({ onClose }) => (
       <span>۱۳۹۸/۰۳/۰۴</span>
       <span className="mr-2"></span>
     </div>
-    <div className="flex justify-end">
+    <div className="flex justify-center">
       <button
         onClick={onClose}
         className="flex px-4 font-bold text-black border border-gray-300"
@@ -429,16 +427,16 @@ const ConfirmedPortfolioShareRequestModalContent = ({ onClose }) => (
 // Modal Content for "رد شده" (Rejected) basket
 const RejectedBasketModalContent = ({ basketNumber, onClose }) => (
   <div className="">
-    <div className="px-8 space-y-8">
+    <div className="px-8 space-y-6">
       <div className="flex justify-between">
         <span>مبلغ:</span>
-        <span>۱۰۰۰۰۰۰</span>
-        <span>ریال</span>
+        <span className="text-center">۱۰۰۰۰۰۰</span>
+        <span className="">ریال</span>
       </div>
       <div className="flex justify-between">
         <span>تاریخ:</span>
-        <span>۱۳۹۹/۰۹/۲۱</span>
-        <span></span>
+        <span className="text-center">۱۳۹۹/۰۹/۲۱</span>
+        <span className="text-gray-100">ریال</span>
       </div>
       <div className="flex justify-between">
         <span>واریز به صورت مستقیم</span>
@@ -467,10 +465,10 @@ const RejectedBasketModalContent = ({ basketNumber, onClose }) => (
         </div>
       </div>
     </div>
-    <div className="flex justify-end mt-10">
+    <div className="flex justify-center mt-10">
       <button
         onClick={onClose}
-        className="px-4 font-bold text-black border border-gray-300"
+        className="px-4 font-bold border border-gray-300"
       >
         بازگشت
       </button>
@@ -499,6 +497,9 @@ const InvestorPaymentRequest = () => {
   } = useContext(AppContext);
 
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/dashboard");
+  };
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -644,6 +645,15 @@ const InvestorPaymentRequest = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
+      <div className="flex py-4">
+        <button
+          onClick={handleNavigate}
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
+          <Icon name="arrowright" size={16} className="ml-2" />
+        </button>
+        <span className="font-bold">درخواست سهم سبدگردانی</span>
+      </div>
       {baskets.map((basket) => (
         <div
           key={basket.id}

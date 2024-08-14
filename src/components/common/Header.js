@@ -49,7 +49,7 @@ const Header = () => {
             className="object-contain w-12 h-12 mb-2"
           />
         </div>
-        <h1 className="text-xl font-extrabold">هم سبد</h1>
+        <h1 className="text-4xl font-extrabold">هم سبد</h1>
         <div className="flex items-center space-x-4">
           <button className="ml-4 text-2xl">
             <img

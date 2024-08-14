@@ -35,6 +35,10 @@ const Register = () => {
     navigate("/");
   };
 
+  const closeCaptcha = () =>{
+    setShowCaptcha(false);
+  }
+
   const handleContinue = () => {
     setPhoneNumber(phoneNumber);
     setNationalId(nationalId);
@@ -171,7 +175,7 @@ const Register = () => {
 
       {showCaptcha && (
         <Captcha
-          onClose={() => setShowCaptcha(false)}
+          onClose={closeCaptcha}
           onSubmit={handleCaptchaSubmit}
         />
       )}

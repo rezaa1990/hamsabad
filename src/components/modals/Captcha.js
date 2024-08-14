@@ -43,14 +43,15 @@ const Captcha = ({ onClose, onSubmit }) => {
         }`}
       >
         <div className="flex justify-end mb-4">
-          <Icon
-            name="exit"
-            size={24}
-            className={`cursor-pointer ${
-              isDarkMode ? "text-white" : "text-gray-800"
-            }`}
-            onClick={onClose}
-          />
+          <button onClick={onClose}>
+            <Icon
+              name="exit"
+              size={24}
+              className={`cursor-pointer ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              }`}
+            />
+          </button>
         </div>
 
         <div
