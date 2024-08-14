@@ -478,7 +478,7 @@ const Investor = () => {
                     },
                   }}
                   minWidth={1}
-                  maxWidth={1} 
+                  maxWidth={1}
                 />
                 <span className="absolute text-gray-400 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none top-1/2 left-1/2">
                   محل امضا

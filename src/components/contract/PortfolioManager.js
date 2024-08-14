@@ -662,7 +662,9 @@ ${clauses.map((clause, index) => `تبصره ${index + 1}: ${clause}`).join("\n"
                   >
                     <Icon name="arrowright" size={16} />
                   </button>
-                  <h3 className="mr-1 text-xl font-semibold">پیش‌نمایش قرارداد</h3>
+                  <h3 className="mr-1 text-xl font-semibold">
+                    پیش‌نمایش قرارداد
+                  </h3>
                 </div>
                 <div
                   className="relative flex-auto p-6 overflow-y-auto"

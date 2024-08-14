@@ -384,9 +384,6 @@ const UploadDocumentModal = ({ onClose, onSubmit }) => {
 
   return (
     <div className="p-6">
-      {/* <h2 className="mb-4 text-xl font-bold text-right">
-        ثبت سند واریز وجه درخواستی به حساب (شماره)
-      </h2> */}
       <div className="flex justify-center mb-4">
         <div className="flex items-center justify-center w-56 h-40 bg-white border-2 border-gray-300">
           {/* {selectedFile ? (
@@ -482,7 +479,6 @@ const InvestorCashRequest = () => {
 
   const [isUploadDocumentModalVisible, setIsUploadDocumentModalVisible] =
     useState(false);
-  //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
     setSelectedBasket(basket);

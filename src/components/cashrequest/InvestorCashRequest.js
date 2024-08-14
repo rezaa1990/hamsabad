@@ -299,7 +299,6 @@ const InvestorCashRequest = () => {
     navigate("/dashboard");
   };
   const [cashrequestValue, setCashRequestValue] = useState();
-  //------------------------------------------------------------------------------------------
   const [selectedBasket, setSelectedBasket] = useState(null);
   const [isUploadDocumentModalVisible, setUploadDocumentModalVisible] =
     useState(false);
@@ -317,7 +316,6 @@ const InvestorCashRequest = () => {
     isConfirmedCashRequestModalVisible,
     setIsConfirmedCashRequestModalVisible,
   ] = useState(false);
-  //------------------------------------------------------------------------------------------
 
   const handleBasketClick = (basket) => {
     setSelectedBasket(basket);

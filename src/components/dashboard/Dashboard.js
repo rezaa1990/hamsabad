@@ -24,23 +24,24 @@ const Dashboard = () => {
   } = useContext(AppContext);
 
   const menuItems = [
-    { icon: icons.notes, label: "یادداشت", path: "" },
-    { icon: icons.graf1, label: "بررسی شاخص", path: "" },
-    { icon: icons.shoppingBasket, label: "سبدهای من", path: "" },
     { icon: icons.merchantPrograms, label: "بستن قرارداد", path: "/user" },
-    { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
-    { icon: icons.messages, label: "پیام‌های من", path: "" },
-    { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
-    {
-      icon: icons.dollarbag2,
-      label: "درخواست سهم سبدگردانی",
-      path: "/share-request",
-    },
+    { icon: icons.shoppingBasket, label: "سبدهای من", path: "" },
+    { icon: icons.graf1, label: "بررسی شاخص", path: "" },
+    { icon: icons.notes, label: "یادداشت", path: "" },
     {
       icon: icons.cash,
       label: "درخواست وجه",
       path: "/cashrequest",
     },
+    {
+      icon: icons.dollarbag2,
+      label: "درخواست سهم سبدگردانی",
+      path: "/share-request",
+    },
+    { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
+    { icon: icons.messages, label: "پیام‌های من", path: "" },
+    { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
+
     { icon: icons.favorites, label: "علاقه‌مندی", path: "" },
     { icon: icons.kodal, label: "اخبار", path: "" },
     { icon: icons.txhistory, label: "تاریخچه معاملات", path: "" },

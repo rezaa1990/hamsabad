@@ -309,22 +309,12 @@ const InvestorIncreaseCapital = () => {
     setSelectedBasket(basket);
     setIncaptreq(incaptreq);
     if (incaptreq.increaseCapitalStatus === "رد") {
-      // setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setRejectedIncreaseCapitalModalVisible(true);
     } else if (incaptreq.increaseCapitalStatus === "انجام شده") {
-      // setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setConfirmedIncreaseCapitalModalVisible(true);
-      // } else if (sharereq.shareRequestStatus === "در انتظار تایید") {
-      //   // setSelectedBasket(basket);
-      //   // setSharereq(sharereq);
-      //   setShareRequestModalVisible(true);
     } else if (
       incaptreq.increaseCapitalStatus === "در انتظار ارسال سند واریز"
     ) {
-      //   setSelectedBasket(basket);
-      // setSharereq(sharereq);
       setUploadIncreaseCapitalDocumentModalVisible(true);
     }
   };

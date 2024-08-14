@@ -222,9 +222,6 @@ const ConfirmShareRequestModalContent = () => {
 
   return (
     <div className="px-8 py-4 space-y-4">
-      {/* <div className="text-lg font-semibold text-right">
-        تایید درخواست وجه (سرمایه‌گذار)
-      </div> */}
       <div className="space-y-2">
         <label className="flex items-center text-right">
           <input
