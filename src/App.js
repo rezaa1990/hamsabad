@@ -41,7 +41,7 @@ function AppContent() {
         isDarkMode ? "bg-gray-800 text-white" : ""
       }`}
     >
-      <Header />
+     {isAuthenticated && <Header />}
       <div className="relative flex flex-1">
         {isAuthenticated && <Sidebar />}
         <main className="flex-1 pb-20 overflow-x-hidden">

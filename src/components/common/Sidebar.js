@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as icons from "../../assets/icons";
 import AppContext from "../../contexts/AppContext";
 
@@ -22,6 +22,11 @@ const Sidebar = ({ isOpen, onClose }) => {
     setIsDarkMode,
     toggleDarkMode,
   } = useContext(AppContext);
+
+    const navigate = useNavigate();
+    const handleNavigate = () => {
+      navigate("./dashboard");
+    };
 
   return (
     <>
@@ -46,7 +51,9 @@ const Sidebar = ({ isOpen, onClose }) => {
             }`}
           >
             <div className="w-6 h-6"></div>
-            <img src={icons.hamsabad} alt="هم‌سبد" className="w-12 h-12" />
+            <button onClick={handleNavigate}>
+              <img src={icons.hamsabad} alt="هم‌سبد" className="w-12 h-12" />
+            </button>
             <button onClick={onClose} className="text-2xl">
               <img src={icons.arrowright} alt="بستن" className="w-4 h-6" />
             </button>

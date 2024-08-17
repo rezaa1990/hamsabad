@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import * as icons from "../../assets/icons";
 import Sidebar from "../common/Sidebar";
 import AppContext from "../../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const {
@@ -27,6 +28,10 @@ const Header = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("./dashboard");
+  }
 
   return (
     <div>
@@ -43,11 +48,15 @@ const Header = () => {
               className="object-contain w-10 h-10 mb-2"
             />
           </button>
-          <img
-            src={icons.hamsabad}
-            alt={"hamsabad"}
-            className="object-contain w-12 h-12 mb-2"
-          />
+          <button
+          onClick={handleNavigate}
+          >
+            <img
+              src={icons.hamsabad}
+              alt={"hamsabad"}
+              className="object-contain w-12 h-12 mb-2"
+            />
+          </button>
         </div>
         <h1 className="text-4xl font-extrabold">هم سبد</h1>
         <div className="flex items-center space-x-4">
