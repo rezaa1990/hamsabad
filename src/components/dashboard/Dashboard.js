@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   const menuItems = [
     { icon: icons.merchantPrograms, label: "بستن قرارداد", path: "/user" },
-    { icon: icons.shoppingBasket, label: "سبدهای من", path: "" },
+    { icon: icons.shoppingBasket, label: "سبدهای من", path: "/mybaskets" },
     { icon: icons.graf1, label: "بررسی شاخص", path: "" },
     { icon: icons.notes, label: "یادداشت", path: "" },
     {
@@ -39,7 +39,7 @@ const Dashboard = () => {
       path: "/share-request",
     },
     { icon: icons.pay1, label: "افزایش سرمایه", path: "/increasecapital" },
-    { icon: icons.messages, label: "پیام‌های من", path: "" },
+    { icon: icons.messages, label: "پیام‌های من", path: "/messages" },
     { icon: icons.bell, label: "اعلان‌ها", path: "/notification" },
 
     { icon: icons.favorites, label: "علاقه‌مندی", path: "" },
